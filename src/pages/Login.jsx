@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import React from 'react';
 
-const App = () => {
+const Login = () => {
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
     };
@@ -62,4 +63,4 @@ const App = () => {
     );
 };
 
-export default App;
+export default Login;
