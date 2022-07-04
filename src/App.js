@@ -6,12 +6,13 @@ import {
 } from "react-router-dom";
 
 import Login from './pages/Login'
+import Root from './pages/Root';
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<Root />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
