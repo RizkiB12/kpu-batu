@@ -5,10 +5,10 @@ import {
   Route,
 } from "react-router-dom";
 
-import Login from './pages/Login'
-import Root from './pages/Root'
-import Dashboard from './pages/Dashboard';
-import { Overview } from './pages/Overview';
+import Login from './pages/Login';
+import Root from './pages/Root';
+import Dashboard  from './pages/Dashboard';
+import Employees from './pages/Employees';
 
 function App() {
   return (
@@ -16,8 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Root />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/overview" element={<Overview />} />
+        <Route path="/employees" element={<Employees />} />
+        <Route path="/dashboard" element={<Dashboard/>} />
       </Routes>
     </BrowserRouter>
   );

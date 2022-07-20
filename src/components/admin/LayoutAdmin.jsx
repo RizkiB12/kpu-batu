@@ -20,7 +20,7 @@ const LayoutAdmin = (props) => {
 
     const items = [
         getItem('Dashboard', '/dashboard', <HomeOutlined />),
-        getItem('Overview', '/overview', <PieChartOutlined />),
+        getItem('Employees', '/employees', <PieChartOutlined />),
         getItem('Logout', '/login', <LogoutOutlined />),
     ];
 
