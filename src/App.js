@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import Root from './pages/Root';
 import Dashboard  from './pages/Dashboard';
 import Employees from './pages/Employees';
+import AddData  from './pages/AddData';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/employees" element={<Employees />} />
         <Route path="/dashboard" element={<Dashboard/>} />
+        <Route path="/adddata" element={<AddData/>} />
       </Routes>
     </BrowserRouter>
   );

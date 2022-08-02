@@ -1,134 +1,250 @@
-import { Input, Table, Select } from 'antd'
-import Button from "antd-button-color";
-import React from 'react'
+import { Button, Modal, Space, Table } from 'antd';
+import React, { useState } from 'react';
+import { ExclamationCircleOutlined } from '@ant-design/icons';
+const { confirm } = Modal;
+const data = [
+    {
+        key: '1',
+        name: 'John Brown',
+        age: 32,
+        address: 'New York No. 1 Lake Park',
+    },
+    {
+        key: '2',
+        name: 'Jim Green',
+        age: 42,
+        address: 'London No. 1 Lake Park',
+    },
+    {
+        key: '3',
+        name: 'Joe Black',
+        age: 32,
+        address: 'Sidney No. 1 Lake Park',
+    },
+    {
+        key: '4',
+        name: 'Jim Red',
+        age: 32,
+        address: 'London No. 2 Lake Park',
+    },
+    {
+        key: '5',
+        name: 'Jim Red',
+        age: 32,
+        address: 'London No. 2 Lake Park',
+    },
+    {
+        key: '6',
+        name: 'Jim Red',
+        age: 32,
+        address: 'London No. 2 Lake Park',
+    },
+];
 
 export const TableData = () => {
+    const [filteredInfo, setFilteredInfo] = useState({});
+    const [sortedInfo, setSortedInfo] = useState({});
+
+    const handleChange = (pagination, filters, sorter) => {
+        console.log('Various parameters', pagination, filters, sorter);
+        setFilteredInfo(filters);
+        setSortedInfo(sorter);
+    };
+
+    const clearFilters = () => {
+        setFilteredInfo({});
+    };
+
+    const clearAll = () => {
+        setFilteredInfo({});
+        setSortedInfo({});
+    };
+
+    const setAgeSort = () => {
+        setSortedInfo({
+            order: 'descend',
+            columnKey: 'age',
+        });
+    };
+
+    const showAdd = () => {
+        confirm({
+            title: 'Do you Want to delete these items?',
+            icon: <ExclamationCircleOutlined />,
+            content: 'Some descriptions',
+
+            onOk() {
+                console.log('OK');
+            },
+
+            onCancel() {
+                console.log('Cancel');
+            },
+        });
+    };
+
+    const showDelete = () => {
+        confirm({
+            title: 'Do you Want to delete these items?',
+            icon: <ExclamationCircleOutlined />,
+            content: 'Some descriptions',
+
+            onOk() {
+                console.log('OK');
+            },
+
+            onCancel() {
+                console.log('Cancel');
+            },
+        });
+    };
+
     const columns = [
         {
-            title: 'Full Name',
-            width: 100,
+            title: 'Name',
             dataIndex: 'name',
             key: 'name',
-            fixed: 'left',
+            filters: [
+                {
+                    text: 'Joe',
+                    value: 'Joe',
+                },
+                {
+                    text: 'Jim',
+                    value: 'Jim',
+                },
+            ],
+            filteredValue: filteredInfo.name || null,
+            onFilter: (value, record) => record.name.includes(value),
+            sorter: (a, b) => a.name.length - b.name.length,
+            sortOrder: sortedInfo.columnKey === 'name' ? sortedInfo.order : null,
+            ellipsis: true,
         },
         {
             title: 'Age',
-            width: 100,
             dataIndex: 'age',
             key: 'age',
-            fixed: 'left',
+            sorter: (a, b) => a.age - b.age,
+            sortOrder: sortedInfo.columnKey === 'age' ? sortedInfo.order : null,
+            ellipsis: true,
         },
         {
-            title: 'Column 1',
+            title: 'Address',
             dataIndex: 'address',
-            key: '1',
-            width: 150,
+            key: 'address',
+            filters: [
+                {
+                    text: 'London',
+                    value: 'London',
+                },
+                {
+                    text: 'New York',
+                    value: 'New York',
+                },
+            ],
+            filteredValue: filteredInfo.address || null,
+            onFilter: (value, record) => record.address.includes(value),
+            sorter: (a, b) => a.address.length - b.address.length,
+            sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
+            ellipsis: true,
         },
         {
-            title: 'Column 2',
+            title: 'Address',
             dataIndex: 'address',
-            key: '2',
-            width: 150,
+            key: 'address',
+            filters: [
+                {
+                    text: 'London',
+                    value: 'London',
+                },
+                {
+                    text: 'New York',
+                    value: 'New York',
+                },
+            ],
+            filteredValue: filteredInfo.address || null,
+            onFilter: (value, record) => record.address.includes(value),
+            sorter: (a, b) => a.address.length - b.address.length,
+            sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
+            ellipsis: true,
         },
         {
-            title: 'Column 3',
+            title: 'Address',
             dataIndex: 'address',
-            key: '3',
-            width: 150,
+            key: 'address',
+            filters: [
+                {
+                    text: 'London',
+                    value: 'London',
+                },
+                {
+                    text: 'New York',
+                    value: 'New York',
+                },
+            ],
+            filteredValue: filteredInfo.address || null,
+            onFilter: (value, record) => record.address.includes(value),
+            sorter: (a, b) => a.address.length - b.address.length,
+            sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
+            ellipsis: true,
         },
         {
-            title: 'Column 4',
+            title: 'Address',
             dataIndex: 'address',
-            key: '4',
-            width: 150,
+            key: 'address',
+            filters: [
+                {
+                    text: 'London',
+                    value: 'London',
+                },
+                {
+                    text: 'New York',
+                    value: 'New York',
+                },
+            ],
+            filteredValue: filteredInfo.address || null,
+            onFilter: (value, record) => record.address.includes(value),
+            sorter: (a, b) => a.address.length - b.address.length,
+            sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
+            ellipsis: true,
         },
         {
-            title: 'Column 5',
+            title: 'Address',
             dataIndex: 'address',
-            key: '5',
-            width: 150,
+            key: 'address',
+            filters: [
+                {
+                    text: 'London',
+                    value: 'London',
+                },
+                {
+                    text: 'New York',
+                    value: 'New York',
+                },
+            ],
+            filteredValue: filteredInfo.address || null,
+            onFilter: (value, record) => record.address.includes(value),
+            sorter: (a, b) => a.address.length - b.address.length,
+            sortOrder: sortedInfo.columnKey === 'address' ? sortedInfo.order : null,
+            ellipsis: true,
         },
-        {
-            title: 'Column 6',
-            dataIndex: 'address',
-            key: '6',
-            width: 150,
-        },
-        {
-            title: 'Column 7',
-            dataIndex: 'address',
-            key: '7',
-            width: 150,
-        },
-        {
-            title: 'Column 8',
-            dataIndex: 'address',
-            key: '8',
-        },
-        {
-            title: 'Action',
-            key: 'operation',
-            fixed: 'right',
-            width: 100,
-            render: () => <a>action</a>,
-        },
+
     ];
-    const data = [];
+    return (
+        <>
+            <Space
+                style={{
+                    marginBottom: 16,
+                }}
+            >
+                <Button onClick={setAgeSort}>Sort age</Button>
+                <Button onClick={clearFilters}>Clear filters</Button>
+                <Button onClick={clearAll}>Clear filters and sorters</Button>
+                <Button onClick={showDelete}>Delete Data</Button>
+                <Button type="primary">Export Data</Button>
+            </Space>
+            <Table columns={columns} dataSource={data} onChange={handleChange} />
+        </>
+    );
+};
 
-    for (let i = 0; i < 100; i++) {
-        data.push({
-            key: i,
-            name: `Edrward ${i}`,
-            age: 32,
-            address: `London Park no. ${i}`,
-        });
-
-        const { Search } = Input
-        const onSearch = (value) => console.log(value);
-
-        const { Option } = Select
-        const handleChange = (value) => {
-            console.log(`selected ${value}`);
-        };
-
-        return (
-            <>
-                <div className="flex justify-between mb-3">
-                    <div className="flex gap-x-2">
-                        <Button type="primary">Tambah Data</Button>
-                        <Button type="">Export Data</Button>
-                    </div>
-                    <div className="flex gap-x-2">
-                        <Select
-                            defaultValue="lucy"
-                            style={{
-                                width: 120,
-                            }}
-                            onChange={handleChange}
-                        >
-                            <Option value="jack">Jack</Option>
-                            <Option value="lucy">Lucy</Option>
-                            <Option value="Yiminghe">yiminghe</Option>
-                        </Select>
-
-                        <Search
-                            placeholder="input search text"
-                            onSearch={onSearch}
-                            style={{
-                                width: 200,
-                            }}
-                        />
-                    </div>
-                </div>
-                <Table
-                    columns={columns}
-                    dataSource={data}
-                    scroll={{
-                        x: 1500,
-                        y: 300,
-                    }}
-                />
-            </>
-        )
-    }
-}

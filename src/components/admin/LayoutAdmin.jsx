@@ -1,7 +1,8 @@
 import {
     PieChartOutlined,
     HomeOutlined,
-    LogoutOutlined
+    LogoutOutlined,
+    UserAddOutlined
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React, { useState } from 'react';
@@ -21,6 +22,7 @@ const LayoutAdmin = (props) => {
     const items = [
         getItem('Dashboard', '/dashboard', <HomeOutlined />),
         getItem('Employees', '/employees', <PieChartOutlined />),
+        getItem('Add Data', '/adddata', <UserAddOutlined />),
         getItem('Logout', '/login', <LogoutOutlined />),
     ];
 

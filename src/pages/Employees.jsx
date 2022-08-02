@@ -1,11 +1,10 @@
 import React from 'react'
 import LayoutAdmin from '../components/admin/LayoutAdmin';
 import { TableData } from '../components/admin/TableData';
-
 const Employees = () => {
     const breadcumb = [
         {
-            name: 'Dashboard',
+            name: 'Employees',
             link: '/dashboard',
         },
     ];
