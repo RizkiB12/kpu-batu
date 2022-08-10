@@ -1,5 +1,5 @@
 import {
-    PieChartOutlined,
+    TeamOutlined,
     HomeOutlined,
     LogoutOutlined,
     UserAddOutlined
@@ -21,7 +21,7 @@ const LayoutAdmin = (props) => {
 
     const items = [
         getItem('Dashboard', '/dashboard', <HomeOutlined />),
-        getItem('Employees', '/employees', <PieChartOutlined />),
+        getItem('Employees', '/employees', <TeamOutlined />),
         getItem('Add Data', '/adddata', <UserAddOutlined />),
         getItem('Logout', '/login', <LogoutOutlined />),
     ];

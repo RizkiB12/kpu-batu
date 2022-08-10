@@ -175,7 +175,7 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="Tanggal Lahir"
+                name="bod"
                 label="Tanggal Lahir"
                 rules={[
                     {
@@ -188,7 +188,7 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="Tempat Lahir"
+                name="bop"
                 label="Tempat Lahir"
                 rules={[
                     {
@@ -264,7 +264,7 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="Surat Pernyataan Setia Pancasila"
+                name="SPSP"
                 label="Surat Setia Pancasila "
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
@@ -276,7 +276,7 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="Surat Pakta Integritas"
+                name="SPI"
                 label="Surat Pakta Integritas"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
