@@ -12,6 +12,7 @@ export const TableData = () => {
             dataIndex: "name",
             sorter: (a, b) => a.name > b.name,
             sortDirections: ["descend"],
+            fixed: 'left',
         },
         {
             key: "email",
@@ -58,6 +59,8 @@ export const TableData = () => {
         {
             key: "action",
             title: "Actions",
+            width: 90,
+            fixed: 'right',
             render: (record) => {
                 return (
                     <>
@@ -107,6 +110,7 @@ export const TableData = () => {
             <Table
                 dataSource={Data}
                 columns={columns}
+                scroll={{ x: 1300 }}
                 pagination={{ pageSize: 8, total: 50, showSizeChanger: true }}
                 bordered
             />

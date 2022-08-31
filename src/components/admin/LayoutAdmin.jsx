@@ -1,6 +1,7 @@
 import {
     TeamOutlined,
     HomeOutlined,
+    CalendarOutlined,
     LogoutOutlined,
     UserAddOutlined
 } from '@ant-design/icons';
@@ -21,6 +22,7 @@ const LayoutAdmin = (props) => {
 
     const items = [
         getItem('Dashboard', '/dashboard', <HomeOutlined />),
+        getItem('Schedule', '/schedule', <CalendarOutlined />),
         getItem('Employees', '/employees', <TeamOutlined />),
         getItem('Add Data', '/adddata', <UserAddOutlined />),
         getItem('Logout', '/login', <LogoutOutlined />),

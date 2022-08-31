@@ -159,6 +159,9 @@ export const Add = () => {
                 prefix: '86',
             }}
             scrollToFirstError
+            labelCol={{ span: 4 }}
+            wrapperCol={{ span: 14 }}
+            layout="horizontal"
         >
             <Form.Item
                 name="Nama"
@@ -529,13 +532,21 @@ export const Add = () => {
                     },
                 ]}
                 {...tailFormItemLayout}
+                wrapperCol={{
+                    offset: 4,
+                    span: 8,
+                }}
             >
                 <Checkbox>
                     I have read the <a href="/">agreement</a>
                 </Checkbox>
             </Form.Item>
-            <Form.Item {...tailFormItemLayout}>
-                <Button type="primary" htmlType="submit">
+            <Form.Item {...tailFormItemLayout}
+                wrapperCol={{
+                    offset: 4,
+                    span: 8,
+                }}>
+                <Button type="primary" htmlType="submit" >
                     Submit
                 </Button>
             </Form.Item>
