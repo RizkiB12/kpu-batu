@@ -151,9 +151,6 @@ export const Add = () => {
             form={form}
             name="register"
             onFinish={onFinish}
-            labelCol={{ span: 4 }}
-            wrapperCol={{ span: 14 }}
-            layout="horizontal"
             initialValues={{
                 residence: ['zhejiang', 'hangzhou', 'xihu'],
                 prefix: '86',
