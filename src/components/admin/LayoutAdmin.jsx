@@ -4,7 +4,8 @@ import {
     CalendarOutlined,
     LogoutOutlined,
     UserAddOutlined,
-    SettingOutlined
+    SettingOutlined,
+    UserOutlined
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React, { useState } from 'react';
@@ -24,6 +25,7 @@ const LayoutAdmin = (props) => {
     const items = [
         getItem('Dashboard', '/dashboard', <HomeOutlined />),
         getItem('Schedule', '/schedule', <CalendarOutlined />),
+        getItem('Employee', '/employee', <UserOutlined />),
         getItem('Employees', '/employees', <TeamOutlined />),
         getItem('Add Data', '/adddata', <UserAddOutlined />),
         getItem('Edit Profile', '/editProfile', <SettingOutlined />),

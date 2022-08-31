@@ -8,6 +8,7 @@ import Employees from "./pages/Employees";
 import AddData from "./pages/AddData";
 import Schedule from "./pages/Schedule";
 import EditProfile from "./pages/EditProfile";
+import Employee from "./pages/Employee";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/adddata" element={<AddData />} />
         <Route path="/schedule" element={<Schedule />} />
         <Route path="/editProfile" element={<EditProfile />} />
+        <Route path="/employee" element={<Employee />} />
       </Routes>
     </BrowserRouter>
   );
