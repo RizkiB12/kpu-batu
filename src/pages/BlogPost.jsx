@@ -1,19 +1,23 @@
 import React from 'react'
 import LayoutAdmin from '../components/admin/LayoutAdmin';
-import { TableData } from '../components/admin/TableData';
-const Employees = () => {
+
+
+const BlogPost = () => {
     const breadcumb = [
         {
-            name: 'Employees',
-            link: '/dashboard',
+            name: 'Blog Post',
+            link: '/blogpost',
         },
     ];
 
     return (
         <LayoutAdmin breadcumb={breadcumb}>
-            <TableData />
+            <div>
+                BlogPost
+            </div>
         </LayoutAdmin>
-    )
-}
 
-export default Employees;
+    )
+
+}
+export default BlogPost;

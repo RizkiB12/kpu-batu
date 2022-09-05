@@ -10,7 +10,6 @@ import {
   Row,
   Space,
   Upload,
-  message,
 } from "antd";
 import React, { useState } from "react";
 
@@ -25,22 +24,22 @@ export default function Dashboard() {
   const formItemLayout =
     formLayout === "horizontal"
       ? {
-          labelCol: {
-            span: 4,
-          },
-          wrapperCol: {
-            span: 14,
-          },
-        }
+        labelCol: {
+          span: 4,
+        },
+        wrapperCol: {
+          span: 14,
+        },
+      }
       : null;
   const buttonItemLayout =
     formLayout === "horizontal"
       ? {
-          wrapperCol: {
-            span: 14,
-            offset: 4,
-          },
-        }
+        wrapperCol: {
+          span: 14,
+          offset: 4,
+        },
+      }
       : null;
 
   const breadcumb = [
@@ -50,10 +49,7 @@ export default function Dashboard() {
     },
   ];
 
-  const style = {
-    background: "#0092ff",
-    padding: "8px 0",
-  };
+
 
   return (
     <LayoutAdmin breadcumb={breadcumb}>
