@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Modal } from "antd";
+import { Table, Modal, Empty } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { data } from "./Data";
 import Modals from "./Modals";
@@ -13,48 +13,206 @@ export const TableData = () => {
             sorter: (a, b) => a.name > b.name,
             sortDirections: ["descend"],
             fixed: 'left',
+            width: 150,
         },
         {
-            key: "email",
-            title: "Email",
-            dataIndex: "email",
+            key: "foto",
+            title: "Foto",
+            dataIndex: "foto",
+            width: 100,
+            render: (text, record) => {
+                return (
+                    <div>
+                        <img src={record.productimage} />
+                    </div>
+                );
+            },
         },
         {
-            key: "address",
-            title: "Address",
-            dataIndex: "address",
-            filters: [
-                {
-                    text: "London",
-                    value: "London",
-                },
-                {
-                    text: "New York",
-                    value: "New York",
-                },
-            ],
-            onFilter: (value, record) => record.address.indexOf(value) === 0,
+            key: "tanggal lahir",
+            title: "Tanggal",
+            dataIndex: "tanggal",
+            width: 150,
         },
         {
-            key: "phone",
-            title: "Phone Number",
-            dataIndex: "phone",
+            key: "tempat lahir",
+            title: "Tempat",
+            dataIndex: "tempat",
+            width: 150,
         },
         {
-            key: "website",
-            title: "Website",
-            dataIndex: "website",
+            key: "alamat",
+            title: "Alamat",
+            dataIndex: "alamat",
+            width: 150,
             // render: (website) => <a href={website}>{website}</a>,
         },
         {
-            key: "phone",
-            title: "Phone Number",
-            dataIndex: "phone",
+            key: "instagram",
+            title: "Instagram",
+            dataIndex: "instagram",
+            width: 150,
         },
         {
-            key: "phone",
-            title: "Phone Number",
-            dataIndex: "phone",
+            key: "facebook",
+            title: "Facebook",
+            dataIndex: "facebook",
+            width: 150,
+        },
+        {
+            key: "nomer hp",
+            title: "Nomer HP",
+            dataIndex: "hp",
+            width: 150,
+        },
+        {
+            key: "pendidikan terakhir",
+            title: "Pendidikan",
+            dataIndex: "pendidikan",
+            width: 150,
+        },
+        {
+            key: "fotocopy ktp",
+            title: "KTP",
+            dataIndex: "ktp",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "surat setia pancasila",
+            title: "SPSPS",
+            dataIndex: "spsp",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "surat pakta integritas",
+            title: "SPI",
+            dataIndex: "spi",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "surat tidak menjadi anggota parpol",
+            title: "STPOL",
+            dataIndex: "stpol",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "surat keterangan sehat",
+            title: "SKES",
+            dataIndex: "skes",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "fotocopy ijazah",
+            title: "Ijazah",
+            dataIndex: "ijazah",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "skck",
+            title: "SKCK",
+            dataIndex: "skck",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "surat pernyataan tidak pernah sanksi kpu",
+            title: "STSKPU",
+            dataIndex: "stskpu",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "surat belum pernah menjabat 2 tahun",
+            title: "SBTH",
+            dataIndex: "sbth",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "surat pernyataan tidak dalam ikatan perkawinan dengan sesama penyelenggara",
+            title: "STPP",
+            dataIndex: "stpp",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "surat keterangan domosili",
+            title: "SDOM",
+            dataIndex: "sdom",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
         },
         {
             key: "action",

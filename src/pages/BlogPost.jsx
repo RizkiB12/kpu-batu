@@ -1,5 +1,6 @@
 import React from 'react'
 import LayoutAdmin from '../components/admin/LayoutAdmin';
+import TableBlogPost from '../components/admin/TableBlogPost';
 
 
 const BlogPost = () => {
@@ -12,9 +13,7 @@ const BlogPost = () => {
 
     return (
         <LayoutAdmin breadcumb={breadcumb}>
-            <div>
-                BlogPost
-            </div>
+            <TableBlogPost />
         </LayoutAdmin>
 
     )
