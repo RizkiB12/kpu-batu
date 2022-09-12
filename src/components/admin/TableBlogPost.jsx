@@ -1,10 +1,10 @@
-import { Button, Table, Modal, Input } from "antd";
+import { Table, Modal, Input } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 function TableBlogPost() {
     const [isEditing, setIsEditing] = useState(false);
-    const [editingStudent, setEditingStudent] = useState(null);
+    const [editingBlogPost, setEditingBlogPost] = useState(null);
     const [dataSource, setDataSource] = useState([
         {
             id: 1,
@@ -16,23 +16,23 @@ function TableBlogPost() {
         {
             id: 2,
             productimage: "https://joeschmoe.io/api/v1/random",
-            name: "David",
-            email: "david@gmail.com",
-            address: "David Address",
+            judul: "Pelangi dimatamu",
+            deskripsi: "lorem ipsum dolor sit amet amet amet amet",
+            tanggal: "05/09/2019, 15:53:32",
         },
         {
             id: 3,
             productimage: "https://joeschmoe.io/api/v1/random",
-            name: "James",
-            email: "james@gmail.com",
-            address: "James Address",
+            judul: "Pelangi dimatamu",
+            deskripsi: "lorem ipsum dolor sit amet amet amet amet",
+            tanggal: "05/09/2019, 15:53:32",
         },
         {
             id: 4,
             productimage: "https://joeschmoe.io/api/v1/random",
-            name: "Sam",
-            email: "sam@gmail.com",
-            address: "Sam Address",
+            judul: "Pelangi dimatamu",
+            deskripsi: "lorem ipsum dolor sit amet amet amet amet",
+            tanggal: "05/09/2019, 15:53:32",
         },
     ]);
     const columns = [
@@ -77,12 +77,12 @@ function TableBlogPost() {
                     <>
                         <EditOutlined
                             onClick={() => {
-                                onEditStudent(record);
+                                onEditBlogPost(record);
                             }}
                         />
                         <DeleteOutlined
                             onClick={() => {
-                                onDeleteStudent(record);
+                                onDeleteBlogPost(record);
                             }}
                             style={{ color: "red", marginLeft: 12 }}
                         />
@@ -92,89 +92,75 @@ function TableBlogPost() {
         },
     ];
 
-    const onAddStudent = () => {
-        const randomNumber = parseInt(Math.random() * 1000);
-        const newStudent = {
-            id: randomNumber,
-            name: "Name " + randomNumber,
-            email: randomNumber + "@gmail.com",
-            address: "Address " + randomNumber,
-        };
-        setDataSource((pre) => {
-            return [...pre, newStudent];
-        });
-    };
-    const onDeleteStudent = (record) => {
+
+    const onDeleteBlogPost = (record) => {
         Modal.confirm({
-            title: "Are you sure, you want to delete this student record?",
+            title: "Are you sure, you want to delete this Blog Post record?",
             okText: "Yes",
             okType: "danger",
             onOk: () => {
                 setDataSource((pre) => {
-                    return pre.filter((student) => student.id !== record.id);
+                    return pre.filter((blog) => blog.id !== record.id);
                 });
             },
         });
     };
-    const onEditStudent = (record) => {
+    const onEditBlogPost = (record) => {
         setIsEditing(true);
-        setEditingStudent({ ...record });
+        setEditingBlogPost({ ...record });
     };
     const resetEditing = () => {
         setIsEditing(false);
-        setEditingStudent(null);
+        setEditingBlogPost(null);
     };
     return (
         <div className="App">
-            <header className="App-header">
-                <Button onClick={onAddStudent}>Add a new Student</Button>
-                <Table columns={columns} dataSource={dataSource}></Table>
-                <Modal
-                    title="Edit Student"
-                    visible={isEditing}
-                    okText="Save"
-                    onCancel={() => {
-                        resetEditing();
-                    }}
-                    onOk={() => {
-                        setDataSource((pre) => {
-                            return pre.map((student) => {
-                                if (student.id === editingStudent.id) {
-                                    return editingStudent;
-                                } else {
-                                    return student;
-                                }
-                            });
+            <Table columns={columns} dataSource={dataSource}></Table>
+            <Modal
+                title="Edit Blog Post"
+                visible={isEditing}
+                okText="Save"
+                onCancel={() => {
+                    resetEditing();
+                }}
+                onOk={() => {
+                    setDataSource((pre) => {
+                        return pre.map((blog) => {
+                            if (blog.id === editingBlogPost.id) {
+                                return editingBlogPost;
+                            } else {
+                                return blog;
+                            }
                         });
-                        resetEditing();
+                    });
+                    resetEditing();
+                }}
+            >
+                <Input
+                    value={editingBlogPost?.judul}
+                    onChange={(e) => {
+                        setEditingBlogPost((pre) => {
+                            return { ...pre, judul: e.target.value };
+                        });
                     }}
-                >
-                    <Input
-                        value={editingStudent?.name}
-                        onChange={(e) => {
-                            setEditingStudent((pre) => {
-                                return { ...pre, name: e.target.value };
-                            });
-                        }}
-                    />
-                    <Input
-                        value={editingStudent?.email}
-                        onChange={(e) => {
-                            setEditingStudent((pre) => {
-                                return { ...pre, email: e.target.value };
-                            });
-                        }}
-                    />
-                    <Input
-                        value={editingStudent?.address}
-                        onChange={(e) => {
-                            setEditingStudent((pre) => {
-                                return { ...pre, address: e.target.value };
-                            });
-                        }}
-                    />
-                </Modal>
-            </header>
+                />
+                <Input
+                    value={editingBlogPost?.deskripsi}
+                    onChange={(e) => {
+                        setEditingBlogPost((pre) => {
+                            return { ...pre, deskripsi: e.target.value };
+                        });
+                    }}
+                />
+                <Input
+                    value={editingBlogPost?.tanggal}
+                    onChange={(e) => {
+                        setEditingBlogPost((pre) => {
+                            return { ...pre, tanggal: e.target.value };
+                        });
+                    }}
+                />
+            </Modal>
         </div>
     );
 }

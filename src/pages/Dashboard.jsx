@@ -12,10 +12,6 @@ export default function Dashboard() {
         },
     ];
 
-    const style = {
-        background: '#0092ff',
-        padding: '8px 0',
-    };
     return (
         <LayoutAdmin breadcumb={breadcumb}>
             <Divider orientation="left">Statistics</Divider>

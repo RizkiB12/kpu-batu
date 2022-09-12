@@ -1,10 +1,10 @@
-import { Button, Table, Modal, Input } from "antd";
+import { Table, Modal, Input } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 function TableEmployee() {
     const [isEditing, setIsEditing] = useState(false);
-    const [editingStudent, setEditingStudent] = useState(null);
+    const [editingEmployee, setEditingEmployee] = useState(null);
     const [dataSource, setDataSource] = useState([
         {
             id: 1,
@@ -76,12 +76,12 @@ function TableEmployee() {
                     <>
                         <EditOutlined
                             onClick={() => {
-                                onEditStudent(record);
+                                onEditEmployee(record);
                             }}
                         />
                         <DeleteOutlined
                             onClick={() => {
-                                onDeleteStudent(record);
+                                onDeleteEmployee(record);
                             }}
                             style={{ color: "red", marginLeft: 12 }}
                         />
@@ -91,89 +91,74 @@ function TableEmployee() {
         },
     ];
 
-    const onAddStudent = () => {
-        const randomNumber = parseInt(Math.random() * 1000);
-        const newStudent = {
-            id: randomNumber,
-            name: "Name " + randomNumber,
-            email: randomNumber + "@gmail.com",
-            address: "Address " + randomNumber,
-        };
-        setDataSource((pre) => {
-            return [...pre, newStudent];
-        });
-    };
-    const onDeleteStudent = (record) => {
+    const onDeleteEmployee = (record) => {
         Modal.confirm({
-            title: "Are you sure, you want to delete this student record?",
+            title: "Are you sure, you want to delete this employee record?",
             okText: "Yes",
             okType: "danger",
             onOk: () => {
                 setDataSource((pre) => {
-                    return pre.filter((student) => student.id !== record.id);
+                    return pre.filter((employee) => employee.id !== record.id);
                 });
             },
         });
     };
-    const onEditStudent = (record) => {
+    const onEditEmployee = (record) => {
         setIsEditing(true);
-        setEditingStudent({ ...record });
+        setEditingEmployee({ ...record });
     };
     const resetEditing = () => {
         setIsEditing(false);
-        setEditingStudent(null);
+        setEditingEmployee(null);
     };
     return (
         <div className="App">
-            <header className="App-header">
-                <Button onClick={onAddStudent}>Add a new Student</Button>
-                <Table columns={columns} dataSource={dataSource}></Table>
-                <Modal
-                    title="Edit Student"
-                    visible={isEditing}
-                    okText="Save"
-                    onCancel={() => {
-                        resetEditing();
-                    }}
-                    onOk={() => {
-                        setDataSource((pre) => {
-                            return pre.map((student) => {
-                                if (student.id === editingStudent.id) {
-                                    return editingStudent;
-                                } else {
-                                    return student;
-                                }
-                            });
+            <Table columns={columns} dataSource={dataSource}></Table>
+            <Modal
+                title="Edit Employee"
+                visible={isEditing}
+                okText="Save"
+                onCancel={() => {
+                    resetEditing();
+                }}
+                onOk={() => {
+                    setDataSource((pre) => {
+                        return pre.map((employee) => {
+                            if (employee.id === editingEmployee.id) {
+                                return editingEmployee;
+                            } else {
+                                return employee;
+                            }
                         });
-                        resetEditing();
+                    });
+                    resetEditing();
+                }}
+            >
+                <Input
+                    value={editingEmployee?.nama}
+                    onChange={(e) => {
+                        setEditingEmployee((pre) => {
+                            return { ...pre, nama: e.target.value };
+                        });
                     }}
-                >
-                    <Input
-                        value={editingStudent?.name}
-                        onChange={(e) => {
-                            setEditingStudent((pre) => {
-                                return { ...pre, name: e.target.value };
-                            });
-                        }}
-                    />
-                    <Input
-                        value={editingStudent?.email}
-                        onChange={(e) => {
-                            setEditingStudent((pre) => {
-                                return { ...pre, email: e.target.value };
-                            });
-                        }}
-                    />
-                    <Input
-                        value={editingStudent?.address}
-                        onChange={(e) => {
-                            setEditingStudent((pre) => {
-                                return { ...pre, address: e.target.value };
-                            });
-                        }}
-                    />
-                </Modal>
-            </header>
+                />
+                <Input
+                    value={editingEmployee?.email}
+                    onChange={(e) => {
+                        setEditingEmployee((pre) => {
+                            return { ...pre, email: e.target.value };
+                        });
+                    }}
+                />
+                <Input
+                    value={editingEmployee?.password}
+                    onChange={(e) => {
+                        setEditingEmployee((pre) => {
+                            return { ...pre, password: e.target.value };
+                        });
+                    }}
+                />
+            </Modal>
         </div>
     );
 }
