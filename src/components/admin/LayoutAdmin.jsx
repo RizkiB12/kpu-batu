@@ -97,7 +97,7 @@ const LayoutAdmin = (props) => {
                         textAlign: 'center',
                     }}
                 >
-                    Ant Design ©2018 Created by Ant UED
+                    KPU Kota Batu ©2022
                 </Footer>
             </Layout>
         </Layout>

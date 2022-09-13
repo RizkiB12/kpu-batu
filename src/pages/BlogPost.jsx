@@ -33,7 +33,7 @@ const BlogPost = () => {
 
     return (
         <LayoutAdmin breadcumb={breadcumb}>
-            <Button type="primary" onClick={showModal}>
+            <Button type="primary" onClick={showModal} style={{ marginBottom: 15 }}>
                 Add Data Blog Post
             </Button>
             <Modal title="Modal Add Data Blog Post" onOk={handleOk} onCancel={handleCancel} visible={isModalOpen}>
@@ -44,7 +44,7 @@ const BlogPost = () => {
                         modifier: 'public',
                     }}
                 >
-                    <Form.Item label="Upload" valuePropName="fileList"
+                    <Form.Item label="Image" valuePropName="fileList"
                         rules={[
                             {
                                 required: true,
@@ -64,20 +64,36 @@ const BlogPost = () => {
                             </div>
                         </Upload>
                     </Form.Item>
-                    <Form.Item name="description" label="Description"
+                    <Form.Item
+                        name="judul"
+                        label="Judul"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input the Description!',
+                                message: 'Please input the judul!',
                             },
-                        ]}>
-                        <Input type="textarea" />
+                        ]}
+                    >
+                        <Input />
                     </Form.Item>
-                    <Form.Item label="DatePicker"
+                    <Form.Item
+                        name="deskripsi"
+                        label="Deskripsi"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input the Date!',
+                                message: 'Please input Deskripsi',
+                            },
+                        ]}
+                    >
+                        <Input.TextArea showCount maxLength={500} />
+                    </Form.Item>
+
+                    <Form.Item label="Tanggal"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input the Tanggal!',
                             },
                         ]}>
                         <DatePicker />

@@ -33,7 +33,7 @@ const Employee = () => {
 
     return (
         <LayoutAdmin breadcumb={breadcumb}>
-            <Button type="primary" onClick={showModal}>
+            <Button type="primary" onClick={showModal} style={{ marginBottom: 15 }}>
                 Add Data Employee
             </Button>
             <Modal title="Modal Add Data Employee" onOk={handleOk} onCancel={handleCancel} visible={isModalOpen}>

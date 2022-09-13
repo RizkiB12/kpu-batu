@@ -7,7 +7,7 @@ const { Meta } = Card;
 export default function Dashboard() {
     const breadcumb = [
         {
-            name: 'Overview',
+            name: 'Dashboard',
             link: '/overview',
         },
     ];
@@ -51,11 +51,11 @@ export default function Dashboard() {
                         <Card
                             hoverable
                             style={{
-                                width: 240,
+                                width: 250,
                             }}
-                            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                            cover={<img alt="example" src="https://joeschmoe.io/api/v1/random" style={{ backgroundColor: '#F1F1F1' }} />}
                         >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
+                            <Meta title="Rudi Saputra" description="www.instagram.com" />
                         </Card>
                     </div>
                 </Col>
@@ -64,11 +64,11 @@ export default function Dashboard() {
                         <Card
                             hoverable
                             style={{
-                                width: 240,
+                                width: 250,
                             }}
-                            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                            cover={<img alt="example" src="https://joeschmoe.io/api/v1/random" style={{ backgroundColor: '#F1F1F1' }} />}
                         >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
+                            <Meta title="Kirana Dewi" description="www.instagram.com" />
                         </Card></div>
                 </Col>
                 <Col className="gutter-row" span={6}>
@@ -76,11 +76,11 @@ export default function Dashboard() {
                         <Card
                             hoverable
                             style={{
-                                width: 240,
+                                width: 250,
                             }}
-                            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                            cover={<img alt="example" src="https://joeschmoe.io/api/v1/random" style={{ backgroundColor: '#F1F1F1' }} />}
                         >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
+                            <Meta title="Nicholas Saputra" description="www.instagram.com" />
                         </Card>
                     </div>
                 </Col>
@@ -89,11 +89,11 @@ export default function Dashboard() {
                         <Card
                             hoverable
                             style={{
-                                width: 240,
+                                width: 250,
                             }}
-                            cover={<img alt="example" src="https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png" />}
+                            cover={<img alt="example" src="https://joeschmoe.io/api/v1/random" style={{ backgroundColor: '#F1F1F1' }} />}
                         >
-                            <Meta title="Europe Street beat" description="www.instagram.com" />
+                            <Meta title="Dodit Mulyanto" description="www.instagram.com" />
                         </Card>
                     </div>
                 </Col>

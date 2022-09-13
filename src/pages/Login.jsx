@@ -12,7 +12,7 @@ const Login = () => {
         <div className="min-h-screen flex flex-col justify-center">
             <div className="grid grid-cols-1 justify-items-center">
                 <div className="w-4/5 sm:w-3/5 md:w-2/5 lg:w-2/5 xl:w-1/3 bg-gray-100 p-5 rounded-lg">
-                    <h1 className='text-2xl'>Form Login</h1>
+                    <h1 className='text-2xl'>Form Login Badan Adhoc</h1>
                     <Form
                         name="normal_login"
                         className="login-form"
@@ -22,15 +22,15 @@ const Login = () => {
                         onFinish={onFinish}
                     >
                         <Form.Item
-                            name="username"
+                            name="email"
                             rules={[
                                 {
                                     required: true,
-                                    message: 'Please input your Username!',
+                                    message: 'Please input your Email!',
                                 },
                             ]}
                         >
-                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+                            <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
                         </Form.Item>
                         <Form.Item
                             name="password"
@@ -51,17 +51,12 @@ const Login = () => {
                             <Form.Item name="remember" valuePropName="checked" noStyle>
                                 <Checkbox>Remember me</Checkbox>
                             </Form.Item>
-
-                            <a className="login-form-forgot" href="">
-                                Forgot password
-                            </a>
                         </Form.Item>
 
                         <Form.Item>
                             <Button type="primary" htmlType="submit" className="login-form-button">
                                 Log in
                             </Button>
-                            Or <a href="">register now!</a>
                         </Form.Item>
                     </Form>
                 </div>
