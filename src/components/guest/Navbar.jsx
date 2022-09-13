@@ -17,7 +17,7 @@ const Navbar = () => {
                 <li className='p-4  hover:text-orange-400'>News</li>
                 <li className='p-4  hover:text-orange-400'>Team</li>
                 <li className='p-4  hover:text-orange-400'>FAQ</li>
-                <NavLink to="/">
+                <NavLink to="/login">
                     <li className='p-4 text-white hover:text-orange-400'>Login</li>
                 </NavLink>
             </ul>
@@ -30,7 +30,7 @@ const Navbar = () => {
                 <li className='p-4 border-b border-gray-600 text-white  hover:text-orange-400'>News</li>
                 <li className='p-4 border-b border-gray-600 text-white  hover:text-orange-400'>Team</li>
                 <li className='p-4 border-b border-gray-600 text-white  hover:text-orange-400'>FAQ</li>
-                <NavLink to="/">
+                <NavLink to="/login">
                     <li className='p-4 border-b border-gray-600 text-white  hover:text-orange-400'>Login</li>
                 </NavLink>
             </ul>

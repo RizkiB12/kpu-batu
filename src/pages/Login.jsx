@@ -2,6 +2,7 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Login = () => {
     const onFinish = (values) => {
@@ -54,9 +55,11 @@ const Login = () => {
                         </Form.Item>
 
                         <Form.Item>
-                            <Button type="primary" htmlType="submit" className="login-form-button">
-                                Log in
-                            </Button>
+                            <NavLink to="/dashboard">
+                                <Button type="primary" htmlType="submit" className="login-form-button">
+                                    Log in
+                                </Button>
+                            </NavLink>
                         </Form.Item>
                     </Form>
                 </div>

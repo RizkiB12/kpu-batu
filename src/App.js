@@ -10,6 +10,7 @@ import Employee from "./pages/Employee";
 import BlogPost from "./pages/BlogPost";
 import EmployeeAdhoc from "./pages/EmployeeAdhoc";
 import Home from "./pages/guest/Home";
+import PrintEmployeeAdhoc from "./pages/PrintEmployeeAdhoc";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/editProfile" element={<EditProfile />} />
         <Route path="/employee" element={<Employee />} />
         <Route path="/blogpost" element={<BlogPost />} />
+        <Route path="/print" element={<PrintEmployeeAdhoc />} />
       </Routes>
     </BrowserRouter>
   );

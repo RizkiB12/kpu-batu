@@ -6,7 +6,8 @@ import {
     UserAddOutlined,
     SettingOutlined,
     UserOutlined,
-    CreditCardOutlined
+    CreditCardOutlined,
+    FileTextOutlined
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React, { useState } from 'react';
@@ -30,6 +31,7 @@ const LayoutAdmin = (props) => {
         getItem('Employee', '/employee', <UserOutlined />),
         getItem('Employee Adhoc', '/employeeadhoc', <TeamOutlined />),
         getItem('Add Data', '/adddata', <UserAddOutlined />),
+        getItem('Print Adhoc', '/print', <FileTextOutlined />),
         getItem('Edit Profile', '/editProfile', <SettingOutlined />),
         getItem('Logout', '/login', <LogoutOutlined />),
     ];
