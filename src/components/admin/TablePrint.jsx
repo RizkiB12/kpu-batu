@@ -1,69 +1,56 @@
-import { Table, Tag } from 'antd';
+import { Table } from 'antd';
 import React from 'react';
+import { data } from './Data';
 const columns = [
     {
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
+        width: 150,
         render: (text) => <a>{text}</a>,
     },
     {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
+        title: 'Tanggal',
+        dataIndex: 'tanggal',
+        key: 'tanggal lahir',
+        width: 150,
     },
     {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
+        title: 'Tempat',
+        dataIndex: 'tempat',
+        key: 'tempat lahir',
+        width: 150,
     },
     {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: (_, { tags }) => (
-            <>
-                {tags.map((tag) => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </>
-        ),
-    },
-];
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
+        title: 'Alamat',
+        dataIndex: 'alamat',
+        key: 'alamat',
+        width: 150,
     },
     {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
+        title: 'Facebook',
+        dataIndex: 'facebook',
+        key: 'facebook',
+        width: 150,
     },
     {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
+        title: 'Nomer HP',
+        dataIndex: 'hp',
+        key: 'nomer hp',
+        width: 150,
+    },
+    {
+        title: 'Pendidikan',
+        dataIndex: 'pendidikan',
+        key: 'pendidikan terakhir',
+        width: 150,
     },
 ];
 
-const TabelPrint = () => <Table columns={columns} dataSource={data} />;
+
+const TabelPrint = () => <Table
+    columns={columns} dataSource={data}
+    pagination={{ pageSize: 6, total: 50, showSizeChanger: true }}
+    bordered />;
 
 export default TabelPrint;

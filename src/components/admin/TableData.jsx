@@ -269,7 +269,7 @@ export const TableData = () => {
                 dataSource={Data}
                 columns={columns}
                 scroll={{ x: 1300 }}
-                pagination={{ pageSize: 8, total: 50, showSizeChanger: true }}
+                pagination={{ pageSize: 4, total: 50, showSizeChanger: true }}
                 bordered
             />
             <Modals

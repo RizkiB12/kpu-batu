@@ -13,7 +13,7 @@ const Hero = () => {
                         Untuk Kota Batu
                     </p>
                     <Typed
-                        className='md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2 pb-11 text-gray-400'
+                        className='md:text-5xl sm:text-4xl text-xl font-bold md:pl-4 pl-2 pb-12 text-gray-400'
                         strings={['Jujur', 'Aman', 'Damai']}
                         typeSpeed={120}
                         backSpeed={140}

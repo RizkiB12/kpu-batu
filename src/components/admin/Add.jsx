@@ -5,6 +5,7 @@ import {
     Select,
     DatePicker,
     Upload,
+    message,
 } from 'antd';
 
 import { UploadOutlined } from '@ant-design/icons';
@@ -26,40 +27,6 @@ const normFile = (e) => {
     return e?.fileList;
 };
 
-const residences = [
-    {
-        value: 'zhejiang',
-        label: 'Zhejiang',
-        children: [
-            {
-                value: 'hangzhou',
-                label: 'Hangzhou',
-                children: [
-                    {
-                        value: 'xihu',
-                        label: 'West Lake',
-                    },
-                ],
-            },
-        ],
-    },
-    {
-        value: 'jiangsu',
-        label: 'Jiangsu',
-        children: [
-            {
-                value: 'nanjing',
-                label: 'Nanjing',
-                children: [
-                    {
-                        value: 'zhonghuamen',
-                        label: 'Zhong Hua Men',
-                    },
-                ],
-            },
-        ],
-    },
-];
 const formItemLayout = {
     labelCol: {
         xs: {
@@ -100,18 +67,6 @@ export const Add = () => {
     };
 
 
-    const prefixSelector = (
-        <Form.Item name="prefix" noStyle>
-            <Select
-                style={{
-                    width: 70,
-                }}
-            >
-                <Option value="86">+86</Option>
-                <Option value="87">+87</Option>
-            </Select>
-        </Form.Item>
-    );
     const suffixSelector = (
         <Form.Item name="suffix" noStyle>
             <Select
@@ -138,6 +93,21 @@ export const Add = () => {
         label: website,
         value: website,
     }));
+
+    const props = {
+        beforeUpload: (file) => {
+            const isPNG = file.type === 'image/png';
+
+            if (!isPNG) {
+                message.error(`${file.name} is not a png file`);
+            }
+
+            return isPNG || Upload.LIST_IGNORE;
+        },
+        onChange: (info) => {
+            console.log(info.fileList);
+        },
+    };
     return (
 
         <Form
@@ -242,10 +212,10 @@ export const Add = () => {
                 label="Foto"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="JPEG/JPG/PDF/PNG file max size 1MB, 3x4"
+                extra="PNG file max size 1MB, 3x4"
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
+                <Upload {...props}>
+                    <Button icon={<UploadOutlined />}>Upload PNG Only</Button>
                 </Upload>
             </Form.Item>
 
@@ -254,9 +224,9 @@ export const Add = () => {
                 label="Fotocopy KTP"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="JPEG/JPG/PDF file max size 1MB"
+                extra="PNG file max size 1MB"
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload {...props}>
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
