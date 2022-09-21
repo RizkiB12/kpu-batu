@@ -1,8 +1,9 @@
-import { Button, Form, Input, Modal, Upload } from 'antd';
+import { Button, Form, Input, Modal, Upload, message } from 'antd';
 import React, { useState } from 'react';
 import LayoutAdmin from '../components/admin/LayoutAdmin';
 import TableEmployee from '../components/admin/TableEmployee';
-import { PlusOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
+
 
 
 const Employee = () => {
@@ -23,6 +24,46 @@ const Employee = () => {
     };
 
     console.log(isModalOpen);
+    const layout = {
+        labelCol: {
+            span: 6,
+        },
+        wrapperCol: {
+            span: 16,
+        },
+    };
+
+    const validateMessages = {
+        required: '${label} is required!',
+        types: {
+            email: '${label} is not a valid email!',
+            number: '${label} is not a valid number!',
+        },
+        number: {
+            range: '${label} must be between ${min} and ${max}',
+        },
+    };
+
+    const onFinish = (values) => {
+        console.log(values);
+    };
+
+    const props = {
+        beforeUpload: (file) => {
+            const isPNG = file.type === 'image/png';
+
+            if (!isPNG) {
+                message.error(`${file.name} is not a png file`);
+            }
+
+            return isPNG || Upload.LIST_IGNORE;
+        },
+        onChange: (info) => {
+            console.log(info.fileList);
+        },
+    };
+
+
 
     const breadcumb = [
         {
@@ -37,56 +78,31 @@ const Employee = () => {
                 Add Data Employee
             </Button>
             <Modal title="Modal Add Data Employee" onOk={handleOk} onCancel={handleCancel} visible={isModalOpen}>
-                <Form
-                    layout="vertical"
-                    name="form_in_modal"
-                    initialValues={{
-                        modifier: 'public',
-                    }}
-                >
-                    <Form.Item label="Image" valuePropName="fileList"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input the image!',
-                            },
-                        ]}>
-                        <Upload action="/upload.do" listType="picture-card">
-                            <div>
-                                <PlusOutlined />
-                                <div
-                                    style={{
-                                        marginTop: 8,
-                                    }}
-                                >
-                                    Image
-                                </div>
-                            </div>
-                        </Upload>
-                    </Form.Item>
+                <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
                     <Form.Item
-                        name="nama"
-                        label="Nama"
+                        name={['user', 'name']}
+                        label="Name"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input the Nama!',
                             },
                         ]}
                     >
                         <Input />
                     </Form.Item>
-                    <Form.Item name="email" label="Email"
+                    <Form.Item
+                        name={['user', 'email']}
+                        label="Email"
                         rules={[
                             {
-                                required: true,
-                                message: 'Please input the Email!',
+                                type: 'email',
                             },
-                        ]}>
+                        ]}
+                    >
                         <Input />
                     </Form.Item>
                     <Form.Item
-                        name="password"
+                        name={['user', 'password']}
                         label="Password"
                         rules={[
                             {
@@ -98,29 +114,31 @@ const Employee = () => {
                     >
                         <Input.Password />
                     </Form.Item>
-
                     <Form.Item
-                        name="confirm"
+                        name={['user', 'confirm']}
                         label="Confirm Password"
-                        dependencies={['password']}
-                        hasFeedback
                         rules={[
                             {
                                 required: true,
-                                message: 'Please confirm your password!',
+                                message: 'Please input your password!',
                             },
-                            ({ getFieldValue }) => ({
-                                validator(_, value) {
-                                    if (!value || getFieldValue('password') === value) {
-                                        return Promise.resolve();
-                                    }
-
-                                    return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                                },
-                            }),
                         ]}
+                        hasFeedback
                     >
                         <Input.Password />
+                    </Form.Item>
+                    <Form.Item name={['user', 'Image']} label="Image">
+                        <Upload {...props}>
+                            <Button icon={<UploadOutlined />}>Upload png only</Button>
+                        </Upload>
+                    </Form.Item>
+                    <Form.Item name={['user', 'introduction']} label="Introduction">
+                        <Input.TextArea />
+                    </Form.Item>
+                    <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
+                        <Button type="primary" htmlType="submit">
+                            Submit
+                        </Button>
                     </Form.Item>
                 </Form>
             </Modal>

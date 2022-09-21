@@ -1,78 +1,81 @@
 import React, { useState } from "react";
 import { Table, Modal, Empty } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { data } from "./Data";
+//import { data } from "./Data";
 import Modals from "./Modals";
+import axios from "axios";
+import { useEffect } from "react";
+
 
 export const TableData = () => {
     const columns = [
         {
-            key: "name",
+            key: "user_id",
             title: "Name",
-            dataIndex: "name",
-            sorter: (a, b) => a.name > b.name,
+            render: item => item.user.name,
+            sorter: (a, b) => a.user_id > b.user_id,
             sortDirections: ["descend"],
             fixed: 'left',
             width: 150,
         },
+        // {
+        //     key: "foto",
+        //     title: "Foto",
+        //     dataIndex: "foto",
+        //     width: 100,
+        //     render: (text, record) => {
+        //         return (
+        //             <div>
+        //                 <img src={record.productimage} />
+        //             </div>
+        //         );
+        //     },
+        // },
         {
-            key: "foto",
-            title: "Foto",
-            dataIndex: "foto",
-            width: 100,
-            render: (text, record) => {
-                return (
-                    <div>
-                        <img src={record.productimage} />
-                    </div>
-                );
-            },
-        },
-        {
-            key: "tanggal lahir",
+            key: "user_id",
             title: "Tanggal",
-            dataIndex: "tanggal",
+            dataIndex: "dob",
             width: 150,
         },
         {
-            key: "tempat lahir",
+            key: "user_id",
             title: "Tempat",
-            dataIndex: "tempat",
+            dataIndex: "dop",
             width: 150,
         },
         {
-            key: "alamat",
+            key: "user_id",
             title: "Alamat",
             dataIndex: "alamat",
             width: 150,
-            // render: (website) => <a href={website}>{website}</a>,
+
         },
+        // {
+        //     key: "instagram",
+        //     title: "Instagram",
+        //     dataIndex: "instagram",
+        //     width: 150,
+        // },
+        // {
+        //     key: "facebook",
+        //     title: "Facebook",
+        //     dataIndex: "facebook",
+        //     width: 150,
+        // },
         {
-            key: "instagram",
-            title: "Instagram",
-            dataIndex: "instagram",
-            width: 150,
-        },
-        {
-            key: "facebook",
-            title: "Facebook",
-            dataIndex: "facebook",
-            width: 150,
-        },
-        {
-            key: "nomer hp",
+            key: "user_id",
             title: "Nomer HP",
-            dataIndex: "hp",
+            dataIndex: "no_hp",
             width: 150,
         },
         {
-            key: "pendidikan terakhir",
+            key: "user_id",
             title: "Pendidikan",
-            dataIndex: "pendidikan",
+            dataIndex: "pendidikan_terakhir",
             width: 150,
         },
         {
-            key: "fotocopy ktp",
+            key: "user_id",
             title: "KTP",
             dataIndex: "ktp",
             width: 200,
@@ -85,7 +88,7 @@ export const TableData = () => {
             },
         },
         {
-            key: "surat setia pancasila",
+            key: "user_id",
             title: "SPSPS",
             dataIndex: "spsp",
             width: 200,
@@ -98,7 +101,7 @@ export const TableData = () => {
             },
         },
         {
-            key: "surat pakta integritas",
+            key: "user_id",
             title: "SPI",
             dataIndex: "spi",
             width: 200,
@@ -111,7 +114,7 @@ export const TableData = () => {
             },
         },
         {
-            key: "surat tidak menjadi anggota parpol",
+            key: "user_id",
             title: "STPOL",
             dataIndex: "stpol",
             width: 200,
@@ -124,7 +127,7 @@ export const TableData = () => {
             },
         },
         {
-            key: "surat keterangan sehat",
+            key: "user_id",
             title: "SKES",
             dataIndex: "skes",
             width: 200,
@@ -137,7 +140,7 @@ export const TableData = () => {
             },
         },
         {
-            key: "fotocopy ijazah",
+            key: "user_id",
             title: "Ijazah",
             dataIndex: "ijazah",
             width: 200,
@@ -150,7 +153,7 @@ export const TableData = () => {
             },
         },
         {
-            key: "skck",
+            key: "user_id",
             title: "SKCK",
             dataIndex: "skck",
             width: 200,
@@ -163,7 +166,7 @@ export const TableData = () => {
             },
         },
         {
-            key: "surat pernyataan tidak pernah sanksi kpu",
+            key: "user_id",
             title: "STSKPU",
             dataIndex: "stskpu",
             width: 200,
@@ -176,7 +179,7 @@ export const TableData = () => {
             },
         },
         {
-            key: "surat belum pernah menjabat 2 tahun",
+            key: "user_id",
             title: "SBTH",
             dataIndex: "sbth",
             width: 200,
@@ -189,7 +192,7 @@ export const TableData = () => {
             },
         },
         {
-            key: "surat pernyataan tidak dalam ikatan perkawinan dengan sesama penyelenggara",
+            key: "user_id",
             title: "STPP",
             dataIndex: "stpp",
             width: 200,
@@ -202,9 +205,22 @@ export const TableData = () => {
             },
         },
         {
-            key: "surat keterangan domosili",
+            key: "user_id",
             title: "SDOM",
             dataIndex: "sdom",
+            width: 200,
+            render: () => {
+                return (
+                    <div>
+                        <Empty />
+                    </div>
+                );
+            },
+        },
+        {
+            key: "user_id",
+            title: "KK",
+            dataIndex: "kk",
             width: 200,
             render: () => {
                 return (
@@ -238,9 +254,23 @@ export const TableData = () => {
         },
     ];
 
-    const [Data, setData] = useState(data);
+    const [data, setData] = useState([]);
     const [visible, setVisible] = useState(false);
     const [edit, setEdit] = useState(null);
+
+    useEffect(() => {
+        const fetchEmp = () => {
+            axios.get("http://127.0.0.1:5000/api/v1/emp-adhoc")
+                .then((res) => {
+                    console.log(res);
+                    setData(res.data.empAdhoc);
+
+                })
+        }
+        fetchEmp();
+    }, [])
+    console.log(data);
+
 
     const Delete = (record) => {
         Modal.confirm({
@@ -266,7 +296,7 @@ export const TableData = () => {
         <>
 
             <Table
-                dataSource={Data}
+                dataSource={data}
                 columns={columns}
                 scroll={{ x: 1300 }}
                 pagination={{ pageSize: 4, total: 50, showSizeChanger: true }}
