@@ -1,9 +1,11 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import CreateFormEmployee from '../components/admin/CreateFormEmployee';
 import LayoutAdmin from '../components/admin/LayoutAdmin';
 import TableEmployee from '../components/admin/TableEmployee';
 
 const Employee = () => {
+    const { authUser } = useSelector(state => state.authUser)
 
 
     const breadcumb = [
@@ -15,7 +17,10 @@ const Employee = () => {
 
     return (
         <LayoutAdmin breadcumb={breadcumb}>
-            <CreateFormEmployee />
+            {
+                authUser.role === 'admin' &&
+                <CreateFormEmployee />
+            }
             <TableEmployee />
         </LayoutAdmin>
 
