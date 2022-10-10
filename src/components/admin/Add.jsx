@@ -9,6 +9,7 @@ import {
 } from 'antd';
 
 import { UploadOutlined } from '@ant-design/icons';
+import '../../assets/css/add.css';
 
 import React, { useState } from 'react';
 const { Option } = Select;
@@ -81,22 +82,11 @@ export const Add = () => {
     );
     const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
-    const onWebsiteChange = (value) => {
-        if (!value) {
-            setAutoCompleteResult([]);
-        } else {
-            setAutoCompleteResult(['.com', '.org', '.net'].map((domain) => `${value}${domain}`));
-        }
-    };
-
-    const websiteOptions = autoCompleteResult.map((website) => ({
-        label: website,
-        value: website,
-    }));
 
     const props = {
         beforeUpload: (file) => {
             const isPNG = file.type === 'image/png';
+
 
             if (!isPNG) {
                 message.error(`${file.name} is not a png file`);
@@ -238,7 +228,7 @@ export const Add = () => {
                 getValueFromEvent={normFile}
                 extra="PDF file max size 1MB, 3x4"
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload name="logo">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
@@ -262,7 +252,7 @@ export const Add = () => {
                 getValueFromEvent={normFile}
                 extra="PDF file max size 1MB"
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload name="logo" action="/upload.do" listType="text">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>

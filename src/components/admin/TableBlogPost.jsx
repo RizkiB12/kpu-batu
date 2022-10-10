@@ -93,6 +93,8 @@ function TableBlogPost() {
     ];
 
 
+
+
     const onDeleteBlogPost = (record) => {
         Modal.confirm({
             title: "Are you sure, you want to delete this Blog Post record?",

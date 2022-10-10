@@ -121,7 +121,7 @@ const CollectionCreateForm = ({ open, onCreate, onCancel }) => {
     );
 };
 
-const CreateForm = () => {
+const CreateFormEmployee = () => {
     const [open, setOpen] = useState(false);
 
     const onCreate = (values) => {
@@ -151,4 +151,4 @@ const CreateForm = () => {
     );
 };
 
-export default CreateForm;
+export default CreateFormEmployee;

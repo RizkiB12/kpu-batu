@@ -69,12 +69,12 @@ const CollectionCreateForm = ({ open, onCreate, onCancel }) => {
                     <Input />
                 </Form.Item>
                 <Form.Item
-                    name="intro"
-                    label="Intro"
+                    name="deskripsi"
+                    label="Deskripsi"
                     rules={[
                         {
                             required: true,
-                            message: 'Please input Intro',
+                            message: 'Please input Deskripsi',
                         },
                     ]}
                 >

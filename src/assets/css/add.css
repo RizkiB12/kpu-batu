@@ -1,0 +1,11 @@
+.ant-upload-list-picture .ant-upload-list-item-error {
+    border-color: #0096FF !important;
+}
+
+.ant-upload-list-item-error .ant-upload-list-item-name {
+    color: #0096FF !important;
+}
+
+.ant-upload-list-picture .ant-upload-list-item-error .ant-upload-list-item-thumbnail .anticon svg path[fill="#1890ff"] {
+    fill: #0096FF !important;
+}

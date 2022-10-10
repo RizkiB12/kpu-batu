@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateForm from '../components/admin/CreateForm';
+import CreateFormEmployee from '../components/admin/CreateFormEmployee';
 import LayoutAdmin from '../components/admin/LayoutAdmin';
 import TableEmployee from '../components/admin/TableEmployee';
 
@@ -15,7 +15,7 @@ const Employee = () => {
 
     return (
         <LayoutAdmin breadcumb={breadcumb}>
-            <CreateForm />
+            <CreateFormEmployee />
             <TableEmployee />
         </LayoutAdmin>
 
