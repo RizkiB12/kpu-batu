@@ -1,13 +1,30 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
+import axios from 'axios';
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { login, logout } from '../redux/slice/AuthSlice';
+
 
 const Login = () => {
+    const dispatch = useDispatch();
+
+
     const onFinish = (values) => {
         console.log('Received values of form: ', values);
+        axios.post(`${process.env.REACT_APP_API_URL}auth/login`, values)
+            .then(res => {
+                console.log('this data res', res.data);
+                const user = res.data;
+                dispatch(login(user))
+            })
     };
+
+    const handleLogout = () => {
+        console.log('clicked logout');
+        dispatch(logout());
+    }
 
     return (
         <div className="min-h-screen flex flex-col justify-center">
@@ -55,15 +72,15 @@ const Login = () => {
                         </Form.Item>
 
                         <Form.Item>
-                            <NavLink to="/dashboard">
-                                <Button type="primary" htmlType="submit" className="login-form-button">
-                                    Log in
-                                </Button>
-                            </NavLink>
+
+                            <Button type="primary" htmlType="submit" className="login-form-button">
+                                Log in
+                            </Button>
                         </Form.Item>
                     </Form>
                 </div>
             </div>
+            <button onClick={() => handleLogout()}>Logout</button>
         </div>
     );
 };
