@@ -4,11 +4,13 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { login, logout } from '../redux/slice/AuthSlice';
 
 
 const Login = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
 
     const onFinish = (values) => {

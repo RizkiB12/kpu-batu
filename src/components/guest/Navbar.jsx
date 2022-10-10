@@ -1,13 +1,28 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../redux/slice/AuthSlice';
 
 const Navbar = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const { authUser } = useSelector(state => state.authUser)
     const [nav, setNav] = useState(false);
 
     const handleNav = () => {
         setNav(!nav);
     };
+
+    const handleLogout = () => {
+        console.log('clicked')
+        dispatch(logout())
+        navigate('/')
+    }
+
+    const handleLogin = () => {
+        navigate('/login')
+    }
 
     return (
         <div className='flex justify-between items-center h-24 max-w-[1240px] mx-auto px-4 text-white'>
@@ -30,11 +45,9 @@ const Navbar = () => {
                 <li className='p-4 border-b border-gray-600 text-white  hover:text-orange-400'>News</li>
                 <li className='p-4 border-b border-gray-600 text-white  hover:text-orange-400'>Team</li>
                 <li className='p-4 border-b border-gray-600 text-white  hover:text-orange-400'>FAQ</li>
-                <NavLink to="/login">
-                    <li className='p-4 border-b border-gray-600 text-white  hover:text-orange-400'>Login</li>
-                </NavLink>
+                <li className='p-4 border-b border-gray-600 text-white  hover:text-orange-400 cursor-pointer' onClick={authUser === null ? () => handleLogin() : () => handleLogout()}>{authUser === null ? 'Login' : 'Logout'}</li>
             </ul>
-        </div>
+        </div >
     );
 };
 

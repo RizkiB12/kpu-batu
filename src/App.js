@@ -11,21 +11,29 @@ import BlogPost from "./pages/BlogPost";
 import EmployeeAdhoc from "./pages/EmployeeAdhoc";
 import Home from "./pages/guest/Home";
 import PrintEmployeeAdhoc from "./pages/PrintEmployeeAdhoc";
+import { AdminRoute, GuestRoute } from "./middleware/AuthRoute";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/employeeadhoc" element={<EmployeeAdhoc />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/adddata" element={<AddData />} />
-        <Route path="/schedule" element={<Schedule />} />
-        <Route path="/editProfile" element={<EditProfile />} />
-        <Route path="/employee" element={<Employee />} />
-        <Route path="/blogpost" element={<BlogPost />} />
-        <Route path="/print" element={<PrintEmployeeAdhoc />} />
+        {/* Guest Route */}
+        <Route element={<GuestRoute/>}>
+          <Route path="/login" element={<Login />} />
+        </Route>
+
+        {/* Admin Route */}
+        <Route element={<AdminRoute/>}>
+          <Route path="/employeeadhoc" element={<EmployeeAdhoc />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/adddata" element={<AddData />} />
+          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/editProfile" element={<EditProfile />} />
+          <Route path="/employee" element={<Employee />} />
+          <Route path="/blogpost" element={<BlogPost />} />
+          <Route path="/print" element={<PrintEmployeeAdhoc />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
