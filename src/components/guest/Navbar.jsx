@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../../redux/slice/AuthSlice';
@@ -32,9 +32,7 @@ const Navbar = () => {
                 <li className='p-4  hover:text-orange-400'>News</li>
                 <li className='p-4  hover:text-orange-400'>Team</li>
                 <li className='p-4  hover:text-orange-400'>FAQ</li>
-                <NavLink to="/login">
-                    <li className='p-4 text-white hover:text-orange-400'>Login</li>
-                </NavLink>
+                <li className='p-4  text-white  hover:text-orange-400 cursor-pointer' onClick={authUser === null ? () => handleLogin() : () => handleLogout()}>{authUser === null ? 'Login' : 'Logout'}</li>
             </ul>
             <div onClick={handleNav} className='block md:hidden'>
                 {nav ? <AiOutlineClose size={20} /> : <AiOutlineMenu size={20} />}
