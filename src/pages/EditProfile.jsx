@@ -10,6 +10,7 @@ import {
   Row,
   Space,
   Upload,
+  message
 } from "antd";
 import React, { useState } from "react";
 
@@ -49,6 +50,10 @@ export default function Dashboard() {
     },
   ];
 
+  const success = () => {
+    message.success('Success to edit profile');
+  };
+
 
 
   return (
@@ -79,7 +84,7 @@ export default function Dashboard() {
               <Input.Password placeholder="Masukkan ulang password" />
             </Form.Item>
             <Form.Item {...buttonItemLayout}>
-              <Button type="primary">Submit</Button>
+              <Button type="primary" onClick={success}>Submit</Button>
             </Form.Item>
           </Form>
         </Col>

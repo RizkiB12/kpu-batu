@@ -14,6 +14,8 @@ const BlogPost = () => {
         },
     ];
 
+
+
     return (
         <LayoutAdmin breadcumb={breadcumb}>
             <CreateFormBlog />

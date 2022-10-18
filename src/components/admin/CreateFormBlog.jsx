@@ -17,6 +17,11 @@ const props = {
     },
 };
 
+const success = () => {
+    message.success('This is a success add data blog post');
+};
+
+
 const onChange = (value, dateString) => {
     console.log('Selected Time: ', value);
     console.log('Formatted Selected Time: ', dateString);
@@ -103,6 +108,7 @@ const CreateFormBlog = () => {
 
 
 
+
     return (
         <div>
             <Button
@@ -116,7 +122,7 @@ const CreateFormBlog = () => {
             </Button>
             <CollectionCreateForm
                 open={open}
-                onCreate={onCreate}
+                onCreate={success}
                 onCancel={() => {
                     setOpen(false);
                 }}
