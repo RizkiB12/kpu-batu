@@ -11,10 +11,14 @@ import {
 } from '@ant-design/icons';
 import { Breadcrumb, Layout, Menu } from 'antd';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+import { logout } from '../../redux/slice/AuthSlice';
 const { Header, Content, Footer, Sider } = Layout;
 
 const LayoutAdmin = (props) => {
+    const dispatch = useDispatch()
+
     function getItem(label, key, icon, children) {
         return {
             key,
@@ -22,7 +26,15 @@ const LayoutAdmin = (props) => {
             children,
             label,
         };
+
     }
+
+    const handleLogout = () => {
+        console.log("clicked");
+        dispatch(logout())
+    }
+
+
 
     const items = [
         getItem('Dashboard', '/dashboard', <HomeOutlined />),
@@ -33,8 +45,10 @@ const LayoutAdmin = (props) => {
         getItem('Add Data', '/adddata', <UserAddOutlined />),
         getItem('Print Adhoc', '/print', <FileTextOutlined />),
         getItem('Edit Profile', '/editProfile', <SettingOutlined />),
-        getItem('Logout', '/login', <LogoutOutlined />),
+        getItem('Logout', '/', <LogoutOutlined />),
     ];
+
+
 
     const [collapsed, setCollapsed] = useState(false);
     return (
@@ -49,7 +63,7 @@ const LayoutAdmin = (props) => {
                     defaultSelectedKeys={useLocation().pathname}
                     mode="inline">
                     {items.map((item) => (
-                        <Menu.Item key={item.key} icon={item.icon}>
+                        <Menu.Item key={item.label} icon={item.icon} onClick={item.label === "Logout" && handleLogout}>
                             <Link to={item.key}>{item.label}</Link>
                         </Menu.Item>
                     ))}

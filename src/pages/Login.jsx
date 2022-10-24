@@ -4,7 +4,7 @@ import { Button, Checkbox, Form, Input } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { login, logout } from '../redux/slice/AuthSlice';
+import { login } from '../redux/slice/AuthSlice';
 
 
 const Login = () => {
@@ -21,10 +21,6 @@ const Login = () => {
             })
     };
 
-    const handleLogout = () => {
-        console.log('clicked logout');
-        dispatch(logout());
-    }
 
     return (
         <div className="min-h-screen flex flex-col justify-center">
@@ -80,7 +76,6 @@ const Login = () => {
                     </Form>
                 </div>
             </div>
-            <button onClick={() => handleLogout()}>Logout</button>
         </div>
     );
 };
