@@ -1,4 +1,4 @@
-import { Table, Modal, Input } from "antd";
+import { Table, Modal, Input, message } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
@@ -110,6 +110,10 @@ function TableEmployee() {
     const resetEditing = () => {
         setIsEditing(false);
         setEditingEmployee(null);
+    };
+
+    const success = () => {
+        message.success('This is a success message');
     };
     return (
         <div className="App">
