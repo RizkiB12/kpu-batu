@@ -33,7 +33,7 @@ export const TableData = () => {
         // },
         {
             key: "user_id",
-            title: "Tanggal",
+            title: "Tanggal Lahir",
             dataIndex: "dob",
             width: 150,
         },
@@ -236,6 +236,7 @@ export const TableData = () => {
             width: 90,
             fixed: 'right',
             render: (record) => {
+
                 return (
                     <>
                         <div className="flex">
@@ -269,7 +270,6 @@ export const TableData = () => {
         }
         fetchEmp();
     }, [])
-    console.log(data);
 
 
     const Delete = (record) => {
@@ -284,6 +284,7 @@ export const TableData = () => {
     };
 
     const Edit = (record) => {
+        console.log(record);
         setVisible(true);
         setEdit({ ...record });
     };

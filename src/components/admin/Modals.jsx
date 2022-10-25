@@ -1,11 +1,14 @@
 import React from "react";
-import { Input, Modal } from "antd";
+import { Input, Modal, Form, DatePicker } from "antd";
+
 
 const Modals = ({ visible, edit, setEdit, setData, ResetEditing }) => {
+
+    const [form] = Form.useForm();
     return (
         <>
             <Modal
-                title="Edit Details"
+                title="Edit Details Employee Adhoc"
                 visible={visible}
                 okText="Save"
                 onCancel={() => /*setVisible(false)*/ ResetEditing()}
@@ -22,46 +25,78 @@ const Modals = ({ visible, edit, setEdit, setData, ResetEditing }) => {
                     ResetEditing();
                 }}
             >
-                <Input
-                    value={edit?.name}
-                    onChange={(e) => {
-                        setEdit((pre) => {
-                            return { ...pre, name: e.target.value };
-                        });
-                    }}
-                />
-                <Input
-                    value={edit?.email}
-                    onChange={(e) => {
-                        setEdit((pre) => {
-                            return { ...pre, email: e.target.value };
-                        });
-                    }}
-                />
-                <Input
-                    value={edit?.address}
-                    onChange={(e) => {
-                        setEdit((pre) => {
-                            return { ...pre, address: e.target.value };
-                        });
-                    }}
-                />
-                <Input
-                    value={edit?.phone}
-                    onChange={(e) => {
-                        setEdit((pre) => {
-                            return { ...pre, phone: e.target.value };
-                        });
-                    }}
-                />
-                <Input
-                    value={edit?.website}
-                    onChange={(e) => {
-                        setEdit((pre) => {
-                            return { ...pre, website: e.target.value };
-                        });
-                    }}
-                />
+                <Form
+                    form={form}
+                    layout="vertical"
+                    name="form_in_modal"
+                >
+                    <Form.Item
+                        label="Nama"
+                    >
+                        <Input
+                            value={edit?.user?.name}
+                            onChange={(e) => {
+                                setEdit((pre) => {
+                                    return { ...pre, name: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+
+                    <Form.Item label="Tanggal Lahir">
+                        <DatePicker
+                        />
+                    </Form.Item>
+
+                    <Form.Item
+                        label="Tempat Lahir"
+                    >
+                        <Input
+                            value={edit?.dop}
+                            onChange={(e) => {
+                                setEdit((pre) => {
+                                    return { ...pre, dop: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label="Alamat"
+                    >
+                        <Input
+                            value={edit?.alamat}
+                            onChange={(e) => {
+                                setEdit((pre) => {
+                                    return { ...pre, alamat: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label="Nomer Handphone"
+                    >
+                        <Input
+                            value={edit?.no_hp}
+                            onChange={(e) => {
+                                setEdit((pre) => {
+                                    return { ...pre, no_hp: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label="Pendidikan Terakhir"
+                    >
+                        <Input
+                            value={edit?.pendidikan}
+                            onChange={(e) => {
+                                setEdit((pre) => {
+                                    return { ...pre, pendidikan: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+                </Form>
             </Modal>
         </>
     );

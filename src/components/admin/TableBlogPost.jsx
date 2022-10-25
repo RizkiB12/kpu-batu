@@ -1,8 +1,10 @@
-import { Table, Modal, Input } from "antd";
+import { Table, Modal, Input, Form, Upload } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { PlusOutlined } from '@ant-design/icons';
 
 function TableBlogPost() {
+    const [form] = Form.useForm();
     const [isEditing, setIsEditing] = useState(false);
     const [editingBlogPost, setEditingBlogPost] = useState(null);
     const [dataSource, setDataSource] = useState([
@@ -119,7 +121,7 @@ function TableBlogPost() {
         <div className="App">
             <Table columns={columns} dataSource={dataSource}></Table>
             <Modal
-                title="Edit Blog Post"
+                title="Edit Details Blog Post"
                 visible={isEditing}
                 okText="Save"
                 onCancel={() => {
@@ -138,30 +140,65 @@ function TableBlogPost() {
                     resetEditing();
                 }}
             >
-                <Input
-                    value={editingBlogPost?.judul}
-                    onChange={(e) => {
-                        setEditingBlogPost((pre) => {
-                            return { ...pre, judul: e.target.value };
-                        });
-                    }}
-                />
-                <Input
-                    value={editingBlogPost?.deskripsi}
-                    onChange={(e) => {
-                        setEditingBlogPost((pre) => {
-                            return { ...pre, deskripsi: e.target.value };
-                        });
-                    }}
-                />
-                <Input
-                    value={editingBlogPost?.tanggal}
-                    onChange={(e) => {
-                        setEditingBlogPost((pre) => {
-                            return { ...pre, tanggal: e.target.value };
-                        });
-                    }}
-                />
+                <Form
+                    form={form}
+                    layout="vertical"
+                    name="form_in_modal"
+                >
+                    <Form.Item
+                        label="Upload"
+                        valuePropName="fileList"
+                    >
+                        <Upload action="/upload.do" listType="picture-card">
+                            <div>
+                                <PlusOutlined />
+                                <div
+                                    style={{
+                                        marginTop: 8,
+                                    }}
+                                >
+                                    Upload
+                                </div>
+                            </div>
+                        </Upload>
+                    </Form.Item>
+                    <Form.Item
+                        label="Judul"
+                    >
+                        <Input
+                            value={editingBlogPost?.judul}
+                            onChange={(e) => {
+                                setEditingBlogPost((pre) => {
+                                    return { ...pre, judul: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label="Deskripsi"
+                    >
+                        <Input
+                            value={editingBlogPost?.deskripsi}
+                            onChange={(e) => {
+                                setEditingBlogPost((pre) => {
+                                    return { ...pre, deskripsi: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label="Tanggal"
+                    >
+                        <Input
+                            value={editingBlogPost?.tanggal}
+                            onChange={(e) => {
+                                setEditingBlogPost((pre) => {
+                                    return { ...pre, tanggal: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+                </Form>
             </Modal>
         </div>
     );

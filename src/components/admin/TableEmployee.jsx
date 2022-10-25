@@ -1,8 +1,9 @@
-import { Table, Modal, Input } from "antd";
+import { Table, Modal, Input, Form } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
 function TableEmployee() {
+    const [form] = Form.useForm();
     const [isEditing, setIsEditing] = useState(false);
     const [editingEmployee, setEditingEmployee] = useState(null);
     const [dataSource, setDataSource] = useState([
@@ -134,31 +135,50 @@ function TableEmployee() {
                     resetEditing();
                 }}
             >
-                <Input
-                    value={editingEmployee?.nama}
-                    onChange={(e) => {
-                        setEditingEmployee((pre) => {
-                            return { ...pre, nama: e.target.value };
-                        });
-                    }}
-                />
-                <Input
-                    value={editingEmployee?.email}
-                    onChange={(e) => {
-                        setEditingEmployee((pre) => {
-                            return { ...pre, email: e.target.value };
-                        });
-                    }}
-                />
-                <Input
-                    value={editingEmployee?.password}
-                    onChange={(e) => {
-                        setEditingEmployee((pre) => {
-                            return { ...pre, password: e.target.value };
-                        });
-                    }}
-                />
+                <Form
+                    form={form}
+                    layout="vertical"
+                    name="form_in_modal"
+                >
+                    <Form.Item
+                        label="Nama"
+                    >
+                        <Input
+                            value={editingEmployee?.nama}
+                            onChange={(e) => {
+                                setEditingEmployee((pre) => {
+                                    return { ...pre, nama: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label="Email"
+                    >
+                        <Input
+                            value={editingEmployee?.email}
+                            onChange={(e) => {
+                                setEditingEmployee((pre) => {
+                                    return { ...pre, email: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+                    <Form.Item
+                        label="Password"
+                    >
+                        <Input
+                            value={editingEmployee?.password}
+                            onChange={(e) => {
+                                setEditingEmployee((pre) => {
+                                    return { ...pre, password: e.target.value };
+                                });
+                            }}
+                        />
+                    </Form.Item>
+                </Form>
             </Modal>
+
         </div>
     );
 }

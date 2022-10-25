@@ -2,7 +2,6 @@ import {
     Button,
     Form,
     Input,
-    Select,
     DatePicker,
     Upload,
     message,
@@ -11,8 +10,7 @@ import {
 import { UploadOutlined } from '@ant-design/icons';
 import '../../assets/css/add.css';
 
-import React, { useState } from 'react';
-const { Option } = Select;
+import React from 'react';
 
 const onChange = (date, dateString) => {
     console.log(date, dateString);
@@ -67,20 +65,6 @@ export const Add = () => {
         console.log('Received values of form: ', values);
     };
 
-
-    const suffixSelector = (
-        <Form.Item name="suffix" noStyle>
-            <Select
-                style={{
-                    width: 70,
-                }}
-            >
-                <Option value="USD">$</Option>
-                <Option value="CNY">¥</Option>
-            </Select>
-        </Form.Item>
-    );
-    const [autoCompleteResult, setAutoCompleteResult] = useState([]);
 
 
     const props = {
