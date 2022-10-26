@@ -233,7 +233,7 @@ export const TableData = () => {
         {
             key: "action",
             title: "Actions",
-            width: 90,
+            width: 100,
             fixed: 'right',
             render: (record) => {
 

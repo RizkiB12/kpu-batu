@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, Modal, Form, DatePicker } from "antd";
+import { Input, Modal, Form, DatePicker, Select } from "antd";
 import moment from "moment/moment";
 
 
@@ -7,7 +7,9 @@ import moment from "moment/moment";
 const Modals = ({ visible, edit, setEdit, setData, ResetEditing }) => {
 
     const [form] = Form.useForm();
+    const { Option } = Select;
     const dateFormat = 'YYYY/MM/DD';
+    console.log(edit);
     return (
         <>
             <Modal
@@ -89,15 +91,32 @@ const Modals = ({ visible, edit, setEdit, setData, ResetEditing }) => {
                     </Form.Item>
                     <Form.Item
                         label="Pendidikan Terakhir"
+                        hasFeedback
                     >
-                        <Input
+                        <Select placeholder="Pilih Pendidikan Terakhir"
+                            defaultValue={edit?.pendidikan_terakhir}
+                            onChange={(e) => {
+                                setEdit((pre) => {
+                                    return { ...pre, pendidikan_terakhir: e };
+                                });
+                                console.log(e);
+                            }}
+
+                        >
+                            <Option value="smp">SMP</Option>
+                            <Option value="sma">SMA</Option>
+                            <Option value="s1">S1</Option>
+                            <Option value="s2">S2</Option>
+                        </Select>
+
+                        {/* <Input
                             value={edit?.pendidikan}
                             onChange={(e) => {
                                 setEdit((pre) => {
                                     return { ...pre, pendidikan: e.target.value };
                                 });
                             }}
-                        />
+                        /> */}
                     </Form.Item>
                 </Form>
             </Modal>
