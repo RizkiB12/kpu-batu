@@ -1,10 +1,12 @@
-import { Table, Modal, Input, Form, Upload } from "antd";
+import { Table, Modal, Input, Form, Upload, DatePicker } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { PlusOutlined } from '@ant-design/icons';
+import moment from "moment/moment";
 
 function TableBlogPost() {
     const [form] = Form.useForm();
+    const dateFormat = 'YYYY/MM/DD';
     const [isEditing, setIsEditing] = useState(false);
     const [editingBlogPost, setEditingBlogPost] = useState(null);
     const [dataSource, setDataSource] = useState([
@@ -177,26 +179,30 @@ function TableBlogPost() {
                     <Form.Item
                         label="Deskripsi"
                     >
-                        <Input
+                        <Input.TextArea
                             value={editingBlogPost?.deskripsi}
                             onChange={(e) => {
                                 setEditingBlogPost((pre) => {
                                     return { ...pre, deskripsi: e.target.value };
                                 });
                             }}
+                            showCount maxLength={1000}
                         />
                     </Form.Item>
                     <Form.Item
                         label="Tanggal"
                     >
-                        <Input
+                        <DatePicker
+                            defaultValue={moment(editingBlogPost?.tanggal, dateFormat)} format={dateFormat}
+                        />
+                        {/* <Input
                             value={editingBlogPost?.tanggal}
                             onChange={(e) => {
                                 setEditingBlogPost((pre) => {
                                     return { ...pre, tanggal: e.target.value };
                                 });
                             }}
-                        />
+                        /> */}
                     </Form.Item>
                 </Form>
             </Modal>

@@ -1,10 +1,13 @@
 import React from "react";
 import { Input, Modal, Form, DatePicker } from "antd";
+import moment from "moment/moment";
+
 
 
 const Modals = ({ visible, edit, setEdit, setData, ResetEditing }) => {
 
     const [form] = Form.useForm();
+    const dateFormat = 'YYYY/MM/DD';
     return (
         <>
             <Modal
@@ -44,7 +47,7 @@ const Modals = ({ visible, edit, setEdit, setData, ResetEditing }) => {
                     </Form.Item>
 
                     <Form.Item label="Tanggal Lahir">
-                        <DatePicker
+                        <DatePicker defaultValue={moment(edit?.dob, dateFormat)} format={dateFormat}
                         />
                     </Form.Item>
 

@@ -1,6 +1,7 @@
-import { Table, Modal, Input, Form } from "antd";
+import { Table, Modal, Input, Form, Upload } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { PlusOutlined } from '@ant-design/icons';
 
 function TableEmployee() {
     const [form] = Form.useForm();
@@ -141,6 +142,23 @@ function TableEmployee() {
                     name="form_in_modal"
                 >
                     <Form.Item
+                        label="Upload"
+                        valuePropName="fileList"
+                    >
+                        <Upload action="/upload.do" listType="picture-card">
+                            <div>
+                                <PlusOutlined />
+                                <div
+                                    style={{
+                                        marginTop: 8,
+                                    }}
+                                >
+                                    Upload
+                                </div>
+                            </div>
+                        </Upload>
+                    </Form.Item>
+                    <Form.Item
                         label="Nama"
                     >
                         <Input
@@ -167,7 +185,7 @@ function TableEmployee() {
                     <Form.Item
                         label="Password"
                     >
-                        <Input
+                        <Input.Password
                             value={editingEmployee?.password}
                             onChange={(e) => {
                                 setEditingEmployee((pre) => {
