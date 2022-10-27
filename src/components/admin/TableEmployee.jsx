@@ -68,11 +68,6 @@ function TableEmployee() {
             dataIndex: "email",
         },
         {
-            key: "5",
-            title: "Password",
-            dataIndex: "password",
-        },
-        {
             key: "6",
             title: "Actions",
             render: (record) => {
