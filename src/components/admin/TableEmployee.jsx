@@ -2,9 +2,11 @@ import { Table, Modal, Input, Form, Upload } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { PlusOutlined } from '@ant-design/icons';
+import { useSelector } from 'react-redux';
 
 function TableEmployee() {
     const [form] = Form.useForm();
+    const { authUser } = useSelector(state => state.authUser)
     const [isEditing, setIsEditing] = useState(false);
     const [editingEmployee, setEditingEmployee] = useState(null);
     const [dataSource, setDataSource] = useState([
@@ -115,7 +117,8 @@ function TableEmployee() {
     };
     return (
         <div className="App">
-            <Table columns={columns} dataSource={dataSource}></Table>
+            <Table columns={authUser.role === "user" ? columns.filter(col => col.key !== "6") : columns} dataSource={dataSource}></Table>
+            {/* menambahkan pada employee adhoc */}
             <Modal
                 title="Edit Employee"
                 visible={isEditing}

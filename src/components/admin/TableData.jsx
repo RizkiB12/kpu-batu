@@ -273,11 +273,12 @@ export const TableData = () => {
 
 
     const Delete = (record) => {
+        console.log(record);
         Modal.confirm({
             title: "Are you sure you want to delete this",
             onOk: () => {
                 setData((pre) => {
-                    return pre.filter((person) => person.id !== record.id);
+                    return pre.filter((emp) => emp.user_id !== record.user_id);
                 });
             },
         });

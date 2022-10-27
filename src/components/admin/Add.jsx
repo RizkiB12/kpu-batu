@@ -62,6 +62,7 @@ export const Add = () => {
 
 
     const onFinish = (values) => {
+        alert(JSON.stringify(values))
         console.log('Received values of form: ', values);
     };
 
@@ -99,7 +100,7 @@ export const Add = () => {
             layout="horizontal"
         >
             <Form.Item
-                name="Nama"
+                name="name"
                 label="Nama"
                 align="left"
                 rules={[
@@ -117,7 +118,7 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="bod"
+                name="dob"
                 label="Tanggal Lahir"
                 rules={[
                     {
@@ -130,7 +131,7 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="bop"
+                name="dop"
                 label="Tempat Lahir"
                 rules={[
                     {
@@ -143,7 +144,7 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="Alamat"
+                name="alamat"
                 label="Alamat"
                 rules={[
                     {
@@ -156,8 +157,8 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="Instagram"
-                label="Instagram"
+                name="no_hp"
+                label="No_HP"
                 rules={[
                     {
                         required: true,
@@ -169,14 +170,16 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="Facebook"
-                label="Facebook"
+                name="pendidikan_terakhir"
+                label="Pendidikan"
                 rules={[
                     {
                         required: true,
                         message: 'Please confirm your facebook!',
                     },
                 ]}
+
+            // mengganti menjadi select
             >
                 <Input />
             </Form.Item>
