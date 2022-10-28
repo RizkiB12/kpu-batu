@@ -5,6 +5,7 @@ import {
     DatePicker,
     Upload,
     message,
+    Select
 } from 'antd';
 
 import { UploadOutlined } from '@ant-design/icons';
@@ -15,6 +16,8 @@ import React from 'react';
 const onChange = (date, dateString) => {
     console.log(date, dateString);
 };
+
+const { Option } = Select;
 
 const normFile = (e) => {
     console.log('Upload event:', e);
@@ -175,13 +178,18 @@ export const Add = () => {
                 rules={[
                     {
                         required: true,
-                        message: 'Please confirm your facebook!',
+                        message: 'Please confirm your last education!',
                     },
                 ]}
 
             // mengganti menjadi select
             >
-                <Input />
+                <Select placeholder="Pilih Pendidikan Terakhir">
+                    <Option value="smp">SMP</Option>
+                    <Option value="sma">SMA</Option>
+                    <Option value="s1">S1</Option>
+                    <Option value="s2">S2</Option>
+                </Select>
             </Form.Item>
 
             <Form.Item
