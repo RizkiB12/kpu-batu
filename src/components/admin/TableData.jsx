@@ -5,9 +5,12 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import Modals from "./Modals";
 import axios from "axios";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
 
 
 export const TableData = () => {
+    const { authUser } = useSelector(state => state.authUser)
     const columns = [
         {
             key: "user_id",
@@ -299,7 +302,7 @@ export const TableData = () => {
 
             <Table
                 dataSource={data}
-                columns={columns}
+                columns={authUser.role === "user" ? columns.filter(col => col.key !== "action") : columns}
                 scroll={{ x: 1300 }}
                 pagination={{ pageSize: 4, total: 50, showSizeChanger: true }}
                 bordered
