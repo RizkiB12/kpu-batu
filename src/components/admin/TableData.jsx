@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { Table, Modal, Empty } from "antd";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined, FilePdfOutlined, FileImageOutlined } from "@ant-design/icons";
 //import { data } from "./Data";
 import Modals from "./Modals";
 import axios from "axios";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
-
+import moment from "moment/moment";
+import 'moment/locale/id';
 
 
 export const TableData = () => {
+    moment().locale('id')
     const { authUser } = useSelector(state => state.authUser)
     const columns = [
         {
@@ -21,24 +23,26 @@ export const TableData = () => {
             fixed: 'left',
             width: 150,
         },
-        // {
-        //     key: "foto",
-        //     title: "Foto",
-        //     dataIndex: "foto",
-        //     width: 100,
-        //     render: (text, record) => {
-        //         return (
-        //             <div>
-        //                 <img src={record.productimage} />
-        //             </div>
-        //         );
-        //     },
-        // },
+        {
+            key: "foto",
+            title: "Foto",
+            width: 200,
+            render: (item, record) => {
+                return (
+                    <div>
+                        {item?.foto === null ? <div>Tidak ada foto</div> :
+                            <FileImageOutlined />
+                        }
+                    </div>
+                );
+            },
+        },
         {
             key: "user_id",
             title: "Tanggal Lahir",
-            dataIndex: "dob",
             width: 150,
+            render: item => moment(item.dob).format('Do MMMM YYYY'),
+
         },
         {
             key: "user_id",
@@ -80,12 +84,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "KTP",
-            dataIndex: "ktp",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.ktp === null ? <div>Tidak ada foto</div> :
+                            <FileImageOutlined />
+                        }
                     </div>
                 );
             },
@@ -93,12 +98,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "SPSPS",
-            dataIndex: "spsp",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.spsp === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -106,12 +112,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "SPI",
-            dataIndex: "spi",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.spi === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -119,12 +126,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "STPOL",
-            dataIndex: "stpol",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.stpol === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -132,12 +140,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "SKES",
-            dataIndex: "skes",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.skes === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -145,12 +154,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "Ijazah",
-            dataIndex: "ijazah",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.ijazah === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -158,12 +168,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "SKCK",
-            dataIndex: "skck",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.skck === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -171,12 +182,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "STSKPU",
-            dataIndex: "stskpu",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.stskpu === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -184,12 +196,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "SBTH",
-            dataIndex: "sbth",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.sbth === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -197,12 +210,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "STPP",
-            dataIndex: "stpp",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.stpp === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -210,12 +224,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "SDOM",
-            dataIndex: "sdom",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.sdom === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -223,12 +238,13 @@ export const TableData = () => {
         {
             key: "user_id",
             title: "KK",
-            dataIndex: "kk",
             width: 200,
-            render: () => {
+            render: (item) => {
                 return (
                     <div>
-                        <Empty />
+                        {item?.kk === null ? <div>Tidak ada file</div> :
+                            <FilePdfOutlined />
+                        }
                     </div>
                 );
             },
@@ -264,7 +280,9 @@ export const TableData = () => {
 
     useEffect(() => {
         const fetchEmp = () => {
-            axios.get("http://127.0.0.1:5000/api/v1/emp-adhoc")
+            axios.get("http://127.0.0.1:5000/api/v1/emp-adhoc", {
+                headers: { 'Authorization': 'Bearer ' + authUser.access_token }
+            })
                 .then((res) => {
                     console.log(res);
                     setData(res.data.empAdhoc);
@@ -273,6 +291,8 @@ export const TableData = () => {
         }
         fetchEmp();
     }, [])
+
+    console.log(authUser);
 
 
     const Delete = (record) => {

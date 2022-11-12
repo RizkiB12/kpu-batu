@@ -1,7 +1,7 @@
-import { Table, Modal, Input, Form, Upload } from "antd";
+import { Table, Modal, Input, Form, Upload, message, Button } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { PlusOutlined } from '@ant-design/icons';
+import { UploadOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
 
 function TableEmployee() {
@@ -27,14 +27,14 @@ function TableEmployee() {
         {
             id: 3,
             productimage: "https://joeschmoe.io/api/v1/random",
-            name: "James",
+            nama: "James",
             email: "james@gmail.com",
             address: "James Address",
         },
         {
             id: 4,
             productimage: "https://joeschmoe.io/api/v1/random",
-            name: "Sam",
+            nama: "Sam",
             email: "sam@gmail.com",
             address: "Sam Address",
         },
@@ -48,7 +48,7 @@ function TableEmployee() {
         {
             key: "2",
             title: "Image",
-            dataIndex: "imageURL",
+            dataIndex: "productimage",
             render: (text, record) => {
                 return (
                     <div>
@@ -89,6 +89,24 @@ function TableEmployee() {
             },
         },
     ];
+
+    const props = {
+        name: 'file',
+        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+        headers: {
+            authorization: 'authorization-text',
+        },
+        onChange(info) {
+            if (info.file.status !== 'uploading') {
+                console.log(info.file, info.fileList);
+            }
+            if (info.file.status === 'done') {
+                message.success(`${info.file.name} file uploaded successfully`);
+            } else if (info.file.status === 'error') {
+                message.error(`${info.file.name} file upload failed.`);
+            }
+        },
+    };
 
     const onDeleteEmployee = (record) => {
         Modal.confirm({
@@ -143,17 +161,10 @@ function TableEmployee() {
                         label="Upload"
                         valuePropName="fileList"
                     >
-                        <Upload action="/upload.do" listType="picture-card">
-                            <div>
-                                <PlusOutlined />
-                                <div
-                                    style={{
-                                        marginTop: 8,
-                                    }}
-                                >
-                                    Upload
-                                </div>
-                            </div>
+                        <Upload {...props}
+
+                        >
+                            <Button icon={<UploadOutlined />}>Click to Upload</Button>
                         </Upload>
                     </Form.Item>
                     <Form.Item
