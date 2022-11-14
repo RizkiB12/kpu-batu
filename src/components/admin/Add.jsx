@@ -221,7 +221,7 @@ export const Add = () => {
                 label="Surat Setia Pancasila "
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="PDF file max size 1MB, 3x4"
+                extra="PDF file"
             >
                 <Upload name="logo">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -233,7 +233,7 @@ export const Add = () => {
                 label="Surat Pakta Integritas"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="PDF file max size 1MB"
+                extra="PDF file"
             >
                 <Upload name="logo" action="/upload.do" listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -245,7 +245,7 @@ export const Add = () => {
                 label="Surat Tidak Menjadi Parpol"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="PDF file max size 1MB"
+                extra="PDF file"
             >
                 <Upload name="logo" action="/upload.do" listType="text">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -257,7 +257,7 @@ export const Add = () => {
                 label="Surat Keterangan Sehat"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="PDF file max size 1MB"
+                extra="PDF file"
             >
                 <Upload name="logo" action="/upload.do" listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -269,7 +269,7 @@ export const Add = () => {
                 label="Fotocopy Ijazah"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="PNG/PDF/JPEG/JPG file max size 1MB"
+                extra="PDF file "
             >
                 <Upload name="logo" action="/upload.do" listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -281,7 +281,7 @@ export const Add = () => {
                 label="SKCK"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="PDF file max size 1MB"
+                extra="PDF file"
             >
                 <Upload name="logo" action="/upload.do" listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -293,7 +293,7 @@ export const Add = () => {
                 label="Surat Tidak Sanksi KPU"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="PDF file max size 1MB"
+                extra="PDF file"
             >
                 <Upload name="logo" action="/upload.do" listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -305,7 +305,7 @@ export const Add = () => {
                 label="Surat Belum Menjabat 2x"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="JPEG/JPG/PDF/PNG file max size 1MB"
+                extra="PDF file "
             >
                 <Upload name="logo" action="/upload.do" listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -317,7 +317,7 @@ export const Add = () => {
                 label="Surat Tidak Kawin Sesama"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="PDF file max size 1MB"
+                extra="PDF file"
             >
                 <Upload name="logo" action="/upload.do" listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
@@ -329,7 +329,7 @@ export const Add = () => {
                 label="Surat Domisili"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
-                extra="PDF file max size 1MB"
+                extra="PDF file"
             >
                 <Upload name="logo" action="/upload.do" listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
