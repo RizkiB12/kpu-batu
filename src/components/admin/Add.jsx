@@ -12,6 +12,9 @@ import { UploadOutlined } from '@ant-design/icons';
 import '../../assets/css/add.css';
 
 import React from 'react';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+import moment from "moment"
 
 const onChange = (date, dateString) => {
     console.log(date, dateString);
@@ -62,14 +65,21 @@ const tailFormItemLayout = {
 
 export const Add = () => {
     const [form] = Form.useForm();
-
+    const { authUser } = useSelector(state => state.authUser)
+    const formData = new FormData()
 
     const onFinish = (values) => {
-        alert(JSON.stringify(values))
         console.log('Received values of form: ', values);
+        formData.append('name', values.name)
+        formData.append('email', `${values.name.replace(/\s/g, '').toLowerCase()}@example.com`)
+        formData.append('dob', moment(values.dob).format('YYYY-MM-DD'))
+        formData.append('no_hp', values.no_hp)
+        axios.post(`${process.env.REACT_APP_API_URL}emp-adhoc/create`, formData, {
+            headers: { 'Authorization': 'Bearer ' + authUser.access_token }
+        }).then(res => {
+            console.log(res.data)
+        })
     };
-
-
 
     const props = {
         beforeUpload: (file) => {
@@ -87,7 +97,6 @@ export const Add = () => {
         },
     };
     return (
-
         <Form
             {...formItemLayout}
             form={form}
