@@ -2,7 +2,11 @@ import React from 'react'
 import LayoutAdmin from '../components/admin/LayoutAdmin';
 import { TableData } from '../components/admin/TableData';
 import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
+
 const EmployeeAdhoc = () => {
+    const navigate = useNavigate()
+
     const breadcumb = [
         {
             name: 'Employees Adhoc',
@@ -13,6 +17,7 @@ const EmployeeAdhoc = () => {
     return (
         <LayoutAdmin breadcumb={breadcumb}>
             <Button type="primary" style={{ marginBottom: 15 }}>Export Data</Button>
+            <Button type="primary" onClick={() => navigate('/adddata')} style={{ marginBottom: 15, marginLeft: 15 }}>Add Data</Button>
             <TableData />
         </LayoutAdmin>
     )
