@@ -52,7 +52,7 @@ function TableEmployee() {
             render: (text, record) => {
                 return (
                     <div>
-                        <img src={record.productimage} />
+                        <img src={record.productimage} alt="" />
                     </div>
                 );
             },
