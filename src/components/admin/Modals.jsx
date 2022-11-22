@@ -5,11 +5,9 @@ import moment from "moment/moment";
 
 
 const Modals = ({ visible, edit, setEdit, setData, ResetEditing }) => {
-
     const [form] = Form.useForm();
     const { Option } = Select;
     const dateFormat = 'YYYY/MM/DD';
-    console.log(edit);
     return (
         <>
             <Modal

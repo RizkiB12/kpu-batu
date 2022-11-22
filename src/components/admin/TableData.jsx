@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Modal, Empty } from "antd";
+import { Table, Modal, } from "antd";
 import { EditOutlined, DeleteOutlined, FilePdfOutlined, FileImageOutlined } from "@ant-design/icons";
 //import { data } from "./Data";
 import Modals from "./Modals";
@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import moment from "moment/moment";
 import 'moment/locale/id';
-
 
 export const TableData = () => {
     moment().locale('id')
@@ -280,20 +279,16 @@ export const TableData = () => {
 
     useEffect(() => {
         const fetchEmp = () => {
-            axios.get("http://127.0.0.1:5000/api/v1/emp-adhoc", {
+            axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc`, {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
                     console.log(res);
                     setData(res.data.empAdhoc);
-
                 })
         }
         fetchEmp();
-    }, [])
-
-    console.log(authUser);
-
+    }, [authUser.access_token])
 
     const Delete = (record) => {
         console.log(record);
@@ -319,7 +314,6 @@ export const TableData = () => {
     };
     return (
         <>
-
             <Table
                 dataSource={data}
                 columns={authUser.role === "user" ? columns.filter(col => col.key !== "action") : columns}
