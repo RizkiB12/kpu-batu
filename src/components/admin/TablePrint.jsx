@@ -7,7 +7,7 @@ const columns = [
         dataIndex: 'name',
         key: 'name',
         width: 150,
-        render: (text) => <a>{text}</a>,
+        render: (text) => <a href="/">{text}</a>,
     },
     {
         title: 'Tanggal',
