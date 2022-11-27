@@ -4,33 +4,17 @@ import {
     Input,
     DatePicker,
     Upload,
-    message,
     Select
 } from 'antd';
 
 import { UploadOutlined } from '@ant-design/icons';
 import '../../assets/css/add.css';
 
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import moment from "moment"
-
-const onChange = (date, dateString) => {
-    console.log(date, dateString);
-};
 
 const { Option } = Select;
-
-const normFile = (e) => {
-    console.log('Upload event:', e);
-
-    if (Array.isArray(e)) {
-        return e;
-    }
-
-    return e?.fileList;
-};
 
 const formItemLayout = {
     labelCol: {
@@ -67,35 +51,43 @@ export const Add = () => {
     const [form] = Form.useForm();
     const { authUser } = useSelector(state => state.authUser)
     const formData = new FormData()
+    const [fileUpload, setFileUpload] = useState(null)
+    console.log(fileUpload)
 
     const onFinish = (values) => {
-        console.log('Received values of form: ', values);
         formData.append('name', values.name)
-        formData.append('email', `${values.name.replace(/\s/g, '').toLowerCase()}@example.com`)
-        formData.append('dob', moment(values.dob).format('YYYY-MM-DD'))
-        formData.append('no_hp', values.no_hp)
-        axios.post(`${process.env.REACT_APP_API_URL}emp-adhoc/create`, formData, {
+        if (fileUpload !== null) {
+            for (const [key, value] of Object.entries(fileUpload)) {
+                formData.append(key, value)
+            }
+        }
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+        axios.post(`${process.env.REACT_APP_API_URL}emp-adhoc/createasda`, formData, {
             headers: { 'Authorization': 'Bearer ' + authUser.access_token }
         }).then(res => {
             console.log(res.data)
         })
     };
 
-    const props = {
-        beforeUpload: (file) => {
-            const isPNG = file.type === 'image/png';
+    const normFile = (e) => {
+        if (Array.isArray(e)) {
+            return e;
+        }
 
-
-            if (!isPNG) {
-                message.error(`${file.name} is not a png file`);
-            }
-
-            return isPNG || Upload.LIST_IGNORE;
-        },
-        onChange: (info) => {
-            console.log(info.fileList);
-        },
+        return e?.fileList;
     };
+
+    const addFile = (name, file) => {
+        let nameFile = name
+        setFileUpload(prevState => ({
+            ...prevState,
+            [nameFile]: file
+        }))
+        return false
+    }
+
     return (
         <Form
             {...formItemLayout}
@@ -139,7 +131,7 @@ export const Add = () => {
                     },
                 ]}
             >
-                <DatePicker onChange={onChange} />
+                <DatePicker />
             </Form.Item>
 
             <Form.Item
@@ -190,7 +182,6 @@ export const Add = () => {
                         message: 'Please confirm your last education!',
                     },
                 ]}
-
             // mengganti menjadi select
             >
                 <Select placeholder="Pilih Pendidikan Terakhir">
@@ -202,145 +193,145 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="Foto"
+                name="foto"
                 label="Foto"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PNG file max size 1MB, 3x4"
             >
-                <Upload {...props}>
+                <Upload beforeUpload={(file) => addFile('foto', file)}>
                     <Button icon={<UploadOutlined />}>Upload PNG Only</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="Fotocopy KTP"
-                label="Fotocopy KTP"
+                name="ktp"
+                label="KTP"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PNG file max size 1MB"
             >
-                <Upload {...props}>
+                <Upload beforeUpload={(file) => addFile('ktp', file)}>
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="SPSP"
+                name="spsp"
                 label="Surat Setia Pancasila "
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PDF file"
             >
-                <Upload name="logo">
+                <Upload beforeUpload={(file) => addFile('spsp', file)}>
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="SPI"
+                name="spi"
                 label="Surat Pakta Integritas"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PDF file"
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload beforeUpload={(file) => addFile('spi', file)} listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="STPOL"
+                name="stpol"
                 label="Surat Tidak Menjadi Parpol"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PDF file"
             >
-                <Upload name="logo" action="/upload.do" listType="text">
+                <Upload beforeUpload={(file) => addFile('stpol', file)} listType="text">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="SKES"
+                name="skes"
                 label="Surat Keterangan Sehat"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PDF file"
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload beforeUpload={(file) => addFile('skes', file)} listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="Ijazah"
+                name="ijazah"
                 label="Fotocopy Ijazah"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PDF file "
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload beforeUpload={(file) => addFile('ijazah', file)} listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="SKCK"
+                name="skck"
                 label="SKCK"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PDF file"
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload beforeUpload={(file) => addFile('skck', file)} listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="STSKPU"
+                name="stskpu"
                 label="Surat Tidak Sanksi KPU"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PDF file"
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload beforeUpload={(file) => addFile('stskpu', file)} listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="SBTH"
+                name="sbth"
                 label="Surat Belum Menjabat 2x"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PDF file "
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload beforeUpload={(file) => addFile('sbth', file)} listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="STPP"
+                name="stpp"
                 label="Surat Tidak Kawin Sesama"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PDF file"
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload beforeUpload={(file) => addFile('stpp', file)} listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
 
             <Form.Item
-                name="SDOM"
+                name="sdom"
                 label="Surat Domisili"
                 valuePropName="fileList"
                 getValueFromEvent={normFile}
                 extra="PDF file"
             >
-                <Upload name="logo" action="/upload.do" listType="picture">
+                <Upload beforeUpload={(file) => addFile('sdom', file)} listType="picture">
                     <Button icon={<UploadOutlined />}>Click to upload</Button>
                 </Upload>
             </Form.Item>
