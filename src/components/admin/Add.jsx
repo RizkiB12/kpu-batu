@@ -52,7 +52,7 @@ export const Add = () => {
     const { authUser } = useSelector(state => state.authUser)
     const formData = new FormData()
     const [fileUpload, setFileUpload] = useState(null)
-    console.log(fileUpload)
+    console.log('this file will be upload', fileUpload)
 
     const onFinish = (values) => {
         formData.append('name', values.name)
