@@ -4,7 +4,8 @@ import {
     Input,
     DatePicker,
     Upload,
-    Select
+    Select,
+    message
 } from 'antd';
 
 import { UploadOutlined } from '@ant-design/icons';
@@ -79,7 +80,13 @@ export const Add = () => {
         return e?.fileList;
     };
 
-    const addFile = (name, file) => {
+    const addFile = (name, file, type) => {
+        console.log(file)
+        const isAllowedType = validateFileType(file, type)
+        if (!isAllowedType) {
+            message.error('not allowed format')
+            return false
+        }
         let nameFile = name
         setFileUpload(prevState => ({
             ...prevState,
@@ -87,6 +94,17 @@ export const Add = () => {
         }))
         return false
     }
+
+    const validateFileType = (file, allowedTypes) => {
+        if (!allowedTypes) {
+            return true;
+        }
+
+        if (file) {
+            return allowedTypes.includes(file.type);
+        }
+    };
+
 
     return (
         <Form
@@ -199,7 +217,7 @@ export const Add = () => {
                 getValueFromEvent={normFile}
                 extra="PNG file max size 1MB, 3x4"
             >
-                <Upload beforeUpload={(file) => addFile('foto', file)}>
+                <Upload beforeUpload={(file) => addFile('foto', file, 'image/png')}>
                     <Button icon={<UploadOutlined />}>Upload PNG Only</Button>
                 </Upload>
             </Form.Item>
