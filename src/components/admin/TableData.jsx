@@ -54,9 +54,9 @@ export const TableData = () => {
         <>
             <Table
                 dataSource={data}
-                columns={authUser.role === "user" ? ColumnEmpAdhoc({ Delete, Edit }).filter(col => col.key !== "action") : ColumnEmpAdhoc}
+                columns={ColumnEmpAdhoc({ Delete, Edit, authUser })}
                 scroll={{ x: 1300 }}
-                pagination={{ pageSize: 10, showSizeChanger: true }}
+                pagination={{ pageSize: 8, showSizeChanger: true }}
                 bordered
             />
             <Modals

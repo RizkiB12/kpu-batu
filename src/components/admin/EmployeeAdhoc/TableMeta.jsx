@@ -1,10 +1,67 @@
 import { EditOutlined, DeleteOutlined, FilePdfOutlined, FileImageOutlined } from "@ant-design/icons";
+import { Modal, Row } from "antd";
 import moment from "moment/moment";
+import { useState } from "react";
 
-export const ColumnEmpAdhoc = ({ Delete, Edit }) =>
+export const FilePDF = () => {
+    return (
+        <div style={{ display: "flex", justifyContent: "center", }}>
+            <FilePdfOutlined style={{ fontSize: "32px", }} />
+        </div>
+    )
+}
+
+export const RowFile = (props) => {
+    const { fileSrc, typeFile } = props
+    const [previewOpen, setPreviewOpen] = useState(false)
+    const [modalVisible, setModalVisible] = useState(false)
+
+    const handleOpenModal = () => {
+        setPreviewOpen(true)
+        setModalVisible(true)
+    }
+
+    const handleCloseModal = () => {
+        setTimeout(() => {
+            setModalVisible(false)
+            setPreviewOpen(false)
+        }, 100);
+    }
+
+    return (
+        <div style={{ display: "flex", justifyContent: "center", }} onClick={handleOpenModal}>
+            {
+                typeFile === 'image' ? <FileImageOutlined style={{ fontSize: "32px", }} /> : <FilePdfOutlined style={{ fontSize: "32px", }} />
+            }
+            <Modal
+                open={previewOpen}
+                footer={null}
+                onCancel={handleCloseModal}
+                visible={modalVisible}
+                bodyStyle={typeFile === 'pdf' ? { height: 800 } : null}
+            >
+                {
+                    typeFile === 'image' ? <img
+                        alt="example"
+                        style={{
+                            width: '100%',
+                        }}
+                        src={fileSrc}
+                    /> :
+                        <iframe src={fileSrc} type="application/pdf" width="100%" height="100%" title="File PDF" />
+                }
+                <div>
+                    button delete dan edit
+                </div>
+            </Modal>
+        </div>
+    )
+}
+
+export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) =>
     [
         {
-            key: "user_id",
+            key: "user.name",
             title: "Name",
             render: item => item.user.name,
             sorter: (a, b) => a.user_id > b.user_id,
@@ -15,32 +72,30 @@ export const ColumnEmpAdhoc = ({ Delete, Edit }) =>
         {
             key: "foto",
             title: "Foto",
-            width: 200,
+            width: 100,
             render: (item, record) => {
                 return (
                     <div>
-                        {item?.foto === null ? <div>Tidak ada foto</div> :
-                            <FileImageOutlined />
-                        }
+                        {item?.foto || <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Foto Employee Adhoc" />}
                     </div>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "dob",
             title: "Tanggal Lahir",
-            width: 150,
+            width: 200,
             render: item => moment(item.dob).format('Do MMMM YYYY'),
 
         },
         {
-            key: "user_id",
+            key: "dop",
             title: "Tempat",
             dataIndex: "dop",
             width: 150,
         },
         {
-            key: "user_id",
+            key: "alamat",
             title: "Alamat",
             dataIndex: "alamat",
             width: 150,
@@ -59,206 +114,185 @@ export const ColumnEmpAdhoc = ({ Delete, Edit }) =>
         //     width: 150,
         // },
         {
-            key: "user_id",
+            key: "no_hp",
             title: "Nomer HP",
             dataIndex: "no_hp",
             width: 150,
         },
         {
-            key: "user_id",
+            key: "pendidikan_terakhir",
             title: "Pendidikan",
             dataIndex: "pendidikan_terakhir",
             width: 150,
         },
         {
-            key: "user_id",
+            key: "ktp",
             title: "KTP",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.ktp === null ? <div>Tidak ada foto</div> :
-                            <FileImageOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.ktp !== null ? <RowFile fileSrc={item?.ktp} typeFile={'image'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "spsp",
             title: "SPSPS",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.spsp === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.spsp !== null ? <RowFile fileSrc={item?.spsp} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "spi",
             title: "SPI",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.spi === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.spi !== null ? <RowFile fileSrc={item?.spi} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "stpol",
             title: "STPOL",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.stpol === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.stpol !== null ? <RowFile fileSrc={item?.stpol} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "skes",
             title: "SKES",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.skes === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.skes !== null ? <RowFile fileSrc={item?.skes} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "ijazah",
             title: "Ijazah",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.ijazah === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.ijazah !== null ? <RowFile fileSrc={item?.ijazah} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "skck",
             title: "SKCK",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.skck === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.skck !== null ? <RowFile fileSrc={item?.skck} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "stskpu",
             title: "STSKPU",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.stskpu === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.stskpu !== null ? <RowFile fileSrc={item?.stskpu} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "sbth",
             title: "SBTH",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.sbth === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.sbth !== null ? <RowFile fileSrc={item?.sbth} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "stpp",
             title: "STPP",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.stpp === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.stpp !== null ? <RowFile fileSrc={item?.stpp} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "sdom",
             title: "SDOM",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.sdom === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.sdom !== null ? <RowFile fileSrc={item?.sdom} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
-            key: "user_id",
+            key: "kk",
             title: "KK",
             width: 200,
             render: (item) => {
                 return (
-                    <div>
-                        {item?.kk === null ? <div>Tidak ada file</div> :
-                            <FilePdfOutlined />
-                        }
-                    </div>
+                    <>
+                        {item.kk !== null ? <RowFile fileSrc={item?.kk} typeFile={'pdf'} /> : ''}
+                    </>
                 );
             },
         },
         {
             key: "action",
-            title: "Actions",
-            width: 100,
+            title: authUser?.role === 'admin' ? "Actions" : "",
+            width: authUser?.role === 'admin' ? 150 : 0,
             fixed: 'right',
             render: (record) => {
-
                 return (
                     <>
-                        <div className="flex">
-                            <EditOutlined
-                                style={{ color: "black" }}
-                                onClick={() => Edit(record)}
-                            />
-                            <DeleteOutlined
-                                style={{ color: "red" }}
-                                onClick={() => Delete(record)}
-                            />
-                        </div>
+                        {
+                            authUser?.role === 'admin' &&
+                            <Row justify="space-evenly">
+                                <EditOutlined
+                                    style={{ color: "black", fontSize: "14px" }}
+                                    onClick={() => Edit(record)}
+                                />
+                                <DeleteOutlined
+                                    style={{ color: "red", fontSize: "14px" }}
+                                    onClick={() => Delete(record)}
+                                />
+                            </Row>
+                        }
                     </>
                 );
             },
-        },
+        }
+        ,
     ];
