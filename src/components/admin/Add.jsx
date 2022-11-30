@@ -84,7 +84,7 @@ export const Add = () => {
         console.log(file)
         const isAllowedType = validateFileType(file, type)
         if (!isAllowedType) {
-            message.error('not allowed format')
+            message.error('Not allowed format file!')
             return false
         }
         let nameFile = name
