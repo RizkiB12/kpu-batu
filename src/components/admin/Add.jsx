@@ -177,10 +177,11 @@ export const Add = () => {
             >
                 <Input />
             </Form.Item>
+            
 
             <Form.Item
                 name="no_hp"
-                label="No_HP"
+                label="BPJS Kesehatan"
                 rules={[
                     {
                         required: true,
@@ -189,6 +190,53 @@ export const Add = () => {
                 ]}
             >
                 <Input />
+            </Form.Item>
+
+            <Form.Item
+                name="no_hp"
+                label="BPJS Ketenagakerjaan"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please confirm your instagram!',
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+
+             <Form.Item
+                name="no_hp"
+                label="No_HP"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please confirm your phone number!',
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+
+            <Form.Item
+                name="agama"
+                label="Agama"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please confirm your religion!',
+                    },
+                ]}
+            // mengganti menjadi select
+            >
+                <Select placeholder="Pilih Agama">
+                    <Option value="islam">Islam</Option>
+                    <Option value="kristen">Kristen</Option>
+                    <Option value="katolik">Katolik</Option>
+                    <Option value="hindu">Hindu</Option>
+                    <Option value="budha">Budha</Option>
+                    <Option value="konghucu">Konghucu</Option>
+                </Select>
             </Form.Item>
 
             <Form.Item
