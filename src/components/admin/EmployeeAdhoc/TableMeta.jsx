@@ -120,6 +120,24 @@ export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) =>
             width: 150,
         },
         {
+            key: "no_hp",
+            title: "BPJS Kesehatan",
+            dataIndex: "no_hp",
+            width: 150,
+        },
+        {
+            key: "no_hp",
+            title: "BPJS Kesejahteraan",
+            dataIndex: "no_hp",
+            width: 150,
+        },
+        {
+            key: "no_hp",
+            title: "Agama",
+            dataIndex: "no_hp",
+            width: 150,
+        },
+        {
             key: "pendidikan_terakhir",
             title: "Pendidikan",
             dataIndex: "pendidikan_terakhir",
