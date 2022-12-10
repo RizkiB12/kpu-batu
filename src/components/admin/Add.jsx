@@ -5,7 +5,8 @@ import {
     DatePicker,
     Upload,
     Select,
-    message
+    message,
+    InputNumber
 } from 'antd';
 
 import { UploadOutlined } from '@ant-design/icons';
@@ -74,11 +75,14 @@ export const Add = () => {
     console.log('type of fileUpload', typeof fileUpload)
 
     const onFinish = (values) => {
-        // console.log(values)
 
         if (values !== null) {
             for (const [key, value] of Object.entries(values)) {
-                formData.append(key, value)
+                if (key === 'no_hp') {
+                    formData.append(key, `0${value}`)
+                } else {
+                    formData.append(key, value)
+                }
             }
         }
 
@@ -209,7 +213,7 @@ export const Add = () => {
 
 
             <Form.Item
-                name="no_hp"
+                name="bpjs_kes"
                 label="BPJS Kesehatan"
                 rules={[
                     {
@@ -222,7 +226,7 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="no_hp"
+                name="bpjs_ket"
                 label="BPJS Ketenagakerjaan"
                 rules={[
                     {
@@ -236,7 +240,7 @@ export const Add = () => {
 
             <Form.Item
                 name="no_hp"
-                label="No_HP"
+                label="No HP"
                 rules={[
                     {
                         required: true,
@@ -244,7 +248,7 @@ export const Add = () => {
                     },
                 ]}
             >
-                <Input />
+                <InputNumber addonBefore="+62" placeholder={88123423212} />
             </Form.Item>
 
             <Form.Item
