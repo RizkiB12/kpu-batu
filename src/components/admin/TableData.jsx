@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Modal, } from "antd";
+import { Table, Modal, Form, } from "antd";
 import Modals from "./Modals";
 import axios from "axios";
 import { useEffect } from "react";
@@ -15,6 +15,7 @@ export const TableData = () => {
     const [data, setData] = useState([]);
     const [visible, setVisible] = useState(false);
     const [edit, setEdit] = useState(null);
+    const [form] = Form.useForm();
 
     useEffect(() => {
         const fetchEmp = () => {
@@ -41,15 +42,43 @@ export const TableData = () => {
     };
 
     const Edit = (record) => {
-        console.log(record);
+        setTimeout(() => {
+            form.resetFields()
+        }, 100);
+        setEdit(record)
         setVisible(true);
-        setEdit({ ...record });
     };
 
     const ResetEditing = () => {
         setVisible(false);
-        setEdit(true);
+        setEdit({});
     };
+
+    console.log(data)
+
+    const onFinishUpdate = (values) => {
+        console.log('this value will be updated', values)
+        setData(data.map(item => {
+            if (item.user_id === values.user_id) {
+                console.log('run update')
+                return {
+                    ...item,
+                    dob: moment(values.dob).format('YYYY-MM-DD'),
+                    dop: values.dop,
+                    alamat: values.alamat,
+                    no_hp: `0${values.no_hp}`,
+                    pendidikan_terakhir: values.pendidikan_terakhir,
+                    user: {
+                        ...item.user,
+                        name: values.name
+                    }
+                }
+            } else {
+                return item
+            }
+        }))
+    }
+
     return (
         <>
             <Table
@@ -60,9 +89,10 @@ export const TableData = () => {
                 bordered
             />
             <Modals
+                onFinishUpdate={onFinishUpdate}
+                form={form}
                 visible={visible}
                 edit={edit}
-                setEdit={setEdit}
                 setData={setData}
                 ResetEditing={ResetEditing}
                 setVisible={setVisible}
