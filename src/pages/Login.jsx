@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import axios from 'axios';
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -18,15 +18,20 @@ const Login = () => {
                 console.log('this data res', res.data);
                 const user = res.data;
                 dispatch(login(user))
+                
             })
     };
+
+    const success = () => {
+        message.success('Success to Login');
+      };
 
 
     return (
         <div className="min-h-screen flex flex-col justify-center">
             <div className="grid grid-cols-1 justify-items-center">
-                <div className="w-4/5 sm:w-3/5 md:w-2/5 lg:w-2/5 xl:w-1/3 bg-gray-100 p-5 rounded-lg">
-                    <h1 className='text-2xl'>Form Login Badan Adhoc</h1>
+                <div className="w-4/5 sm:w-3/5 md:w-2/5 lg:w-2/5 xl:w-1/3 bg-gray-200 p-5 rounded-lg">
+                    <h1 className='text-2xl text-center p-5'>Form Login Badan Adhoc</h1>
                     <Form
                         name="normal_login"
                         className="login-form"
@@ -63,8 +68,9 @@ const Login = () => {
                         </Form.Item>
                         <Form.Item>
 
-                            <Button type="primary" htmlType="submit" className="login-form-button">
+                            <Button onClick={success} type="primary" htmlType="submit" className="login-form-button">
                                 Log in
+                               
                             </Button>
                         </Form.Item>
                     </Form>

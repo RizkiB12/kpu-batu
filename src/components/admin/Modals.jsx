@@ -26,6 +26,34 @@ const Modals = ({ visible, edit, onFinishUpdate, ResetEditing, form }) => {
         },
     ]
 
+    const OPTION_AGAMA = [
+        {
+            value : 'islam',
+            label: 'Islam'
+        },
+        {
+            value : 'kristen',
+            label: 'Kristen'
+        },
+        {
+            value : 'katolik',
+            label: 'Katolik'
+        },
+        {
+            value : 'buddha',
+            label: 'Buddha'
+        },
+        {
+            value : 'hindu',
+            label: 'Hindu'
+        },
+        {
+            value : 'konghucu',
+            label: 'Konghucu'
+        },
+        
+    ]
+
     return (
         <>
             <Modal
@@ -50,6 +78,22 @@ const Modals = ({ visible, edit, onFinishUpdate, ResetEditing, form }) => {
                     </Form.Item>
                     <Form.Item name="no_hp" label="No HP" initialValue={`0${edit?.no_hp}`}>
                         <InputNumber addonBefore="+62" />
+                    </Form.Item>
+                    <Form.Item name="kes" label="BPJS Kesehatan" initialValue={edit?.kes}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name="ket" label="BPJS Ketenagakerjaan" initialValue={edit?.ket}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name="npwp" label="NPWP" initialValue={edit?.npwp}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name="agama" label="Agama" initialValue={edit?.agama}>
+                        <Select
+                            defaultValue={edit?.agama}
+                            onChange={(e) => setFieldsValue('agama', e)}
+                            options={OPTION_AGAMA}
+                        />
                     </Form.Item>
                     <Form.Item name="pendidikan_terakhir" label="Pendidikan Terakhir" initialValue={edit?.pendidikan_terakhir}>
                         <Select
