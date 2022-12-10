@@ -58,10 +58,10 @@ const LIST_FILE_UPLOAD = [
         note: 'Upload PNG Only',
     },
     {
-        name: 'ktp',
-        label: 'KTP',
-        extra: '',
-        type: 'image/png',
+        name: 'ktp', // field yang dipake di db
+        label: 'KTP', // nama dari input yang ada di fe
+        extra: '', // note example: "PNG file max size 1MB, 3x4"
+        type: 'image/png', // type of file
         note: 'Upload PNG Only',
     },
 ]
@@ -296,7 +296,7 @@ export const Add = () => {
                     <Form.Item
                         key={item.name}
                         label={item.label}
-                        extra="PNG file max size 1MB, 3x4"
+                        extra={item.extra}
                     >
                         <Upload customRequest={dummyRequest} onChange={(file) => addFile(item.name, file)} beforeUpload={(file) => validate(file, item.type)} onRemove={() => removeFile(item.name)}>
                             <Button icon={<UploadOutlined />}>{item.note}</Button>
