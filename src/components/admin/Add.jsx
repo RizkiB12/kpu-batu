@@ -48,62 +48,91 @@ const tailFormItemLayout = {
     },
 };
 
+const LIST_FILE_UPLOAD = [
+    {
+        name: 'foto',
+        label: 'Foto',
+        extra: '',
+        type: 'image/png',
+        note: 'Upload PNG Only',
+    },
+    {
+        name: 'ktp',
+        label: 'KTP',
+        extra: '',
+        type: 'image/png',
+        note: 'Upload PNG Only',
+    },
+]
+
 export const Add = () => {
     const [form] = Form.useForm();
     const { authUser } = useSelector(state => state.authUser)
     const formData = new FormData()
-    const [fileUpload, setFileUpload] = useState(null)
+    const [fileUpload, setFileUpload] = useState()
     console.log('this file will be upload', fileUpload)
+    console.log('type of fileUpload', typeof fileUpload)
 
     const onFinish = (values) => {
-        formData.append('name', values.name)
-        if (fileUpload !== null) {
+        // console.log(values)
+
+        if (values !== null) {
+            for (const [key, value] of Object.entries(values)) {
+                formData.append(key, value)
+            }
+        }
+
+        if (fileUpload !== undefined) {
             for (const [key, value] of Object.entries(fileUpload)) {
                 formData.append(key, value)
             }
         }
+
         for (var pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
         }
-        axios.post(`${process.env.REACT_APP_API_URL}emp-adhoc/createasda`, formData, {
+
+        axios.post(`${process.env.REACT_APP_API_URL}emp-adhoc/create`, formData, {
             headers: { 'Authorization': 'Bearer ' + authUser.access_token }
         }).then(res => {
             console.log(res.data)
         })
     };
 
-    const normFile = (e) => {
-        if (Array.isArray(e)) {
-            return e;
-        }
-
-        return e?.fileList;
-    };
-
-    const addFile = (name, file, type) => {
-        console.log(file)
-        const isAllowedType = validateFileType(file, type)
+    const validate = (file, type) => {
+        console.log('this add file', { file, type })
+        const isAllowedType = file.type === type
+        console.log('is allowed', isAllowedType)
         if (!isAllowedType) {
+            console.log('failed validate')
             message.error('Not allowed format file!')
-            return false
         }
-        let nameFile = name
-        setFileUpload(prevState => ({
-            ...prevState,
-            [nameFile]: file
-        }))
-        return false
+        return isAllowedType || Upload.LIST_IGNORE
     }
 
-    const validateFileType = (file, allowedTypes) => {
-        if (!allowedTypes) {
-            return true;
-        }
+    const addFile = (name, { file }) => {
+        console.log('this handle change', { name, file })
+        setFileUpload(prevState => ({
+            ...prevState,
+            [name]: file.originFileObj
+        }))
+    }
 
-        if (file) {
-            return allowedTypes.includes(file.type);
-        }
-    };
+    const dummyRequest = async ({ file, onSuccess }) => {
+        console.log('this dummy request', { file, onSuccess })
+        setTimeout(() => {
+            onSuccess("ok");
+        }, 0);
+    }
+
+    const removeFile = (name) => {
+        console.log('this remove file', name)
+        let updatedFile = fileUpload
+        delete updatedFile[name]
+        setTimeout(() => {
+            setFileUpload(updatedFile)
+        }, 100);
+    }
 
 
     return (
@@ -177,7 +206,7 @@ export const Add = () => {
             >
                 <Input />
             </Form.Item>
-            
+
 
             <Form.Item
                 name="no_hp"
@@ -205,7 +234,7 @@ export const Add = () => {
                 <Input />
             </Form.Item>
 
-             <Form.Item
+            <Form.Item
                 name="no_hp"
                 label="No_HP"
                 rules={[
@@ -258,149 +287,19 @@ export const Add = () => {
                 </Select>
             </Form.Item>
 
-            <Form.Item
-                name="foto"
-                label="Foto"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PNG file max size 1MB, 3x4"
-            >
-                <Upload beforeUpload={(file) => addFile('foto', file, 'image/png')}>
-                    <Button icon={<UploadOutlined />}>Upload PNG Only</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="ktp"
-                label="KTP"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PNG file max size 1MB"
-            >
-                <Upload beforeUpload={(file) => addFile('ktp', file)}>
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="spsp"
-                label="Surat Setia Pancasila "
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PDF file"
-            >
-                <Upload beforeUpload={(file) => addFile('spsp', file)}>
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="spi"
-                label="Surat Pakta Integritas"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PDF file"
-            >
-                <Upload beforeUpload={(file) => addFile('spi', file)} listType="picture">
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="stpol"
-                label="Surat Tidak Menjadi Parpol"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PDF file"
-            >
-                <Upload beforeUpload={(file) => addFile('stpol', file)} listType="text">
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="skes"
-                label="Surat Keterangan Sehat"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PDF file"
-            >
-                <Upload beforeUpload={(file) => addFile('skes', file)} listType="picture">
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="ijazah"
-                label="Fotocopy Ijazah"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PDF file "
-            >
-                <Upload beforeUpload={(file) => addFile('ijazah', file)} listType="picture">
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="skck"
-                label="SKCK"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PDF file"
-            >
-                <Upload beforeUpload={(file) => addFile('skck', file)} listType="picture">
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="stskpu"
-                label="Surat Tidak Sanksi KPU"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PDF file"
-            >
-                <Upload beforeUpload={(file) => addFile('stskpu', file)} listType="picture">
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="sbth"
-                label="Surat Belum Menjabat 2x"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PDF file "
-            >
-                <Upload beforeUpload={(file) => addFile('sbth', file)} listType="picture">
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="stpp"
-                label="Surat Tidak Kawin Sesama"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PDF file"
-            >
-                <Upload beforeUpload={(file) => addFile('stpp', file)} listType="picture">
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
-
-            <Form.Item
-                name="sdom"
-                label="Surat Domisili"
-                valuePropName="fileList"
-                getValueFromEvent={normFile}
-                extra="PDF file"
-            >
-                <Upload beforeUpload={(file) => addFile('sdom', file)} listType="picture">
-                    <Button icon={<UploadOutlined />}>Click to upload</Button>
-                </Upload>
-            </Form.Item>
+            {
+                LIST_FILE_UPLOAD.map(item => (
+                    <Form.Item
+                        key={item.name}
+                        label={item.label}
+                        extra="PNG file max size 1MB, 3x4"
+                    >
+                        <Upload customRequest={dummyRequest} onChange={(file) => addFile(item.name, file)} beforeUpload={(file) => validate(file, item.type)} onRemove={() => removeFile(item.name)}>
+                            <Button icon={<UploadOutlined />}>{item.note}</Button>
+                        </Upload>
+                    </Form.Item>
+                ))
+            }
 
             <Form.Item {...tailFormItemLayout}
                 wrapperCol={{
@@ -411,6 +310,7 @@ export const Add = () => {
                     Submit
                 </Button>
             </Form.Item>
+
         </Form>
     );
 };
