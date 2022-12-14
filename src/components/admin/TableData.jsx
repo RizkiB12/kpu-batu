@@ -64,30 +64,32 @@ export const TableData = () => {
             }
         }).then(res => {
             console.log(res.data);
-        })
-        setData(data.map(item => {
-            if (item.user_id === values.user_id) {
-                console.log('run update')
-                return {
-                    ...item,
-                    dob: moment(values.dob).format('YYYY-MM-DD'),
-                    dop: values.dop,
-                    alamat: values.alamat,
-                    no_hp: `0${values.no_hp}`,
-                    kes: values.kes,
-                    ket: values.ket,
-                    npwp: values.npwp,
-                    agama: values.agama,
-                    pendidikan_terakhir: values.pendidikan_terakhir,
-                    user: {
-                        ...item.user,
-                        name: values.name
+            setVisible(false)
+            setData(data.map(item => {
+                if (item.user_id === values.user_id) {
+                    console.log('run update')
+                    return {
+                        ...item,
+                        dob: moment(values.dob).format('YYYY-MM-DD'),
+                        dop: values.dop,
+                        alamat: values.alamat,
+                        no_hp: `0${values.no_hp}`,
+                        kes: values.kes,
+                        ket: values.ket,
+                        npwp: values.npwp,
+                        agama: values.agama,
+                        pendidikan_terakhir: values.pendidikan_terakhir,
+                        user: {
+                            ...item.user,
+                            name: values.name
+                        }
                     }
+                } else {
+                    return item
                 }
-            } else {
-                return item
-            }
-        }))
+            }))
+        })
+        
     }
 
     return (

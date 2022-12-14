@@ -68,63 +68,63 @@ const LIST_FILE_UPLOAD = [
         name: 'spsp', // field yang dipake di db
         label: 'SPSPS', // nama dari input yang ada di fe
         extra: 'PDF file max size 1MB', // note example: "PNG file max size 1MB, 3x4"
-        type: 'file/pdf', // type of file
+        type: 'application/pdf', // type of file
         note: 'Upload PDF',
     },
     {
         name: 'spi', // field yang dipake di db
         label: 'SPI', // nama dari input yang ada di fe
         extra: 'PDF file max size 1MB', // note example: "PNG file max size 1MB, 3x4"
-        type: 'file/pdf', // type of file
+        type: 'application/pdf', // type of file
         note: 'Upload PDF',
     },
     {
         name: 'stpol', // field yang dipake di db
         label: 'STPOL', // nama dari input yang ada di fe
         extra: 'PDF file max size 1MB', // note example: "PNG file max size 1MB, 3x4"
-        type: 'file/pdf', // type of file
+        type: 'application/pdf', // type of file
         note: 'Upload PDF',
     },
     {
         name: 'skes', // field yang dipake di db
         label: 'SKES', // nama dari input yang ada di fe
         extra: 'PDF file max size 1MB', // note example: "PNG file max size 1MB, 3x4"
-        type: 'file/pdf', // type of file
+        type: 'application/pdf', // type of file
         note: 'Upload PDF',
     },
     {
         name: 'skck', // field yang dipake di db
         label: 'SKCK', // nama dari input yang ada di fe
         extra: 'PDF file max size 1MB', // note example: "PNG file max size 1MB, 3x4"
-        type: 'file/pdf', // type of file
+        type: 'application/pdf', // type of file
         note: 'Upload PDF',
     },
     {
         name: 'stskpu', // field yang dipake di db
         label: 'STSKPU', // nama dari input yang ada di fe
         extra: 'PDF file max size 1MB', // note example: "PNG file max size 1MB, 3x4"
-        type: 'file/pdf', // type of file
+        type: 'application/pdf', // type of file
         note: 'Upload PDF',
     },
     {
         name: 'sbth', // field yang dipake di db
         label: 'SBTH', // nama dari input yang ada di fe
         extra: 'PDF file max size 1MB', // note example: "PNG file max size 1MB, 3x4"
-        type: 'file/pdf', // type of file
+        type: 'application/pdf', // type of file
         note: 'Upload PDF',
     },
     {
         name: 'stpp', // field yang dipake di db
         label: 'STPP', // nama dari input yang ada di fe
         extra: 'PDF file max size 1MB', // note example: "PNG file max size 1MB, 3x4"
-        type: 'file/pdf', // type of file
+        type: 'application/pdf', // type of file
         note: 'Upload PDF',
     },
     {
         name: 'sdom', // field yang dipake di db
         label: 'SDOM', // nama dari input yang ada di fe
         extra: 'PDF file max size 1MB', // note example: "PNG file max size 1MB, 3x4"
-        type: 'file/pdf', // type of file
+        type: 'application/pdf', // type of file
         note: 'Upload PDF',
     },
     
