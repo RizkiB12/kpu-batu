@@ -278,12 +278,12 @@ export const Add = () => {
 
 
             <Form.Item
-                name="bpjs_kes"
+                name="kes"
                 label="BPJS Kesehatan"
                 rules={[
                     {
                         required: true,
-                        message: 'Please confirm your instagram!',
+                        message: 'Please confirm your BPJS Kesehatan!',
                     },
                 ]}
             >
@@ -291,12 +291,25 @@ export const Add = () => {
             </Form.Item>
 
             <Form.Item
-                name="bpjs_ket"
+                name="ket"
                 label="BPJS Ketenagakerjaan"
                 rules={[
                     {
                         required: true,
-                        message: 'Please confirm your instagram!',
+                        message: 'Please confirm your BPJS Ketenagakerjaan!',
+                    },
+                ]}
+            >
+                <Input />
+            </Form.Item>
+
+            <Form.Item
+                name="npwp"
+                label="NPWP"
+                rules={[
+                    {
+                        required: true,
+                        message: 'Please confirm your NPWP!',
                     },
                 ]}
             >

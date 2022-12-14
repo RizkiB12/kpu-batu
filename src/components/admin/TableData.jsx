@@ -67,6 +67,10 @@ export const TableData = () => {
                     dop: values.dop,
                     alamat: values.alamat,
                     no_hp: `0${values.no_hp}`,
+                    kes: values.kes,
+                    ket: values.ket,
+                    npwp: values.npwp,
+                    agama: values.agama,
                     pendidikan_terakhir: values.pendidikan_terakhir,
                     user: {
                         ...item.user,
