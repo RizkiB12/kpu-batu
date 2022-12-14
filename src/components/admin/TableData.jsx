@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table, Modal, Form, } from "antd";
-import Modals from "./Modals";
+import Modals from "./EmployeeAdhoc/Modals";
 import axios from "axios";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -58,6 +58,13 @@ export const TableData = () => {
 
     const onFinishUpdate = (values) => {
         console.log('this value will be updated', values)
+        axios.post(`${process.env.REACT_APP_API_URL}emp-adhoc/update`, values, {
+            headers: {
+                'Authorization': 'Bearer ' + authUser.access_token
+            }
+        }).then(res => {
+            console.log(res.data);
+        })
         setData(data.map(item => {
             if (item.user_id === values.user_id) {
                 console.log('run update')

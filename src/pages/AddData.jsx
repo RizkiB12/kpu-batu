@@ -1,7 +1,7 @@
 import React from "react";
 import LayoutAdmin from "../components/admin/LayoutAdmin";
-import { Add } from "../components/admin/Add";
-import Backtop from "../components/admin/BackTop";
+import { Add } from "../components/admin/EmployeeAdhoc/Add";
+import Backtop from "../components/admin/EmployeeAdhoc/BackTop";
 
 const addData = () => {
     const breadcumb = [

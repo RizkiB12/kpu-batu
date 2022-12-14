@@ -10,7 +10,7 @@ import {
 } from 'antd';
 
 import { UploadOutlined } from '@ant-design/icons';
-import '../../assets/css/add.css';
+import '../../../assets/css/add.css';
 
 import React, { useState } from 'react';
 import axios from 'axios';
