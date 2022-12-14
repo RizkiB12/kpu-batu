@@ -1,4 +1,5 @@
 import { EditOutlined, DeleteOutlined, FilePdfOutlined, FileImageOutlined } from "@ant-design/icons";
+import { type } from "@testing-library/user-event/dist/type";
 import { Modal, Row } from "antd";
 import moment from "moment/moment";
 import { useState } from "react";
@@ -31,7 +32,7 @@ export const RowFile = (props) => {
     return (
         <div style={{ display: "flex", justifyContent: "center", }} onClick={handleOpenModal}>
             {
-                typeFile === 'image' ? <FileImageOutlined style={{ fontSize: "32px", }} /> : <FilePdfOutlined style={{ fontSize: "32px", }} />
+                typeFile === 'image' ? <FileImageOutlined style={{ fontSize: "32px", }} /> : typeFile === 'foto' ? <img src={fileSrc} alt="Foto Employee Adhoc" /> : <FilePdfOutlined style={{ fontSize: "32px", }} />
             }
             <Modal
                 open={previewOpen}
@@ -41,7 +42,7 @@ export const RowFile = (props) => {
                 bodyStyle={typeFile === 'pdf' ? { height: 800 } : null}
             >
                 {
-                    typeFile === 'image' ? <img
+                    typeFile === 'image' || 'foto' ? <img
                         alt="example"
                         style={{
                             width: '100%',
@@ -75,9 +76,9 @@ export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) =>
             width: 100,
             render: (item, record) => {
                 return (
-                    <div>
-                        <img src={item?.foto || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="Foto Employee Adhoc" />
-                    </div>
+                    <>
+                         {item.foto !== null ? <RowFile fileSrc={item?.foto} typeFile={'foto'} /> : <img src={item?.foto || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="Foto Employee Adhoc" />}
+                    </>
                 );
             },
         },
