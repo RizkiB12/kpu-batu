@@ -1,213 +1,55 @@
-import { Table, Modal, Input, Form, Upload, DatePicker } from "antd";
+import { Table, Modal, Form  } from "antd";
 import { useState } from "react";
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { PlusOutlined } from '@ant-design/icons';
-import moment from "moment/moment";
+import ModalBlogPost from "./BlogPost/ModalBlogPost";
+import { ColumnBlogPost } from "./BlogPost/TabelBlog";
 
-function TableBlogPost() {
+function TableBlogPost () {
+
+
+    const [data, setData] = useState([]);
+    const [visible, setVisible] = useState(false);
+    const [edit, setEdit] = useState(null);
     const [form] = Form.useForm();
-    const dateFormat = 'YYYY/MM/DD';
-    const [isEditing, setIsEditing] = useState(false);
-    const [editingBlogPost, setEditingBlogPost] = useState(null);
-    const [dataSource, setDataSource] = useState([
-        {
-            id: 1,
-            productimage: "https://joeschmoe.io/api/v1/random",
-            judul: "Padamu Negeri",
-            deskripsi: "lorem ipsum dolor sit amet amet amet amet",
-            tanggal: "05/09/2019, 15:53:32",
-        },
-        {
-            id: 2,
-            productimage: "https://joeschmoe.io/api/v1/random",
-            judul: "Jiwamu Negeriku",
-            deskripsi: "lorem ipsum dolor sit amet amet amet amet",
-            tanggal: "05/09/2019, 15:53:32",
-        },
-        {
-            id: 3,
-            productimage: "https://joeschmoe.io/api/v1/random",
-            judul: "Padamu Negeri",
-            deskripsi: "lorem ipsum dolor sit amet amet amet amet",
-            tanggal: "05/09/2019, 15:53:32",
-        },
-        {
-            id: 4,
-            productimage: "https://joeschmoe.io/api/v1/random",
-            judul: "Jiwa Raga Kami",
-            deskripsi: "lorem ipsum dolor sit amet amet amet amet",
-            tanggal: "05/09/2019, 15:53:32",
-        },
-    ]);
-    const columns = [
-        {
-            key: "1",
-            title: "ID",
-            dataIndex: "id",
-        },
-        {
-            key: "2",
-            title: "Image",
-            dataIndex: "imageURL",
-            render: (text, record) => {
-                return (
-                    <div>
-                        <img src={record.productimage} alt="" />
-                    </div>
-                );
-            },
-        },
-        {
-            key: "3",
-            title: "Judul",
-            dataIndex: "judul",
-        },
-        {
-            key: "4",
-            title: "Deskripsi",
-            width: '40%',
-            dataIndex: "deskripsi",
-        },
-        {
-            key: "5",
-            title: "Tanggal",
-            dataIndex: "tanggal",
-        },
-        {
-            key: "6",
-            title: "Actions",
-            render: (record) => {
-                return (
-                    <>
-                        <EditOutlined
-                            onClick={() => {
-                                onEditBlogPost(record);
-                            }}
-                        />
-                        <DeleteOutlined
-                            onClick={() => {
-                                onDeleteBlogPost(record);
-                            }}
-                            style={{ color: "red", marginLeft: 12 }}
-                        />
-                    </>
-                );
-            },
-        },
-    ];
 
-
-
-
-    const onDeleteBlogPost = (record) => {
+    const Delete = (record) => {
+        console.log(record);
         Modal.confirm({
-            title: "Are you sure, you want to delete this Blog Post record?",
-            okText: "Yes",
-            okType: "danger",
-            onOk: () => {
-                setDataSource((pre) => {
-                    return pre.filter((blog) => blog.id !== record.id);
-                });
-            },
+            title: "Are you sure you want to delete this",
+            // onOk: () => {
+            //     setData((pre) => {
+            //         return pre.filter((emp) => emp.user_id !== record.user_id);
+            //     });
+            // },
         });
     };
-    const onEditBlogPost = (record) => {
-        setIsEditing(true);
-        setEditingBlogPost({ ...record });
+
+    const Edit = (record) => {
+        setTimeout(() => {
+            form.resetFields()
+        }, 100);
+        setEdit(record)
+        setVisible(true);
     };
     const resetEditing = () => {
-        setIsEditing(false);
-        setEditingBlogPost(null);
+        setVisible(false);
+        setEdit({});
     };
+
     return (
-        <div className="App">
-            <Table columns={columns} dataSource={dataSource}></Table>
-            <Modal
-                title="Edit Details Blog Post"
-                visible={isEditing}
-                okText="Save"
-                onCancel={() => {
-                    resetEditing();
-                }}
-                onOk={() => {
-                    setDataSource((pre) => {
-                        return pre.map((blog) => {
-                            if (blog.id === editingBlogPost.id) {
-                                return editingBlogPost;
-                            } else {
-                                return blog;
-                            }
-                        });
-                    });
-                    resetEditing();
-                }}
-            >
-                <Form
-                    form={form}
-                    layout="vertical"
-                    name="form_in_modal"
-                >
-                    <Form.Item
-                        label="Upload"
-                        valuePropName="fileList"
-                    >
-                        <Upload action="/upload.do" listType="picture-card">
-                            <div>
-                                <PlusOutlined />
-                                <div
-                                    style={{
-                                        marginTop: 8,
-                                    }}
-                                >
-                                    Upload
-                                </div>
-                            </div>
-                        </Upload>
-                    </Form.Item>
-                    <Form.Item
-                        label="Judul"
-                    >
-                        <Input
-                            value={editingBlogPost?.judul}
-                            onChange={(e) => {
-                                setEditingBlogPost((pre) => {
-                                    return { ...pre, judul: e.target.value };
-                                });
-                            }}
-                        />
-                    </Form.Item>
-                    <Form.Item
-                        label="Deskripsi"
-                    >
-                        <Input.TextArea
-                            value={editingBlogPost?.deskripsi}
-                            onChange={(e) => {
-                                setEditingBlogPost((pre) => {
-                                    return { ...pre, deskripsi: e.target.value };
-                                });
-                            }}
-                            showCount maxLength={1000}
-                        />
-                    </Form.Item>
-                    <Form.Item
-                        label="Tanggal"
-                    >
-                        <DatePicker
-                            defaultValue={moment(editingBlogPost?.tanggal, dateFormat)} format={dateFormat}
-                        />
-                        {/* <Input
-                            value={editingBlogPost?.tanggal}
-                            onChange={(e) => {
-                                setEditingBlogPost((pre) => {
-                                    return { ...pre, tanggal: e.target.value };
-                                });
-                            }}
-                        /> */}
-                    </Form.Item>
-                </Form>
-            </Modal>
-        </div>
+        <>
+            <Table columns={ColumnBlogPost({ Delete, Edit})} dataSource={data} pagination={{ pageSize: 8, showSizeChanger: true }}></Table>
+            <ModalBlogPost
+                // onFInishUpdate={onFinishUpdate}
+                form={form}
+                visible={visible}
+                edit={edit}
+                setData={setData}
+                resetEditing={resetEditing}
+                setVisible={setVisible}
+            />
+        </>
     );
 }
+
 
 export default TableBlogPost;
