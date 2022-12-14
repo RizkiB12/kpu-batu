@@ -1,5 +1,4 @@
 import { EditOutlined, DeleteOutlined, FilePdfOutlined, FileImageOutlined } from "@ant-design/icons";
-import { type } from "@testing-library/user-event/dist/type";
 import { Modal, Row } from "antd";
 import moment from "moment/moment";
 import { useState } from "react";
