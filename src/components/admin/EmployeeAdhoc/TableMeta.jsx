@@ -76,7 +76,7 @@ export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) =>
             render: (item, record) => {
                 return (
                     <div>
-                        {item?.foto || <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" alt="Foto Employee Adhoc" />}
+                        <img src={item?.foto || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="Foto Employee Adhoc" />
                     </div>
                 );
             },

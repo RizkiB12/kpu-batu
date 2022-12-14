@@ -15,6 +15,7 @@ import '../../../assets/css/add.css';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const { Option } = Select;
 
@@ -132,6 +133,7 @@ const LIST_FILE_UPLOAD = [
 ]
 
 export const Add = () => {
+    const navigate = useNavigate()
     const [form] = Form.useForm();
     const { authUser } = useSelector(state => state.authUser)
     const formData = new FormData()
@@ -160,11 +162,17 @@ export const Add = () => {
         for (var pair of formData.entries()) {
             console.log(pair[0] + ', ' + pair[1]);
         }
-
+        const loading = message.loading('Loading...');
         axios.post(`${process.env.REACT_APP_API_URL}emp-adhoc/create`, formData, {
             headers: { 'Authorization': 'Bearer ' + authUser.access_token }
         }).then(res => {
             console.log(res.data)
+            message.success('Success to Add Data')
+            navigate('/employeeadhoc')
+        }).catch(error => {
+            message.error(error.message)
+        }).finally(()=>{
+            loading()
         })
     };
 
@@ -388,7 +396,7 @@ export const Add = () => {
                     offset: 4,
                     span: 8,
                 }}>
-                <Button type="primary" htmlType="submit" >
+                <Button type="primary" htmlType="submit"  >
                     Submit
                 </Button>
             </Form.Item>
