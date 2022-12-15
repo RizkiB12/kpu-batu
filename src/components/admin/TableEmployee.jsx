@@ -1,14 +1,17 @@
-import { Table, Modal, Input, Form, Upload, message, Button } from "antd";
+import { Table, Modal, Form, message } from "antd";
 import { useState } from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { UploadOutlined } from '@ant-design/icons';
 import { useSelector } from 'react-redux';
+import ModalEmployee from "./Employee/ModalEmployee";
 
 function TableEmployee() {
-    const [form] = Form.useForm();
     const { authUser } = useSelector(state => state.authUser)
     const [isEditing, setIsEditing] = useState(false);
     const [editingEmployee, setEditingEmployee] = useState(null);
+    const [data, setData] = useState([]);
+    const [visible, setVisible] = useState(false);
+    const [edit, setEdit] = useState(null);
+    const [form] = Form.useForm();
     const [dataSource, setDataSource] = useState([
         {
             id: 1,
@@ -132,10 +135,14 @@ function TableEmployee() {
         <div className="App">
             <Table columns={authUser.role === "user" ? columns.filter(col => col.key !== "6") : columns} dataSource={dataSource}></Table>
             {/* menambahkan pada employee adhoc */}
-            <Modal
+            <ModalEmployee
                 title="Edit Employee"
-                visible={isEditing}
-                okText="Save"
+                form={form}
+                edit={edit}
+                visible={visible}
+                setData={setData}
+                resetEditing={resetEditing}
+                setVisible={setVisible}
                 onCancel={() => {
                     resetEditing();
                 }}
@@ -152,59 +159,7 @@ function TableEmployee() {
                     resetEditing();
                 }}
             >
-                <Form
-                    form={form}
-                    layout="vertical"
-                    name="form_in_modal"
-                >
-                    <Form.Item
-                        label="Upload"
-                        valuePropName="fileList"
-                    >
-                        <Upload {...props}
-
-                        >
-                            <Button icon={<UploadOutlined />}>Click to Upload</Button>
-                        </Upload>
-                    </Form.Item>
-                    <Form.Item
-                        label="Nama"
-                    >
-                        <Input
-                            value={editingEmployee?.nama}
-                            onChange={(e) => {
-                                setEditingEmployee((pre) => {
-                                    return { ...pre, nama: e.target.value };
-                                });
-                            }}
-                        />
-                    </Form.Item>
-                    <Form.Item
-                        label="Email"
-                    >
-                        <Input
-                            value={editingEmployee?.email}
-                            onChange={(e) => {
-                                setEditingEmployee((pre) => {
-                                    return { ...pre, email: e.target.value };
-                                });
-                            }}
-                        />
-                    </Form.Item>
-                    <Form.Item
-                        label="Password"
-                    >
-                        <Input.Password
-                            value={editingEmployee?.password}
-                            onChange={(e) => {
-                                setEditingEmployee((pre) => {
-                                    return { ...pre, password: e.target.value };
-                                });
-                            }}
-                        />
-                    </Form.Item>
-                </Form>
-            </Modal>
+            </ModalEmployee>
 
         </div>
     );

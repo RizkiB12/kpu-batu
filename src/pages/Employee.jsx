@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import CreateFormEmployee from '../components/admin/CreateFormEmployee';
+import CreateFormEmployee from '../components/admin/Employee/CreateFormEmployee';
 import LayoutAdmin from '../components/admin/LayoutAdmin';
 import TableEmployee from '../components/admin/TableEmployee';
 
