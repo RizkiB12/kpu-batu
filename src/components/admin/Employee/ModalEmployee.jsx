@@ -2,7 +2,7 @@ import { Form, Modal, Input } from "antd";
 import React from "react";
 
 
-const ModalEmployee = ({visible, edit, onFinishUpdate, resetEditing, form}) => {
+const ModalEmployee = ({visible, edit, onFinishUpdate, ResetEditing, form}) => {
     
     return(
         <>
@@ -11,7 +11,7 @@ const ModalEmployee = ({visible, edit, onFinishUpdate, resetEditing, form}) => {
                 visible={visible}
                 okText="Save"
                 onCancel={() => {
-                    resetEditing();
+                    ResetEditing();
                 }}
                 onOk={form.submit}
             >
