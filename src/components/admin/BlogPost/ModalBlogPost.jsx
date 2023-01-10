@@ -15,6 +15,7 @@ const ModalBlogPost = ({ visible, edit, onFInishUpdate, resetEditing, form}) => 
                 }}
                 onOk={form.submit}
             >
+                {/* asking */}
                 <Form
                     form={form}
                     layout="vertical"
@@ -22,29 +23,15 @@ const ModalBlogPost = ({ visible, edit, onFInishUpdate, resetEditing, form}) => 
                     onFinish={onFInishUpdate}
                 >
                     <Form.Item
-                        label="Upload"
-                        valuePropName="fileList"
-                    >
-                        <Upload action="/upload.do" listType="picture-card">
-                            <div>
-                                <PlusOutlined />
-                                <div
-                                    style={{
-                                        marginTop: 8,
-                                    }}
-                                >
-                                    Upload
-                                </div>
-                            </div>
-                        </Upload>
-                    </Form.Item>
-                    <Form.Item
+                        name="title"
                         label="Judul"
+                        initialValue={edit?.title}
                         rules={[ { required: true, message: 'Please input your title'},]}
                     >
                         <Input />
                     </Form.Item>
                     <Form.Item
+                        name="description"
                         label="Deskripsi"
                         rules={[ { required: true, message: 'Please input your description'},]}
                     >
@@ -52,9 +39,16 @@ const ModalBlogPost = ({ visible, edit, onFInishUpdate, resetEditing, form}) => 
                             showCount maxLength={1000}
                         />
                     </Form.Item>
-                    <Form.Item name="dob" label="Tanggal Lahir" initialValue={moment(edit?.dob, 'YYYY-MM-DD')} rules={[ { required: true, message: 'Please input your date'},]}>
-                        <DatePicker defaultValue={moment(edit?.dob, 'YYYY-MM-DD')} />
+                    <Form.Item
+                        name="description"
+                        label="Deskripsi"
+                        rules={[ { required: true, message: 'Please input your description'},]}
+                    >
+                        <Input.TextArea
+                            showCount maxLength={1000}
+                        />
                     </Form.Item>
+                    
                 </Form>
             </Modal>
         </>

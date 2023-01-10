@@ -17,7 +17,7 @@ export const FilePDF = () => {
 };
 
 export const RowFile = (props) => {
-  const { fileSrc, typeFile } = props;
+  const { fileSrc, typeFile, handleDelete } = props;
   const [previewOpen, setPreviewOpen] = useState(false);
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -75,6 +75,7 @@ export const RowFile = (props) => {
               style={{ color: "black", fontSize: "15px", paddingTop: "10px" }}
             />
             <DeleteOutlined
+            onClick={(e)=>console.log('delete bro', e)}
               style={{ color: "red", fontSize: "15px", paddingTop: "10px" }}
             />
           </Row>
@@ -102,7 +103,7 @@ export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) => [
       return (
         <>
           {item.foto !== null ? (
-            <RowFile fileSrc={item?.foto} typeFile={"foto"} />
+            <RowFile handleDelete={Delete} fileSrc={item?.foto} typeFile={"foto"} />
           ) : (
             <img
               src={

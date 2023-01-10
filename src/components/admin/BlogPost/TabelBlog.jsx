@@ -1,45 +1,130 @@
 import React from 'react';
-import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { EditOutlined, DeleteOutlined,  FilePdfOutlined,
+    FileImageOutlined } from "@ant-design/icons";
+import { useState } from 'react';
+import { Modal, Row } from 'antd';
 // import moment from 'moment/moment';
 
 
 
-export const ColumnBlogPost = ({ Delete, Edit }) =>
+export const RowFile = (props) => {
+    const { fileSrc, typeFile } = props;
+    const [previewOpen, setPreviewOpen] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
+  
+    const handleOpenModal = () => {
+      setPreviewOpen(true);
+      setModalVisible(true);
+    };
+  
+    const handleCloseModal = () => {
+      setTimeout(() => {
+        setModalVisible(false);
+        setPreviewOpen(false);
+      }, 100);
+    };
+  
+    return (
+      <div
+        style={{ display: "flex", justifyContent: "center" }}
+        onClick={handleOpenModal}
+      >
+        {typeFile === "image" ? (
+          <FileImageOutlined style={{ fontSize: "32px" }} />
+        ) : typeFile === "foto" ? (
+          <img src={fileSrc} alt="Foto Blog Post" />
+        ) : (
+          <FilePdfOutlined style={{ fontSize: "32px" }} />
+        )}
+        <Modal
+          open={previewOpen}
+          footer={null}
+          onCancel={handleCloseModal}
+          visible={modalVisible}
+          bodyStyle={typeFile === "pdf" ? { height: 800 } : null}
+        >
+          {typeFile === "image" || "foto" ? (
+            <img
+              alt="example"
+              style={{
+                width: "100%",
+              }}
+              src={fileSrc}
+            />
+          ) : (
+            <iframe
+              src={fileSrc}
+              type="application/pdf"
+              width="100%"
+              height="100%"
+              title="File PDF"
+            />
+          )}
+          <div>
+            <Row justify="space-evenly">
+              <EditOutlined
+                style={{ color: "black", fontSize: "15px", paddingTop: "10px" }}
+              />
+              <DeleteOutlined
+                style={{ color: "red", fontSize: "15px", paddingTop: "10px" }}
+              />
+            </Row>
+          </div>
+        </Modal>
+      </div>
+    );
+  };
+  
+
+
+export const ColumnBlogPost = ({ Delete, Edit, authUser }) =>
 
 [
     {
-        key: "foto",
+        key: "thumbnail_img",
         title: "Foto",
         render: (item, record) => {
             return (
-                <div>
-                    <img src={item?.foto || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="Foto Blog Post" />
-                </div>
-            )
+                <>
+                  {item.foto !== null ? (
+                    <RowFile fileSrc={item?.foto} typeFile={"foto"} />
+                  ) : (
+                    <img
+                      src={
+                        item?.foto ||
+                        "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"
+                      }
+                      alt="Foto Blog Post"
+                    />
+                  )}
+                </>
+              );
         }
     },
     {
-        key: "judul",
+        key: "title",
         title: "Judul",
-        dataIndex: "judul",
+        dataIndex: "title",
     },
     {
-        key: "deskripsi",
+        key: "description",
         title: "Deskripsi",
-        dataIndex: "deskripsi",
+        dataIndex: "description",
     },
     {
-        key: "tanggal",
-        title: "Tanggal",
-        // render: item => moment().format('YYYY-MM-DD'),
+        key: "user.name",
+        title: "Author",
+        render: (item) => item.user.name
     },
     {
         key: "action",
-        title: "Actions",
+        title: authUser?.role === "admin" ? "Actions" : "",
         render: (record) => {
             return (
                 <>
-                    <EditOutlined
+                    {authUser?.role === "admin" &&(
+                    <Row justify="space-evenly">                   
+                        <EditOutlined
                         style={{ color: "black", fontSize: "15px" }}
                         onClick={() => {
                             Edit(record);
@@ -52,7 +137,10 @@ export const ColumnBlogPost = ({ Delete, Edit }) =>
                         }}
                    
                     />
+                    </Row>
+                     )}
                 </>
+               
             );
         },
     },

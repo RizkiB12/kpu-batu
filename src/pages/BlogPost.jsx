@@ -2,12 +2,15 @@ import React from 'react';
 import LayoutAdmin from '../components/admin/LayoutAdmin';
 import TableBlogPost from '../components/admin/TableBlogPost';
 import CreateFormBlog from '../components/admin/BlogPost/CreateFormBlog';
+import { Button } from 'antd';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const BlogPost = () => {
     const { authUser } = useSelector(state => state.authUser)
+    const navigate = useNavigate()
 
     const breadcumb = [
         {
@@ -20,8 +23,9 @@ const BlogPost = () => {
         <LayoutAdmin breadcumb={breadcumb}>
             {
                 authUser.role === 'admin' &&
-                <CreateFormBlog />
-            }
+           
+            <Button type="primary" onClick={() => navigate('/addblog')} style={{ marginBottom: 15 }}>Add Blog Post</Button>
+        }
             <TableBlogPost />
         </LayoutAdmin>
 

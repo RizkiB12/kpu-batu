@@ -19,11 +19,11 @@ export const TableData = () => {
 
     useEffect(() => {
         const fetchEmp = () => {
-            axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc`, {
+            axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc?page=1&limit=10`, {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
-                    setData(res.data.empAdhoc);
+                    setData(res.data.data);
                 })
         }
         fetchEmp();
@@ -31,12 +31,27 @@ export const TableData = () => {
 
     const Delete = (record) => {
         console.log(record);
+        console.log(authUser);
+        const data = {
+            user_id : record.user_id
+        } 
         Modal.confirm({
             title: "Are you sure you want to delete this",
             onOk: () => {
-                setData((pre) => {
-                    return pre.filter((emp) => emp.user_id !== record.user_id);
-                });
+                axios.delete(`${process.env.REACT_APP_API_URL}emp-adhoc/delete`, {
+                    headers: {
+                        'Authorization': 'Bearer ' + authUser.access_token
+                    }, data
+                    
+                }
+                ).then(res => {
+                    console.log(res.data);
+                    setVisible(false)
+                    setData((pre) => {
+                        return pre.filter((emp) => emp.user_id !== record.user_id);
+                    });
+                })
+               
             },
         });
     };
@@ -109,6 +124,7 @@ export const TableData = () => {
                 setData={setData}
                 ResetEditing={ResetEditing}
                 setVisible={setVisible}
+                handleDelete={Delete}
             />
         </>
     );

@@ -4,7 +4,7 @@ import moment from "moment/moment";
 
 
 
-const Modals = ({ visible, edit, onFinishUpdate, ResetEditing, form }) => {
+const Modals = ({ visible, edit, onFinishUpdate, ResetEditing, form, handleDelete }) => {
     const { setFieldsValue } = form
 
     const OPTION_PENDIDIKAN_TERAKHIR = [

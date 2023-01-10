@@ -8,6 +8,7 @@ import Schedule from "./pages/Schedule";
 import EditProfile from "./pages/EditProfile";
 import Employee from "./pages/Employee";
 import BlogPost from "./pages/BlogPost";
+import AddBlogPost from "./pages/AddBlogPost";
 import EmployeeAdhoc from "./pages/EmployeeAdhoc";
 import Home from "./pages/guest/Home";
 import PrintEmployeeAdhoc from "./pages/PrintEmployeeAdhoc";
@@ -32,6 +33,7 @@ function App() {
           <Route path="/editProfile" element={<EditProfile />} />
           <Route path="/employee" element={<Employee />} />
           <Route path="/blogpost" element={<BlogPost />} />
+          <Route path="/addblog" element={<AddBlogPost />} />
           <Route path="/print" element={<PrintEmployeeAdhoc />} />
         </Route>
       </Routes>
