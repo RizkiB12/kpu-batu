@@ -72,8 +72,10 @@ export const RowFile = (props) => {
         <div>
           <Row justify="space-evenly">
             <EditOutlined
+            onClick={(e)=>console.log('edit bro',e)}
               style={{ color: "black", fontSize: "15px", paddingTop: "10px" }}
             />
+            {/* Yang harus dicoba */}
             <DeleteOutlined
             onClick={(e)=>console.log('delete bro', e)}
               style={{ color: "red", fontSize: "15px", paddingTop: "10px" }}
@@ -103,7 +105,7 @@ export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) => [
       return (
         <>
           {item.foto !== null ? (
-            <RowFile handleDelete={Delete} fileSrc={item?.foto} typeFile={"foto"} />
+            <RowFile handleDelete={Delete} edit={Edit} fileSrc={item?.foto} typeFile={"foto"} />
           ) : (
             <img
               src={

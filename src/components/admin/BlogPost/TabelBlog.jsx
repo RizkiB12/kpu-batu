@@ -8,7 +8,7 @@ import { Modal, Row } from 'antd';
 
 
 export const RowFile = (props) => {
-    const { fileSrc, typeFile } = props;
+    const { fileSrc, typeFile, handleDelete } = props;
     const [previewOpen, setPreviewOpen] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
   
@@ -63,9 +63,11 @@ export const RowFile = (props) => {
           <div>
             <Row justify="space-evenly">
               <EditOutlined
+                onClick={(e)=>console.log('edit bos',e)}
                 style={{ color: "black", fontSize: "15px", paddingTop: "10px" }}
               />
               <DeleteOutlined
+                onClick={(e)=>console.log('delete mas', e)}
                 style={{ color: "red", fontSize: "15px", paddingTop: "10px" }}
               />
             </Row>
@@ -87,7 +89,7 @@ export const ColumnBlogPost = ({ Delete, Edit, authUser }) =>
             return (
                 <>
                   {item.foto !== null ? (
-                    <RowFile fileSrc={item?.foto} typeFile={"foto"} />
+                    <RowFile  handleDelete={Delete} edit={Edit} fileSrc={item?.foto} typeFile={"foto"} />
                   ) : (
                     <img
                       src={

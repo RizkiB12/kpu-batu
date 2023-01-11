@@ -103,6 +103,7 @@ function TableBlogPost () {
                 setData={setData}
                 resetEditing={resetEditing}
                 setVisible={setVisible}
+                handleDelete={Delete}
             />
         </>
     );

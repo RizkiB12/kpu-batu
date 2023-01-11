@@ -1,7 +1,6 @@
 import React from 'react';
 import LayoutAdmin from '../components/admin/LayoutAdmin';
 import TableBlogPost from '../components/admin/TableBlogPost';
-import CreateFormBlog from '../components/admin/BlogPost/CreateFormBlog';
 import { Button } from 'antd';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
