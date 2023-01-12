@@ -81,18 +81,14 @@ function TableEmployee() {
             console.log(res.data);
             setVisible(false)
             setEmployeeData(employeeData.map(item => {
-                if (item.user_id === values.user_id) {
+                if (item.id === values.user_id) {
                     console.log('run update')
                     return {
                         ...item,
-                        user: {
-                            ...item.user,
                             name: values.name,
                             email: values.email,
                             password: values.password,
                             role: values.role
-
-                        }
                     }
                 } else {
                     return item
