@@ -1,7 +1,6 @@
 import React from 'react';
-import { Modal, Input, Form, Upload, DatePicker } from "antd";
-import { PlusOutlined } from '@ant-design/icons';
-import moment from 'moment/moment';
+import { Modal, Input, Form } from "antd";
+// import moment from 'moment/moment';
 
 const ModalBlogPost = ({ visible, edit, onFInishUpdate, resetEditing, form}) => {
     return (
@@ -33,22 +32,13 @@ const ModalBlogPost = ({ visible, edit, onFInishUpdate, resetEditing, form}) => 
                     <Form.Item
                         name="description"
                         label="Deskripsi"
+                        initialValue={edit?.description}
                         rules={[ { required: true, message: 'Please input your description'},]}
                     >
                         <Input.TextArea
                             showCount maxLength={1000}
                         />
-                    </Form.Item>
-                    <Form.Item
-                        name="description"
-                        label="Deskripsi"
-                        rules={[ { required: true, message: 'Please input your description'},]}
-                    >
-                        <Input.TextArea
-                            showCount maxLength={1000}
-                        />
-                    </Form.Item>
-                    
+                    </Form.Item>  
                 </Form>
             </Modal>
         </>

@@ -1,5 +1,6 @@
 import { Table, Modal, Form } from "antd";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
 import ModalEmployee from "./Employee/ModalEmployee";
 import { ColumnEmployee } from "./Employee/Tabel";
@@ -10,6 +11,22 @@ function TableEmployee() {
     const [visible, setVisible] = useState(false);
     const [edit, setEdit] = useState(null);
     const [form] = Form.useForm();
+
+
+    useEffect(() => {
+        const fetchEmp = () => {
+            axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc?page=1&limit=10`, {
+                headers: { 'Authorization': 'Bearer ' + authUser.access_token }
+            })
+                .then((res) => {
+                    setData(res.data.data);
+                })
+        }
+        fetchEmp();
+    }, [authUser.access_token])
+
+
+
     // const [dataSource, setDataSource] = useState([
     //     {
     //         id: 1,
@@ -87,7 +104,11 @@ function TableEmployee() {
 
     return (
         <div className="App">
-            <Table columns={authUser.role === "user" ? ColumnEmployee.filter(col => col.key !== "6") : ColumnEmployee ([Delete, Edit])} dataSource={data}></Table>
+            <Table
+             dataSource={data}
+             columns={ColumnEmployee ([Delete, Edit, authUser])}
+             >
+            </Table>
             {/* menambahkan pada employee adhoc */}
             <ModalEmployee
                 title="Edit Employee"

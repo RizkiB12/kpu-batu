@@ -18,6 +18,7 @@ const EmployeeAdhoc = () => {
         <LayoutAdmin breadcumb={breadcumb}>
             <Button type="primary" onClick={() => navigate('/print')} style={{ marginBottom: 15 }}>Export Data</Button>
             <Button type="primary" onClick={() => navigate('/adddata')} style={{ marginBottom: 15, marginLeft: 15 }}>Add Data</Button>
+            <Button type="primary" onClick={() => navigate('/print')} style={{ marginBottom: 15, marginLeft: 15 }}>Print EmployeeAdhoc</Button>
             <TableData />
         </LayoutAdmin>
     )

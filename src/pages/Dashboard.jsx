@@ -1,10 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import LayoutAdmin from '../components/admin/LayoutAdmin'
 import { Card, Col, Row, Statistic } from 'antd';
 import { Divider } from 'antd';
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 const { Meta } = Card;
 
+
+
+
 export default function Dashboard() {
+
+    const { authUser } = useSelector(state => state.authUser)
+
+    const [empAdhoc, setEmpAdhoc] = useState([]);
+    
+useEffect(() => {
+    const fetchEmp = () => {
+        axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc?page=1&limit=4`, {
+            headers: { 'Authorization': 'Bearer ' + authUser.access_token }
+        })
+            .then((res) => {
+                setEmpAdhoc(res.data.data);
+            })
+    }
+    fetchEmp();
+}, [authUser.access_token])
+
+
     const breadcumb = [
         {
             name: 'Dashboard',
@@ -23,7 +46,7 @@ export default function Dashboard() {
             }} >
                 <Col span={8}>
                     <Card>
-                        <Statistic title="In Total" value={112893} />
+                        <Statistic title="In Total" value={200} />
                     </Card>
                 </Col>
                 <Col span={8}>
@@ -46,57 +69,29 @@ export default function Dashboard() {
                     lg: 32,
                 }}
             >
-                <Col className="gutter-row" span={6}>
-                    <div>
-                        <Card
-                            hoverable
-                            style={{
-                                width: 250,
-                            }}
-                            cover={<img alt="example" src="https://joeschmoe.io/api/v1/random" style={{ backgroundColor: '#F1F1F1' }} />}
-                        >
-                            <Meta title="Rudi Saputra" description="www.instagram.com" />
-                        </Card>
-                    </div>
-                </Col>
-                <Col className="gutter-row" span={6}>
-                    <div>
-                        <Card
-                            hoverable
-                            style={{
-                                width: 250,
-                            }}
-                            cover={<img alt="example" src="https://joeschmoe.io/api/v1/random" style={{ backgroundColor: '#F1F1F1' }} />}
-                        >
-                            <Meta title="Kirana Dewi" description="www.instagram.com" />
-                        </Card></div>
-                </Col>
-                <Col className="gutter-row" span={6}>
-                    <div>
-                        <Card
-                            hoverable
-                            style={{
-                                width: 250,
-                            }}
-                            cover={<img alt="example" src="https://joeschmoe.io/api/v1/random" style={{ backgroundColor: '#F1F1F1' }} />}
-                        >
-                            <Meta title="Nicholas Saputra" description="www.instagram.com" />
-                        </Card>
-                    </div>
-                </Col>
-                <Col className="gutter-row" span={6}>
-                    <div>
-                        <Card
-                            hoverable
-                            style={{
-                                width: 250,
-                            }}
-                            cover={<img alt="example" src="https://joeschmoe.io/api/v1/random" style={{ backgroundColor: '#F1F1F1' }} />}
-                        >
-                            <Meta title="Dodit Mulyanto" description="www.instagram.com" />
-                        </Card>
-                    </div>
-                </Col>
+                {
+                    empAdhoc.map(item => {
+                        return (
+                        <Col key={item} className="gutter-row" span={6}>
+                            <div>
+                                <Card
+                                    hoverable
+                                    // style={{
+                                    //     width: 250,
+                                    // }}
+                                    width={100}
+                                    cover={
+                                    <img alt="example" src={item?.foto || "https://joeschmoe.io/api/v1/random"}
+                                    style={{ backgroundColor: '#F1F1F1' }} 
+                                    />}>
+                                    <Meta title={item?.user.name} description="www.instagram.com" />
+                                </Card>
+                            </div>
+                        </Col>
+                            
+                        )
+                    })
+                }
             </Row>
         </LayoutAdmin>
     )
