@@ -6,21 +6,21 @@ import { Row } from "antd";
 export const ColumnEmployee = ({ Delete, Edit}) => 
 [
     {
-        key: "user.name",
+        key: "name",
         title: "Name",
-        render: (item) => item.user.name,
-        sorter: (a, b) => a.user_id > b.user_id,
+        render: (item) => item.name,
+        sorter: (a, b) => a.id > b.id,
     },
     {
-        key: "user.email",
+        key: "email",
         title: "Email",
-        render: (item) => item.user.email,
+        render: (item) => item.email,
     },
     
     {
-        key: "user.role",
+        key: "role",
         title: "Role",
-        render: (item) => item.user.role
+        render: (item) => item.role
     },
 
     {

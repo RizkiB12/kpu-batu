@@ -7,6 +7,7 @@ import { ColumnEmployee } from "./Employee/Tabel";
 
 function TableEmployee() {
     const { authUser } = useSelector(state => state.authUser)
+
     const [employeeData, setEmployeeData] = useState([]);
     const [visible, setVisible] = useState(false);
     const [edit, setEdit] = useState(null);
@@ -14,22 +15,24 @@ function TableEmployee() {
 
 
     useEffect(() => {
-        const fetchEmp = () => {
-            axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc?page=1&limit=10`, {
+        const fetchEmployee = () => {
+            axios.get(`${process.env.REACT_APP_API_URL}employee?page=1&limit=5`, {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
-                    setEmployeeData(res.data.data);
+                    console.log(res);
+                    setEmployeeData(res.data.data.employees);
                 })
         }
-        fetchEmp();
+        fetchEmployee();
     }, [authUser.access_token])
 
 
 
     const Delete = (record) => {
+        console.log("run function delete", record);
         const data = {
-            user_id : record.user_id
+            user_id : record.id
         }
         Modal.confirm({
             title: "Are you sure, you want to delete this employee record?",
@@ -45,7 +48,7 @@ function TableEmployee() {
                     console.log(res.data);
                     setVisible(false)
                     setEmployeeData((pre) => {
-                        return pre.filter((employee) => employee.user_id !== record.user_id);
+                        return pre.filter((employee) => employee.id !== record.id);
                     });
                 })
             },
@@ -99,7 +102,7 @@ function TableEmployee() {
     }
 
     return (
-        <div className="App">
+        <>
             <Table
              dataSource={employeeData}
              columns={ColumnEmployee({Delete, Edit, authUser})}
@@ -117,7 +120,7 @@ function TableEmployee() {
             >
             </ModalEmployee>
 
-        </div>
+        </>
     );
 }
 

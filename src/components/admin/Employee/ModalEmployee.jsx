@@ -24,7 +24,7 @@ const ModalEmployee = ({visible, employee, onFinishUpdate, resetEditing, form}) 
                     <Form.Item
                         name="name"
                         label="Nama"
-                        initialValue={employee?.user?.name}
+                        initialValue={employee?.name}
                         rules={[ { required: true, message: 'Please input your name'},]}
                     >
                         <Input
@@ -33,7 +33,7 @@ const ModalEmployee = ({visible, employee, onFinishUpdate, resetEditing, form}) 
                     <Form.Item
                         name="email"
                         label="Email"
-                        initialValue={employee?.user?.email}
+                        initialValue={employee?.email}
                         rules={[ { required: true, message: 'Please input your email'},]}
                     >
                         <Input
@@ -42,7 +42,7 @@ const ModalEmployee = ({visible, employee, onFinishUpdate, resetEditing, form}) 
                     <Form.Item
                         name="password"
                         label="Password"
-                        initialValue={employee?.user?.password}
+                        initialValue={employee?.password}
                         rules={[ { required: true, message: 'Please input your password'},]}
                     >
                         <Input.Password
@@ -51,7 +51,7 @@ const ModalEmployee = ({visible, employee, onFinishUpdate, resetEditing, form}) 
                     <Form.Item
                         name="role"
                         label="Role"
-                        initialValue={employee?.user?.role}
+                        initialValue={employee?.role}
                         rules={[ { required: true, message: 'Please input your role'},]}
                     >
                         <Input

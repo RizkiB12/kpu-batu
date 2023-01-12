@@ -94,7 +94,10 @@ function TableBlogPost () {
 
     return (
         <>
-            <Table columns={ColumnBlogPost({ Delete, Edit, authUser})} dataSource={data} pagination={{ pageSize: 8, showSizeChanger: true }}></Table>
+            <Table columns={ColumnBlogPost({ Delete, Edit, authUser})} 
+            dataSource={data}
+            pagination={{ pageSize: 8, showSizeChanger: true }}>
+            </Table>
             <ModalBlogPost
                 onFInishUpdate={onFinishUpdate}
                 form={form}

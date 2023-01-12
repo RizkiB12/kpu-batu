@@ -42,6 +42,7 @@ const LayoutAdmin = (props) => {
         getItem('Blog Post', '/blogpost', <CreditCardOutlined />),
         getItem('Add Blog Post', '/addblog', <UserAddOutlined />),
         getItem('Employee', '/employee', <UserOutlined />),
+        getItem('Add Employee', '/addemployee', <UserAddOutlined />),
         getItem('Employee Adhoc', '/employeeadhoc', <TeamOutlined />),
         getItem('Add Data', '/adddata', <UserAddOutlined />),
         getItem('Print Adhoc', '/print', <FileTextOutlined />),
