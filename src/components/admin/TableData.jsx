@@ -19,10 +19,11 @@ export const TableData = () => {
 
     useEffect(() => {
         const fetchEmp = () => {
-            axios.get(`${process.env.REACT_APP_API_URL}employee?page=1&limit=5`, {
+            axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc?page=1&limit=4`, {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
+                    console.log(res);
                     setData(res.data.data);
                 })
         }
