@@ -1,5 +1,6 @@
 import React from "react";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
+import { Row } from "antd";
 
 
 export const ColumnEmployee = ({ Delete, Edit}) => 
@@ -28,8 +29,10 @@ export const ColumnEmployee = ({ Delete, Edit}) =>
         render: (record) => {
             return (
                 <>
+                    <Row justify="space-evenly">
                     <EditOutlined
                         onClick={() => {
+                            console.log('clicked');
                             Edit(record);
                         }}
                     />
@@ -39,6 +42,7 @@ export const ColumnEmployee = ({ Delete, Edit}) =>
                         }}
                         style={{ color: "red", marginLeft: 12 }}
                     />
+                    </Row>
                 </>
             );
         },

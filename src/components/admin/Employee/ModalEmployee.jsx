@@ -2,7 +2,7 @@ import { Form, Modal, Input } from "antd";
 import React from "react";
 
 
-const ModalEmployee = ({visible, edit, onFinishUpdate, ResetEditing, form}) => {
+const ModalEmployee = ({visible, employee, onFinishUpdate, resetEditing, form}) => {
     
     return(
         <>
@@ -11,7 +11,7 @@ const ModalEmployee = ({visible, edit, onFinishUpdate, ResetEditing, form}) => {
                 visible={visible}
                 okText="Save"
                 onCancel={() => {
-                    ResetEditing();
+                    resetEditing();
                 }}
                 onOk={form.submit}
             >
@@ -24,6 +24,7 @@ const ModalEmployee = ({visible, edit, onFinishUpdate, ResetEditing, form}) => {
                     <Form.Item
                         name="name"
                         label="Nama"
+                        initialValue={employee?.user?.name}
                         rules={[ { required: true, message: 'Please input your name'},]}
                     >
                         <Input
@@ -32,6 +33,7 @@ const ModalEmployee = ({visible, edit, onFinishUpdate, ResetEditing, form}) => {
                     <Form.Item
                         name="email"
                         label="Email"
+                        initialValue={employee?.user?.email}
                         rules={[ { required: true, message: 'Please input your email'},]}
                     >
                         <Input
@@ -40,11 +42,22 @@ const ModalEmployee = ({visible, edit, onFinishUpdate, ResetEditing, form}) => {
                     <Form.Item
                         name="password"
                         label="Password"
+                        initialValue={employee?.user?.password}
                         rules={[ { required: true, message: 'Please input your password'},]}
                     >
                         <Input.Password
                         />
                     </Form.Item>
+                    <Form.Item
+                        name="role"
+                        label="Role"
+                        initialValue={employee?.user?.role}
+                        rules={[ { required: true, message: 'Please input your role'},]}
+                    >
+                        <Input
+                        />
+                    </Form.Item>
+
                 </Form>
             </Modal>
         </>

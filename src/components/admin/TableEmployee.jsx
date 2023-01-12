@@ -7,7 +7,7 @@ import { ColumnEmployee } from "./Employee/Tabel";
 
 function TableEmployee() {
     const { authUser } = useSelector(state => state.authUser)
-    const [data, setData] = useState([]);
+    const [employeeData, setEmployeeData] = useState([]);
     const [visible, setVisible] = useState(false);
     const [edit, setEdit] = useState(null);
     const [form] = Form.useForm();
@@ -19,7 +19,7 @@ function TableEmployee() {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
-                    setData(res.data.data);
+                    setEmployeeData(res.data.data);
                 })
         }
         fetchEmp();
@@ -27,69 +27,33 @@ function TableEmployee() {
 
 
 
-    // const [dataSource, setDataSource] = useState([
-    //     {
-    //         id: 1,
-    //         productimage: "https://joeschmoe.io/api/v1/random",
-    //         nama: "Pelangi dimatamu",
-    //         email: "lorem ipsum dolor sit amet amet amet amet",
-    //         passsword: "05/09/2019, 15:53:32",
-    //     },
-    //     {
-    //         id: 2,
-    //         productimage: "https://joeschmoe.io/api/v1/random",
-    //         nama: "David",
-    //         email: "david@gmail.com",
-    //         address: "David Address",
-    //     },
-    //     {
-    //         id: 3,
-    //         productimage: "https://joeschmoe.io/api/v1/random",
-    //         nama: "James",
-    //         email: "james@gmail.com",
-    //         address: "James Address",
-    //     },
-    //     {
-    //         id: 4,
-    //         productimage: "https://joeschmoe.io/api/v1/random",
-    //         nama: "Sam",
-    //         email: "sam@gmail.com",
-    //         address: "Sam Address",
-    //     },
-    // ]);
-
-    // const props = {
-    //     name: 'file',
-    //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-    //     headers: {
-    //         authorization: 'authorization-text',
-    //     },
-    //     onChange(info) {
-    //         if (info.file.status !== 'uploading') {
-    //             console.log(info.file, info.fileList);
-    //         }
-    //         if (info.file.status === 'done') {
-    //             message.success(`${info.file.name} file uploaded successfully`);
-    //         } else if (info.file.status === 'error') {
-    //             message.error(`${info.file.name} file upload failed.`);
-    //         }
-    //     },
-    // };
-
     const Delete = (record) => {
+        const data = {
+            user_id : record.user_id
+        }
         Modal.confirm({
             title: "Are you sure, you want to delete this employee record?",
-            okText: "Yes",
-            okType: "danger",
-            // onOk: () => {
-            //     setDataSource((pre) => {
-            //         return pre.filter((employee) => employee.id !== record.id);
-            //     });
-            // },
+            onOk: () => {
+                console.log(record);
+                axios.delete(`${process.env.REACT_APP_API_URL}employee/delete`, {
+                    headers: {
+                        'Authorization': 'Bearer ' + authUser.access_token
+                    }, data
+                    
+                }
+                ).then(res => {
+                    console.log(res.data);
+                    setVisible(false)
+                    setEmployeeData((pre) => {
+                        return pre.filter((employee) => employee.user_id !== record.user_id);
+                    });
+                })
+            },
         });
     };
 
     const Edit = (record) => {
+        console.log(record)
         setTimeout(() => {
             form.resetFields()
         }, 100);
@@ -97,42 +61,59 @@ function TableEmployee() {
         setVisible(true);
     };
 
-    const ResetEditing = () => {
+    const resetEditing = () => {
         setVisible(false);
         setEdit({});
     };
 
+    console.log(employeeData);
+
+    const onFinishUpdate = (values) => {
+        console.log('this value will be updated', values)
+        axios.post(`${process.env.REACT_APP_API_URL}employee/update`, values, {
+            headers: {
+                'Authorization': 'Bearer ' + authUser.access_token
+            }
+        }).then(res => {
+            console.log(res.data);
+            setVisible(false)
+            setEmployeeData(employeeData.map(item => {
+                if (item.user_id === values.user_id) {
+                    console.log('run update')
+                    return {
+                        ...item,
+                        user: {
+                            ...item.user,
+                            name: values.name,
+                            email: values.email,
+                            password: values.password,
+                            role: values.role
+
+                        }
+                    }
+                } else {
+                    return item
+                }
+            }))
+        })
+    }
+
     return (
         <div className="App">
             <Table
-             dataSource={data}
-             columns={ColumnEmployee ([Delete, Edit, authUser])}
+             dataSource={employeeData}
+             columns={ColumnEmployee({Delete, Edit, authUser})}
              >
             </Table>
             {/* menambahkan pada employee adhoc */}
             <ModalEmployee
-                title="Edit Employee"
+                onFinishUpdate={onFinishUpdate}
                 form={form}
-                edit={edit}
+                employee={edit}
                 visible={visible}
-                setData={setData}
-                resetEditing={ResetEditing}
+                setData={setEmployeeData}
+                resetEditing={resetEditing}
                 setVisible={setVisible}
-                onCancel={() => {
-                    ResetEditing();
-                }}
-                // onOk={() => {
-                //     setDataSource((pre) => {
-                //         return pre.map((employee) => {
-                //             if (employee.id === editingEmployee.id) {
-                //                 return editingEmployee;
-                //             } else {
-                //                 return employee;
-                //             }
-                //         });
-                //     });
-                //     resetEditing();
-                // }}
             >
             </ModalEmployee>
 
