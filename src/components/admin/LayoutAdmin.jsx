@@ -40,7 +40,7 @@ const LayoutAdmin = (props) => {
         getItem('Dashboard', '/dashboard', <HomeOutlined />),
         getItem('Schedule', '/schedule', <CalendarOutlined />),
         getItem('Blog Post', '/blogpost', <CreditCardOutlined />),
-        getItem('Add Blog Post', '/addblog', <UserAddOutlined />),
+        getItem('Add Blog Post', '/blogpost/create', <UserAddOutlined />),
         getItem('Employee', '/employee', <UserOutlined />),
         getItem('Add Employee', '/addemployee', <UserAddOutlined />),
         getItem('Employee Adhoc', '/employeeadhoc', <TeamOutlined />),
