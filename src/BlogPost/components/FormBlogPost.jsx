@@ -7,7 +7,7 @@ import MyCKEditor from "../../components/ckeditor5"
 const { Text } = Typography
 
 const FormBlogPost = (props) => {
-    const { navigate, form, onFinish, fileList, onChangeFile, onRemoveFile, fieldContent, setFieldContent, eachPost } = props
+    const { navigate, loadingSubmit, form, onFinish, fileList, onChangeFile, onRemoveFile, fieldContent, setFieldContent, eachPost } = props
     const { authUser } = useSelector(state => state.authUser)
 
     return (
@@ -17,7 +17,7 @@ const FormBlogPost = (props) => {
             wrapperCol={{ xs: { span: '24' }, lg: { span: 16 } }}
             onFinish={onFinish}
         >
-            <Form.Item hidden={true} nanme="author_id" initialValue={authUser?.id} />
+            <Form.Item hidden={true} name="author_id" initialValue={authUser?.id} />
 
             <Form.Item
                 label="Judul Post"
@@ -92,6 +92,7 @@ const FormBlogPost = (props) => {
                         <Row justify="end" style={{ gap: '10px', marginRight: '-10px' }}>
                             <Button onClick={() => navigate(-1)}>Cancel</Button>
                             <Button
+                                disabled={loadingSubmit}
                                 type="primary"
                                 htmlType="submit"
                             >
