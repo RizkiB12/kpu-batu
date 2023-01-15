@@ -14,6 +14,7 @@ const BlogPost = () => {
     const [eachPost, setEachPost] = useState({})
     const [page, setPage] = useState(1)
     const [isOpenModal, setIsOpenModal] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const breadcumb = [
         {
@@ -27,11 +28,13 @@ const BlogPost = () => {
 
     useEffect(() => {
         const fetchBlog = () => {
+            setLoading(true)
             axios.get(`${process.env.REACT_APP_API_URL}news?limit=10&page=${page}`, {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
                     setBlogPost(res.data)
+                    setLoading(false)
                 })
         }
         fetchBlog();
@@ -49,6 +52,7 @@ const BlogPost = () => {
             <Button type='primary' onClick={() => navigate('create')}>Buat Berita</Button>
             <Divider />
             <Table
+                loading={loading}
                 onRow={(record, idx) => ({ onClick: e => onRowClick(e, record, idx) })}
                 pagination={{
                     position: 'bottomRight',
