@@ -2,7 +2,7 @@ import { Image, Row } from "antd"
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons"
 import moment from 'moment'
 
-const ColumnBlogPost = [
+const ColumnBlogPost = propsColumn => [
     {
         title: 'Image Thumbnail',
         key: 'thumbnail_img',
@@ -40,7 +40,7 @@ const ColumnBlogPost = [
                 <Row justify="space-evenly">
                     <EditOutlined
                         style={{ color: "black", fontSize: "15px" }}
-                        onClick={() => console.log('edit clicked')}
+                        onClick={() => propsColumn.navigate(`edit/${record.id}`, { state: record })}
                     />
                     <DeleteOutlined
                         style={{ color: "red", marginLeft: 12 }}

@@ -5,19 +5,25 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import LayoutAdmin from '../../components/admin/LayoutAdmin'
 import ModalViewPost from '../components/ModalViewPost';
+import { useNavigate } from "react-router-dom"
 
-const BlogPostV2 = () => {
+const BlogPost = () => {
     const { authUser } = useSelector(state => state.authUser)
+    const navigate = useNavigate()
     const [blogPost, setBlogPost] = useState([])
     const [eachPost, setEachPost] = useState({})
     const [page, setPage] = useState(1)
     const [isOpenModal, setIsOpenModal] = useState(false)
+
     const breadcumb = [
         {
-            name: "Add Blog Post V2",
-            link: "/v2/addblog",
+            name: "Add Blog Post",
+            link: "/blogpost",
         },
     ];
+    const propsColumn = {
+        navigate
+    }
 
     useEffect(() => {
         const fetchBlog = () => {
@@ -52,7 +58,7 @@ const BlogPostV2 = () => {
                     onChange: (e) => setPage(e)
                 }}
                 dataSource={blogPost.data}
-                columns={ColumnBlogPost}
+                columns={ColumnBlogPost(propsColumn)}
             />
             <ModalViewPost
                 isOpenModal={isOpenModal}
@@ -62,4 +68,4 @@ const BlogPostV2 = () => {
         </LayoutAdmin>
     )
 }
-export default BlogPostV2
+export default BlogPost
