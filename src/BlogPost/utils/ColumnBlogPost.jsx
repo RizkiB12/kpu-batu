@@ -44,7 +44,7 @@ const ColumnBlogPost = propsColumn => [
                     />
                     <DeleteOutlined
                         style={{ color: "red", marginLeft: 12 }}
-                        onClick={() => { }}
+                        onClick={() => propsColumn.handleDeleteBlogPost(record)}
                     />
                 </Row>
             );

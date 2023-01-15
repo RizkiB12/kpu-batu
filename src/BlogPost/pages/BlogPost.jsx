@@ -1,4 +1,4 @@
-import { Button, Divider, Table } from 'antd'
+import { Button, Divider, message, Modal, Table } from 'antd'
 import { ColumnBlogPost } from '../utils/ColumnBlogPost';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -22,9 +22,6 @@ const BlogPost = () => {
             link: "/blogpost",
         },
     ];
-    const propsColumn = {
-        navigate
-    }
 
     useEffect(() => {
         const fetchBlog = () => {
@@ -45,6 +42,27 @@ const BlogPost = () => {
             setEachPost(record)
             setIsOpenModal(true)
         }
+    }
+
+    const handleDeleteBlogPost = (record) => {
+        console.log('this state will be deleted', record)
+        Modal.confirm({
+            title: 'Hapus Blog Post',
+            content: 'Apakah anda yakin menghapus blog post?',
+            onOk: () => {
+                const loading = message.loading('Loading...')
+                setTimeout(() => {
+                    setBlogPost(prev => ({ ...prev, data: blogPost.data.filter(post => post.id !== record.id) }))
+                    message.success('Sukses menghapus blog post')
+                    loading()
+                }, 3000);
+            }
+        })
+    }
+
+    const propsColumn = {
+        navigate,
+        handleDeleteBlogPost,
     }
 
     return (
