@@ -26,7 +26,7 @@ const EditBlogPost = () => {
     })
 
     const handleUpdateBlogPost = (values) => {
-        console.log(values)
+        console.log('this update blog post', values)
     }
 
     const onChangeFile = ({ fileList: newFileList }) => {
