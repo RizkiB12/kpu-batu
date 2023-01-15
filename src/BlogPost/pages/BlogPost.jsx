@@ -17,7 +17,7 @@ const BlogPost = () => {
 
     const breadcumb = [
         {
-            name: "Add Blog Post",
+            name: "Blog Post",
             link: "/blogpost",
         },
     ];
@@ -46,7 +46,7 @@ const BlogPost = () => {
 
     return (
         <LayoutAdmin breadcumb={breadcumb}>
-            <Button type='primary'>Buat Berita</Button>
+            <Button type='primary' onClick={() => navigate('create')}>Buat Berita</Button>
             <Divider />
             <Table
                 onRow={(record, idx) => ({ onClick: e => onRowClick(e, record, idx) })}

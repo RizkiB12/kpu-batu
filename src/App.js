@@ -15,6 +15,7 @@ import EmployeeAdhoc from "./pages/EmployeeAdhoc";
 import Home from "./pages/guest/Home";
 import PrintEmployeeAdhoc from "./pages/PrintEmployeeAdhoc";
 import { AdminRoute, GuestRoute } from "./middleware/AuthRoute";
+import CreateBlogPost from "./BlogPost/pages/CreateBlogPost";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/employee" element={<Employee />} />
           <Route path="/blogpost">
             <Route index element={<BlogPost />} />
+            <Route path="create" element={<CreateBlogPost />} />
             <Route path="edit/:idBlogPost" element={<EditBlogPost />} />
           </Route>
           <Route path="/addblog" element={<AddBlogPost />} />
