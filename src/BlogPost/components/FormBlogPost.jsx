@@ -17,6 +17,7 @@ const FormBlogPost = (props) => {
             wrapperCol={{ xs: { span: '24' }, lg: { span: 16 } }}
             onFinish={onFinish}
         >
+            <Form.Item hidden={true} name="id" initialValue={eachPost?.id} />
             <Form.Item hidden={true} name="author_id" initialValue={authUser?.id} />
 
             <Form.Item
