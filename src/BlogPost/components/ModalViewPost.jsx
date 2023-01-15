@@ -4,7 +4,6 @@ const { Title, Text } = Typography
 
 export default function ModalViewPost(props) {
     const { isOpenModal, setIsOpenModal, eachPost } = props
-    console.log(eachPost)
     return (
         <Modal
             visible={isOpenModal}
