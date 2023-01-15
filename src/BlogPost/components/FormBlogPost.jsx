@@ -42,6 +42,7 @@ const FormBlogPost = (props) => {
                         message: 'Thumbnail post harus diisi!',
                     },
                 ]}
+                initialValue={fileList}
             >
                 <Dragger
                     multiple={false}
