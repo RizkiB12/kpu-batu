@@ -26,7 +26,7 @@ const BlogPost = () => {
     useEffect(() => {
         const fetchBlog = () => {
             setLoading(true)
-            axios.get(`${process.env.REACT_APP_API_URL}news?limit=10&page=${page}`, {
+            axios.get(`${process.env.REACT_APP_API_URL}news?limit=10&page=${page}&order=updatedAt&sort=desc`, {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
@@ -51,11 +51,19 @@ const BlogPost = () => {
             content: 'Apakah anda yakin menghapus blog post?',
             onOk: () => {
                 const loading = message.loading('Loading...')
-                setTimeout(() => {
+                axios.delete(`${process.env.REACT_APP_API_URL}news/delete`, {
+                    headers: {
+                        Authorization: 'Bearer ' + authUser.access_token
+                    },
+                    data: { id: record.id }
+                }).then(res => {
                     setBlogPost(prev => ({ ...prev, data: blogPost.data.filter(post => post.id !== record.id) }))
                     message.success('Sukses menghapus blog post')
+                }).catch(err => {
+                    message.error(err.message)
+                }).finally(() => {
                     loading()
-                }, 3000);
+                })
             }
         })
     }
