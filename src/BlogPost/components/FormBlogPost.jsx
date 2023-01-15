@@ -7,7 +7,7 @@ import MyCKEditor from "../../components/ckeditor5"
 const { Text } = Typography
 
 const FormBlogPost = (props) => {
-    const { navigate, form, onFinish, fileList, onChangeFile, onRemoveFile, fieldContent, setFieldContent } = props
+    const { navigate, form, onFinish, fileList, onChangeFile, onRemoveFile, fieldContent, setFieldContent, eachPost } = props
     const { authUser } = useSelector(state => state.authUser)
 
     return (
@@ -28,6 +28,7 @@ const FormBlogPost = (props) => {
                         message: 'Judul berita harus diisi!',
                     },
                 ]}
+                initialValue={eachPost?.title}
             >
                 <Input placeholder="Masukkan judul post" />
             </Form.Item>
@@ -76,6 +77,7 @@ const FormBlogPost = (props) => {
                         message: 'Deskripsi berita harus diisi!',
                     },
                 ]}
+                initialValue={fieldContent}
             >
                 <MyCKEditor
                     initialValue={fieldContent}
