@@ -3,10 +3,11 @@ import { InboxOutlined } from "@ant-design/icons"
 import Dragger from "antd/lib/upload/Dragger"
 import { dummyRequest } from "../../helpers/dummyRequest"
 import { useSelector } from "react-redux"
+import MyCKEditor from "../../components/ckeditor5"
 const { Text } = Typography
 
 const FormBlogPost = (props) => {
-    const { navigate, form, onFinish, fileList, onChangeFile, onRemoveFile } = props
+    const { navigate, form, onFinish, fileList, onChangeFile, onRemoveFile, fieldContent, setFieldContent } = props
     const { authUser } = useSelector(state => state.authUser)
 
     return (
@@ -76,7 +77,10 @@ const FormBlogPost = (props) => {
                     },
                 ]}
             >
-                <Input placeholder="Masukkan deskripsi berita" />
+                <MyCKEditor
+                    initialValue={fieldContent}
+                    onChange={setFieldContent}
+                />
             </Form.Item>
 
             <Row>

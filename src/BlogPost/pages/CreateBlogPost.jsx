@@ -8,6 +8,7 @@ const CreateBlogPost = () => {
     const navigate = useNavigate()
     const [form] = Form.useForm()
     const [fileList, setFileList] = useState([])
+    const [fieldContent, setFieldContent] = useState(null)
 
     const breadcumb = [
         {
@@ -17,7 +18,6 @@ const CreateBlogPost = () => {
     ]
 
     const onChangeFile = ({ fileList: newFileList }) => {
-        console.log({ fileList, newFileList })
         setFileList(newFileList);
         setTimeout(() => {
             form.setFields([{ name: 'thumbnail_img', value: newFileList[0].originFileObj }])
@@ -31,7 +31,19 @@ const CreateBlogPost = () => {
         }, 1000);
     }
 
-    console.log(form.getFieldsValue())
+    const handleCreateBlogPost = (values) => {
+        const formData = new FormData()
+        formData.append('title', values.title)
+        if (values.thumbnail_img) {
+            formData.append('thumbnail_img', values.thumbnail_img)
+        }
+        if (fieldContent.length > 0) {
+            formData.append('description', fieldContent)
+        }
+        for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        }
+    }
 
     return (
         <LayoutAdmin breadcumb={breadcumb}>
@@ -40,8 +52,10 @@ const CreateBlogPost = () => {
                 fileList={fileList}
                 onChangeFile={onChangeFile}
                 onRemoveFile={onRemoveFile}
-                onFinish={(values) => console.log(values)}
+                onFinish={handleCreateBlogPost}
                 navigate={navigate}
+                fieldContent={fieldContent}
+                setFieldContent={setFieldContent}
             />
         </LayoutAdmin>
     )
