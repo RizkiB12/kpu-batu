@@ -1,6 +1,6 @@
 import { Col, Divider, Image, Modal, Row, Typography } from 'antd'
 import React from 'react'
-const { Title, Text } = Typography
+const { Title } = Typography
 
 export default function ModalViewPost(props) {
     const { isOpenModal, setIsOpenModal, eachPost } = props
