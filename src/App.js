@@ -12,16 +12,17 @@ import EditBlogPost from "./BlogPost/pages/EditBlogPost";
 import AddBlogPost from "./pages/AddBlogPost";
 import AddEmployee from "./pages/AddEmployee";
 import EmployeeAdhoc from "./pages/EmployeeAdhoc";
-import Home from "./pages/guest/Home";
+// import Home from "./pages/guest/Home";
 import PrintEmployeeAdhoc from "./pages/PrintEmployeeAdhoc";
 import { AdminRoute, GuestRoute } from "./middleware/AuthRoute";
 import CreateBlogPost from "./BlogPost/pages/CreateBlogPost";
+import LandingPage from "../src/LandingPage"
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LandingPage />} />
         {/* Guest Route */}
         <Route element={<GuestRoute />}>
           <Route path="/login" element={<Login />} />
