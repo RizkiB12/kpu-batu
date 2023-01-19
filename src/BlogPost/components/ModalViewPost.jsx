@@ -28,9 +28,9 @@ export default function ModalViewPost(props) {
                         alt="Thumbnail Post"
                     />
                     <Divider />
-                    <Text>
-                        {eachPost.description}
-                    </Text>
+                    <div
+                    dangerouslySetInnerHTML={{ __html: eachPost.description }}
+                    />
                 </Col>
             </Row>
         </Modal>
