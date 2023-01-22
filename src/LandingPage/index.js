@@ -1,12 +1,33 @@
 import { Layout, Row, Col, Image, Typography, Grid, Input, Collapse } from 'antd'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import ImageJumbotron from '../assets/images/jumbotron.jpg'
+import { logout } from '../redux/slice/AuthSlice'
 const { Header } = Layout
 const { Title } = Typography
 const { Search } = Input
 const { Panel } = Collapse
 
 const LandingPage = () => {
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const {authUser} = useSelector(state => state.authUser)
+    
+    const handleLogout = () => {
+        console.log('clicked');
+        dispatch(logout())
+        navigate('/')
+
+    }
+
+    const handleLogin = () => {
+        navigate('/login')
+    }
+
+
+
     const { xs, sm, md, lg } = Grid.useBreakpoint()
     const text = `
         A dog is a type of domesticated animal.
@@ -15,16 +36,23 @@ const LandingPage = () => {
         `;
     return (
         <>
-            <Header style={{ color: 'white' }}>
+            <Header style={{ color: 'white', position: 'sticky',
+          top: 0,
+          zIndex: 1,
+          width: '100%', }}>
                 <WrapNavbar justify='space-between'>
                     <Col>
                         BADAN ADHOC
                     </Col>
                     <Col>
                         <Row justify='space-between' gutter={16}>
-                            <Col>Menu 1</Col>
-                            <Col>Menu 2</Col>
-                            <Col>Menu 3</Col>
+                            <Col style={{
+                                cursor: 'pointer'}} >Home</Col>
+                            <Col style={{
+                                cursor: 'pointer'}} >News</Col>
+                            <Col style={{
+                                cursor: 'pointer'}} 
+                                onClick={authUser === null ? () => handleLogin() : () => handleLogout()}>{authUser === null ? 'Login' : 'Logout'}</Col>
                         </Row>
                     </Col>
                 </WrapNavbar>
@@ -59,6 +87,17 @@ const LandingPage = () => {
                             <Row span={24} style={{ height: '350px', overflow: 'hidden' }}>
                                 <Image src={ImageJumbotron} preview={false} />
                             </Row>
+                        </Col>
+                    </Row>
+                    <Row>
+                    <Col md={24} lg={12} style={{ textAlign: 'center', padding: '2vh 5vh 2vh 5vh' }}>
+                            <Row span={24} style={{ height: '350px', overflow: 'hidden' }}>
+                                <Image src={ImageJumbotron} preview={false} />
+                            </Row>
+                        </Col>
+                        <Col md={24} lg={12} style={{ textAlign: 'center', padding: '2vh 5vh 2vh 5vh', }}>
+                            <Title level={3} style={{ textAlign: 'start', marginTop: `${(xs || sm || md || lg) ? '10px' : '5vh'}` }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, consequuntur?</Title>
+                            <Title level={5} style={{ textAlign: 'start' }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, consequuntur?</Title>
                         </Col>
                     </Row>
                 </Col>
