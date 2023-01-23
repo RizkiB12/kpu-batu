@@ -77,15 +77,18 @@ const TabelPrint = () =>
 {
     const { authUser } = useSelector(state => state.authUser)
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
     moment().locale('id')
 
     useEffect(() => {
         const fetchEmp = () => {
+            setLoading(true);
             axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc?page=1&limit=10`, {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
                     setData(res.data.data);
+                    setLoading(false)
                 })
         }
         fetchEmp();
@@ -94,6 +97,7 @@ const TabelPrint = () =>
 return (
     <>
     <Table
+        loading={loading}
         columns={columnPrint({authUser})} 
         dataSource={data}
         pagination={{ pageSize: 8, total: 50, showSizeChanger: true }}
