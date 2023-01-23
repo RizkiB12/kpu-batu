@@ -186,10 +186,10 @@ const LandingPage = () => {
                                 <Col style={{ margin: '10px 0 10px 0' }} xs={24} lg={6}>
                                     <Title style={{ color: 'white' }} level={4}>Follow Us</Title>
                                     <Row>
-                                        <p style={{ fontSize: '25px', marginRight: '5px' }}><YoutubeOutlined /></p>
                                         <p style={{ fontSize: '25px', marginRight: '5px'  }} ><FacebookOutlined /></p>
                                         <p style={{ fontSize: '25px', marginRight: '5px' }} ><InstagramOutlined /></p>
-                                        <p style={{ fontSize: '25px' }} ><TwitterOutlined /></p>
+                                        <p style={{ fontSize: '25px', marginRight: '5px' }} ><TwitterOutlined /></p>
+                                        <p style={{ fontSize: '25px'}}><YoutubeOutlined /></p>
                                     </Row>
                                 </Col>
                                 <Col style={{ margin: '10px 0 10px 0' }} xs={24} lg={6}>
