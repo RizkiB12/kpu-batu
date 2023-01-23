@@ -6,7 +6,8 @@ import {
     Upload,
     Select,
     message,
-    InputNumber
+    InputNumber,
+    Row
 } from 'antd';
 
 import { UploadOutlined } from '@ant-design/icons';
@@ -396,9 +397,13 @@ export const Add = () => {
                     offset: 4,
                     span: 8,
                 }}>
+                    <Row justify='start' style={{ gap: '10px' }}>
+                        <Button
+                        onClick={() => navigate(-1)}>Cancel</Button>
                 <Button type="primary" htmlType="submit"  >
                     Submit
                 </Button>
+                </Row>
             </Form.Item>
 
         </Form>

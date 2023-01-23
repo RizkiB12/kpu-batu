@@ -1,5 +1,5 @@
-import { Button, Form, Input, message, Select } from 'antd';
-import React, { useState } from 'react';
+import { Button, Form, Input, message, Row, Select } from 'antd';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
@@ -40,7 +40,8 @@ const tailFormItemLayout = {
 
 
 
-const CreateFormEmployee = () => {
+const CreateFormEmployee = (props) => {
+    const {loadingSubmit} = props
     const navigate = useNavigate()
     const [form] = Form.useForm();
     const { authUser } = useSelector(state => state.authUser)
@@ -143,9 +144,17 @@ const CreateFormEmployee = () => {
                 offset: 4,
                 span: 8,
             }}>
-            <Button type="primary" htmlType="submit"  >
-                Submit
-            </Button>
+            <Row justify='start' style={{ gap:'10px' }}>
+                <Button onClick={() => navigate(-1)}> 
+                  Cancel
+                </Button>
+                <Button 
+                    disabled={loadingSubmit}
+                    type="primary"
+                    htmlType="submit"  >
+                    Submit
+                </Button>
+            </Row>
         </Form.Item>
 
     </Form>

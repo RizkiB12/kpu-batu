@@ -1,4 +1,4 @@
-import { Table, Modal, Form } from "antd";
+import { Table, Modal, Form, message } from "antd";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useSelector } from 'react-redux';
@@ -12,16 +12,19 @@ function TableEmployee() {
     const [visible, setVisible] = useState(false);
     const [edit, setEdit] = useState(null);
     const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false)
 
 
     useEffect(() => {
         const fetchEmployee = () => {
+            setLoading(true)
             axios.get(`${process.env.REACT_APP_API_URL}employee?page=1&limit=5`, {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
                     console.log(res);
                     setEmployeeData(res.data.data.employees);
+                    setLoading(false)
                 })
         }
         fetchEmployee();
@@ -38,6 +41,7 @@ function TableEmployee() {
             title: "Are you sure, you want to delete this employee record?",
             onOk: () => {
                 console.log(record);
+                const loading = message.loading('Loading...')
                 axios.delete(`${process.env.REACT_APP_API_URL}employee/delete`, {
                     headers: {
                         'Authorization': 'Bearer ' + authUser.access_token
@@ -48,7 +52,9 @@ function TableEmployee() {
                     console.log(res.data);
                     setVisible(false)
                     setEmployeeData((pre) => {
-                        return pre.filter((employee) => employee.id !== record.id);
+                         return pre.filter((employee) => employee.id !== record.id);
+                    }).finally(() => {
+                        loading()
                     });
                 })
             },
@@ -100,6 +106,7 @@ function TableEmployee() {
     return (
         <>
             <Table
+            loading={loading}
              dataSource={employeeData}
              columns={ColumnEmployee({Delete, Edit, authUser})}
              >

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Table, Modal, Form, } from "antd";
+import { Table, Modal, Form, message, } from "antd";
 import Modals from "./EmployeeAdhoc/Modals";
 import axios from "axios";
 import { useEffect } from "react";
@@ -16,15 +16,18 @@ export const TableData = () => {
     const [visible, setVisible] = useState(false);
     const [edit, setEdit] = useState(null);
     const [form] = Form.useForm();
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchEmp = () => {
+            setLoading(true)
             axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc?page=1&limit=4`, {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
                     console.log(res);
                     setData(res.data.data);
+                    setLoading(false)
                 })
         }
         fetchEmp();
@@ -39,6 +42,7 @@ export const TableData = () => {
         Modal.confirm({
             title: "Are you sure you want to delete this",
             onOk: () => {
+                const loading = message.loading('Loading...')
                 axios.delete(`${process.env.REACT_APP_API_URL}emp-adhoc/delete`, {
                     headers: {
                         'Authorization': 'Bearer ' + authUser.access_token
@@ -51,6 +55,8 @@ export const TableData = () => {
                     setData((pre) => {
                         return pre.filter((emp) => emp.user_id !== record.user_id);
                     });
+                }).finally(() => {
+                    loading();
                 })
                
             },
@@ -111,6 +117,7 @@ export const TableData = () => {
     return (
         <>
             <Table
+                loading={loading}
                 dataSource={data}
                 columns={ColumnEmpAdhoc({ Delete, Edit, authUser })}
                 scroll={{ x: 1300 }}
