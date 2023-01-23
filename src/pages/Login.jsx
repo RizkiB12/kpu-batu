@@ -3,28 +3,35 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Card, Col, Form, Input, message, Row } from 'antd';
 import axios from 'axios';
 import React from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from '../redux/slice/AuthSlice';
 
 
 const Login = () => {
     const dispatch = useDispatch();
+    const [loadingSubmit, setLoadingSubmit] = useState(false)
 
 
     const onFinish = (values) => {
+        setLoadingSubmit(true)
+        const loading = message.loading('Loading...')
         console.log('Received values of form: ', values);
         axios.post(`${process.env.REACT_APP_API_URL}auth/login`, values)
             .then(res => {
                 console.log('this data res', res.data);
                 const user = res.data;
-                dispatch(login(user))
-                
+                message.success(res.data.message)
+                dispatch(login(user)) 
+            }).catch ((err) => {
+                console.log(err.response.data.message);
+                message.error(err.response.data.message)
+            }).finally(() => {
+                setLoadingSubmit(false);
+                loading()
             })
     };
 
-    const success = () => {
-        message.success('Success to Login');
-      };
 
 
     return (
@@ -70,7 +77,11 @@ const Login = () => {
                         </Form.Item>
                         <Form.Item>
 
-                            <Button onClick={success} type="primary" htmlType="submit" className="login-form-button">
+                            <Button
+                            disabled={loadingSubmit}
+                            type="primary" 
+                            htmlType="submit" 
+                            className="login-form-button">
                                 Log in
                             </Button>
                         </Form.Item>
