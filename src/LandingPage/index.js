@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
 import ImageJumbotron from '../assets/images/jumbotron.jpg'
 import { logout } from '../redux/slice/AuthSlice'
+import { YoutubeOutlined, FacebookOutlined, InstagramOutlined, TwitterOutlined } from '@ant-design/icons';
 const { Header } = Layout
 const { Title } = Typography
 const { Search } = Input
@@ -30,9 +31,7 @@ const LandingPage = () => {
 
     const { xs, sm, md, lg } = Grid.useBreakpoint()
     const text = `
-        A dog is a type of domesticated animal.
-        Known for its loyalty and faithfulness,
-        it can be found as a welcome guest in many households across the world.
+    https://drive.google.com/drive/folders/1ieaYMvgWTkx1uLJPZucwoBO_poueYztj?usp=share_link
         `;
     return (
         <>
@@ -100,6 +99,17 @@ const LandingPage = () => {
                             <Title level={5} style={{ textAlign: 'start' }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, consequuntur?</Title>
                         </Col>
                     </Row>
+                    <Row>
+                        <Col order={lg ? 0 : 2} md={24} lg={12} style={{ textAlign: 'center', padding: '2vh 5vh 2vh 5vh', }}>
+                            <Title level={3} style={{ textAlign: 'start', marginTop: `${(xs || md || lg) ? '10px' : '5vh'}` }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, consequuntur?</Title>
+                            <Title level={5} style={{ textAlign: 'start' }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, consequuntur?</Title>
+                        </Col>
+                        <Col md={24} lg={12} style={{ textAlign: 'center', padding: '2vh 5vh 2vh 5vh' }}>
+                            <Row span={24} style={{ height: '350px', overflow: 'hidden' }}>
+                                <Image src={ImageJumbotron} preview={false} />
+                            </Row>
+                        </Col>
+                    </Row>
                 </Col>
             </Row>
 
@@ -144,13 +154,13 @@ const LandingPage = () => {
                     <Row justify='center' style={{ marginTop: '20px' }}>
                         <Col xs={20} lg={18}>
                             <Collapse defaultActiveKey={['1']}>
-                                <Panel header="This is panel header 1" key="1">
+                                <Panel header="Bagaimana cara menjadi bagian dari badan adhoc?" key="1">
                                     <p>{text}</p>
                                 </Panel>
-                                <Panel header="This is panel header 2" key="2">
+                                <Panel header="Apa saja persyaratan yang dibutuhkan untuk menjadi badan adhoc?" key="2">
                                     <p>{text}</p>
                                 </Panel>
-                                <Panel header="This is panel header 3" key="3">
+                                <Panel header="Berapa lama masa kerja menjadi badan adhoc?" key="3">
                                     <p>{text}</p>
                                 </Panel>
                             </Collapse>
@@ -166,19 +176,20 @@ const LandingPage = () => {
                             <Row justify='center'>
                                 <Col style={{ margin: '10px 0 10px 0' }} xs={24} lg={6}>
                                     <Title style={{ color: 'white' }} level={4}>Adress</Title>
-                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                                    <p>Jl. Sultan Agung No.16, Sisir, Kec. Batu, Kota Batu, Jawa Timur 65314</p>
                                 </Col>
                                 <Col style={{ margin: '10px 0 10px 0' }} xs={24} lg={6}>
                                     <Title style={{ color: 'white' }} level={4}>Contact</Title>
-                                    <p>info@pesantrengodigital.com</p>
-                                    <p>telkom.pesantrengodigital@gmail.com</p>
+                                    <p>info@kpu.com</p>
+                                    <p>kpu.batu@kpu.ac.id</p>
                                 </Col>
                                 <Col style={{ margin: '10px 0 10px 0' }} xs={24} lg={6}>
                                     <Title style={{ color: 'white' }} level={4}>Follow Us</Title>
                                     <Row>
-                                        <p>Logo 1</p>
-                                        <p>Logo 2</p>
-                                        <p>Logo 3</p>
+                                        <p style={{ fontSize: '25px', marginRight: '5px' }}><YoutubeOutlined /></p>
+                                        <p style={{ fontSize: '25px', marginRight: '5px'  }} ><FacebookOutlined /></p>
+                                        <p style={{ fontSize: '25px', marginRight: '5px' }} ><InstagramOutlined /></p>
+                                        <p style={{ fontSize: '25px' }} ><TwitterOutlined /></p>
                                     </Row>
                                 </Col>
                                 <Col style={{ margin: '10px 0 10px 0' }} xs={24} lg={6}>
