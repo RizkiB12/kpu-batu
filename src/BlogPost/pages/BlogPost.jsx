@@ -79,6 +79,7 @@ const BlogPost = () => {
             <Divider />
             <Table
                 loading={loading}
+                scroll={{ x: 1300 }}
                 onRow={(record, idx) => ({ onClick: e => onRowClick(e, record, idx) })}
                 pagination={{
                     position: 'bottomRight',
