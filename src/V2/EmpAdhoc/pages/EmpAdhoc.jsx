@@ -1,28 +1,30 @@
-import React, { useState } from "react";
-import { Table, Modal, Form, message, Row, } from "antd";
-import Modals from "./EmployeeAdhoc/Modals";
-import axios from "axios";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
-import moment from "moment/moment";
-import 'moment/locale/id';
-import { ColumnEmpAdhoc } from "./EmployeeAdhoc/TableMeta";
-import {
-    EditOutlined,
-    DeleteOutlined,
-} from "@ant-design/icons";
+import { Form, message, Modal, Table } from 'antd'
+import React, { useEffect, useState } from 'react'
+import moment from 'moment'
+import LayoutAdmin from '../../components/admin/LayoutAdmin'
+import { useSelector } from 'react-redux'
+import axios from 'axios'
+import { ColumnEmpAdhoc } from '../utils/ColumnEmpAdhoc'
+import ModalViewEmpAdhoc from '../components/ModalViewEmpAdhoc'
+import ModalViewTextEmpAdhoc from '../components/ModalViewTextEmpAdhoc'
 
-import { Document, Page } from 'react-pdf';
-
-export const TableData = () => {
+const EmpAdhoc = () => {
     moment().locale('id')
     const { authUser } = useSelector(state => state.authUser)
 
     const [data, setData] = useState([]);
-    const [visible, setVisible] = useState(false);
-    const [edit, setEdit] = useState(null);
     const [form] = Form.useForm();
     const [loading, setLoading] = useState(false);
+    const [openCell, setModalCell] = useState(false)
+    const [openEditText, setOpenEditText] = useState(false)
+    const [dataCell, setDataCell] = useState('')
+
+    const breadcumb = [
+        {
+            name: 'Employees Adhoc',
+            link: '/employeeadhoc',
+        },
+    ];
 
     useEffect(() => {
         const fetchEmp = () => {
@@ -57,7 +59,6 @@ export const TableData = () => {
                 }
                 ).then(res => {
                     console.log(res.data);
-                    setVisible(false)
                     setData((pre) => {
                         return pre.filter((emp) => emp.user_id !== record.user_id);
                     });
@@ -73,16 +74,7 @@ export const TableData = () => {
         setTimeout(() => {
             form.resetFields()
         }, 100);
-        setEdit(record)
-        setVisible(true);
     };
-
-    const ResetEditing = () => {
-        setVisible(false);
-        setEdit({});
-    };
-
-    console.log(data)
 
     const onFinishUpdate = (values) => {
         console.log('this value will be updated', values)
@@ -92,7 +84,6 @@ export const TableData = () => {
             }
         }).then(res => {
             console.log(res.data);
-            setVisible(false)
             setData(data.map(item => {
                 if (item.user_id === values.user_id) {
                     console.log('run update')
@@ -117,76 +108,59 @@ export const TableData = () => {
                 }
             }))
         })
-
     }
 
-    const [openCell, setModalCell] = useState(false)
-    const [dataCell, setDataCell] = useState('')
+    const handleOpenEditing = (record) => {
+        setTimeout(() => {
+            form.resetFields()
+        }, 100);
+        setDataCell(record)
+        setOpenEditText(true);
+    }
+
+    const handleResetEditing = () => {
+        setOpenEditText(false);
+        setDataCell('')
+    }
+
+    const propsColumn = {
+        Delete,
+        Edit,
+        authUser,
+        setModalCell,
+        setDataCell,
+        setOpenEditText,
+        handleOpenEditing,
+    }
 
     return (
-        <>
+        <LayoutAdmin breadcumb={breadcumb}>
             <Table
                 loading={loading}
                 dataSource={data}
-                columns={ColumnEmpAdhoc({ Delete, Edit, authUser, setModalCell, setDataCell })}
+                columns={ColumnEmpAdhoc(propsColumn)}
                 scroll={{ x: 1300 }}
                 pagination={{ pageSize: 8, showSizeChanger: true }}
                 bordered
             />
 
-            <Modal
-                open={openCell}
-                visible={openCell}
-                footer={null}
-                onCancel={() => setModalCell(false)}
-                bodyStyle={dataCell.typeFile === "pdf" ? { height: 800 } : null}
-            >
-                {
-                    dataCell.fileSrc === null ? (<div>tidak ada data</div>) : dataCell.typeFile === ("image" || "foto") ? (
-                        <img
-                            alt="example"
-                            style={{
-                                width: "100%",
-                            }}
-                            src={dataCell.fileSrc}
-                        />
-                    ) : (
-                        <iframe
-                            src={dataCell.fileSrc}
-                            type="application/pdf"
-                            width="100%"
-                            height="100%"
-                            title="File PDF"
-                        />
-                    )
-                }
-                <div>
-                    <Row justify="space-evenly">
-                        <EditOutlined
-                            onClick={(e) => console.log('edit bro', e)}
-                            style={{ color: "black", fontSize: "15px", paddingTop: "10px" }}
-                        />
-                        {/* Yang harus dicoba */}
-                        <DeleteOutlined
-                            onClick={(e) => console.log('delete bro', e)}
-                            style={{ color: "red", fontSize: "15px", paddingTop: "10px" }}
-                        />
-                    </Row>
-                </div>
-            </Modal>
+            <ModalViewEmpAdhoc
+                openCell={openCell}
+                setModalCell={setModalCell}
+                dataCell={dataCell}
+            />
 
-            <Modals
+            <ModalViewTextEmpAdhoc
                 onFinishUpdate={onFinishUpdate}
                 form={form}
-                visible={visible}
-                edit={edit}
+                visible={openEditText}
+                edit={dataCell}
                 setData={setData}
-                ResetEditing={ResetEditing}
-                setVisible={setVisible}
+                resetEditing={handleResetEditing}
                 handleDelete={Delete}
             />
-        </>
-    );
-};
+        </LayoutAdmin>
+    )
+}
 
-
+export default EmpAdhoc

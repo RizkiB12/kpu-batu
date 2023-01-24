@@ -10,7 +10,7 @@ const EmployeeAdhoc = () => {
     const breadcumb = [
         {
             name: 'Employees Adhoc',
-            link: '/dashboard',
+            link: '/employeeadhoc',
         },
     ];
 

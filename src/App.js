@@ -11,7 +11,7 @@ import BlogPost from "./BlogPost/pages/BlogPost";
 import EditBlogPost from "./BlogPost/pages/EditBlogPost";
 import AddBlogPost from "./pages/AddBlogPost";
 import AddEmployee from "./pages/AddEmployee";
-import EmployeeAdhoc from "./pages/EmployeeAdhoc";
+import EmpAdhoc from "./EmpAdhoc/pages/EmpAdhoc";
 // import Home from "./pages/guest/Home";
 import PrintEmployeeAdhoc from "./pages/PrintEmployeeAdhoc";
 import { AdminRoute, GuestRoute } from "./middleware/AuthRoute";
@@ -30,7 +30,7 @@ function App() {
 
         {/* Admin Route */}
         <Route element={<AdminRoute />}>
-          <Route path="/employeeadhoc" element={<EmployeeAdhoc />} />
+          <Route path="/employeeadhoc" element={<EmpAdhoc />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/adddata" element={<AddData />} />
           <Route path="/schedule" element={<Schedule />} />

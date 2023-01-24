@@ -72,12 +72,12 @@ export const RowFile = (props) => {
         <div>
           <Row justify="space-evenly">
             <EditOutlined
-            onClick={(e)=>console.log('edit bro',e)}
+              onClick={(e) => console.log('edit bro', e)}
               style={{ color: "black", fontSize: "15px", paddingTop: "10px" }}
             />
             {/* Yang harus dicoba */}
             <DeleteOutlined
-            onClick={(e)=>console.log('delete bro', e)}
+              onClick={(e) => console.log('delete bro', e)}
               style={{ color: "red", fontSize: "15px", paddingTop: "10px" }}
             />
           </Row>
@@ -87,7 +87,7 @@ export const RowFile = (props) => {
   );
 };
 
-export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) => [
+export const ColumnEmpAdhoc = ({ Delete, Edit, authUser, setModalCell, setDataCell }) => [
   {
     key: "user.name",
     title: "Name",
@@ -101,6 +101,18 @@ export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) => [
     key: "foto",
     title: "Foto",
     width: 100,
+    onCell: (record, rowIndex) => {
+      return {
+        onClick: (ev) => {
+          console.log(record, rowIndex);
+          setModalCell(true)
+          setDataCell({
+            fileSrc: record.foto,
+            typeFile: 'image'
+          })
+        },
+      };
+    },
     render: (item, record) => {
       return (
         <>
@@ -189,6 +201,18 @@ export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) => [
     key: "ktp",
     title: "KTP",
     width: 200,
+    onCell: (record, rowIndex) => {
+      return {
+        onClick: (ev) => {
+          console.log(record, rowIndex);
+          setModalCell(true)
+          setDataCell({
+            fileSrc: record.foto,
+            typeFile: 'image'
+          })
+        },
+      };
+    },
     render: (item) => {
       return (
         <>
@@ -205,6 +229,18 @@ export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) => [
     key: "spsp",
     title: "SPSPS",
     width: 200,
+    onCell: (record, rowIndex) => {
+      return {
+        onClick: (ev) => {
+          console.log(record, rowIndex);
+          setModalCell(true)
+          setDataCell({
+            fileSrc: record.foto,
+            typeFile: 'image'
+          })
+        },
+      };
+    },
     render: (item) => {
       return (
         <>
@@ -269,11 +305,37 @@ export const ColumnEmpAdhoc = ({ Delete, Edit, authUser }) => [
     key: "ijazah",
     title: "Ijazah",
     width: 200,
+    onCell: (record, rowIndex) => {
+      return {
+        onClick: (ev) => {
+          if (record.ijazah === null) {
+            setModalCell(true)
+            setDataCell({
+              fileSrc: record.ijazah,
+              typeFile: 'pdf'
+            })
+          }
+          console.log(record, rowIndex);
+        },
+      };
+    },
     render: (item) => {
       return (
         <>
           {item.ijazah !== null ? (
-            <RowFile fileSrc={item?.ijazah} typeFile={"pdf"} />
+            <Row
+              justify="center"
+              onClick={() => {
+                console.log('click by render')
+                setModalCell(true)
+                setDataCell({
+                  fileSrc: item.ijazah,
+                  typeFile: 'pdf'
+                })
+              }}
+            >
+              <FilePdfOutlined style={{ fontSize: "32px" }} />
+            </Row>
           ) : (
             ""
           )}
