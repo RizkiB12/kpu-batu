@@ -3,7 +3,7 @@ import { ColumnBlogPost } from '../utils/ColumnBlogPost';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
-import LayoutAdmin from '../../components/admin/LayoutAdmin'
+import LayoutAdmin from '../../../components/admin/LayoutAdmin'
 import ModalViewPost from '../components/ModalViewPost';
 import { useNavigate } from "react-router-dom"
 

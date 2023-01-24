@@ -3,7 +3,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useLocation, useNavigate, useParams } from "react-router-dom"
-import LayoutAdmin from "../../components/admin/LayoutAdmin"
+import LayoutAdmin from "../../../components/admin/LayoutAdmin"
 import FormBlogPost from "../components/FormBlogPost"
 
 const EditBlogPost = () => {

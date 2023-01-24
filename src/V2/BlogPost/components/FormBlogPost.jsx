@@ -1,9 +1,9 @@
 import { Button, Col, Form, Input, Row, Typography } from "antd"
 import { InboxOutlined } from "@ant-design/icons"
 import Dragger from "antd/lib/upload/Dragger"
-import { dummyRequest } from "../../helpers/dummyRequest"
+import { dummyRequest } from "../../../helpers/dummyRequest"
 import { useSelector } from "react-redux"
-import MyCKEditor from "../../components/ckeditor5"
+import MyCKEditor from "../../../components/ckeditor5"
 const { Text } = Typography
 
 const FormBlogPost = (props) => {
