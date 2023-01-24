@@ -3,7 +3,7 @@ import { RowCellFile } from "./RowCellFile";
 import moment from "moment";
 import ActionEmpAdhoc from "../components/ActionEmpAdhoc";
 
-export const ColumnEmpAdhoc = ({ Delete, Edit, authUser, setModalCell, setDataCell, handleOpenEditing }) => [
+export const ColumnEmpAdhoc = ({ handleDelete, authUser, setModalCell, setDataCell, handleOpenEditing }) => [
     {
         key: "user.name",
         title: "Name",
@@ -93,6 +93,6 @@ export const ColumnEmpAdhoc = ({ Delete, Edit, authUser, setModalCell, setDataCe
         title: authUser?.role === "admin" ? "Actions" : "",
         width: authUser?.role === "admin" ? 150 : 0,
         fixed: "right",
-        render: (record) => (authUser?.role === "admin" && <ActionEmpAdhoc handleOpenEditing={handleOpenEditing} setDataCell={setDataCell} Delete={Delete} record={record} />)
+        render: (record) => (authUser?.role === "admin" && <ActionEmpAdhoc handleOpenEditing={handleOpenEditing} setDataCell={setDataCell} handleDelete={handleDelete} record={record} />)
     },
 ];

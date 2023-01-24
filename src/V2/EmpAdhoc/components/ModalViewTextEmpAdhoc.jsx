@@ -4,7 +4,7 @@ import moment from 'moment'
 import { OPTION_AGAMA, OPTION_PENDIDIKAN_TERAKHIR } from '../enum'
 
 const ModalViewTextEmpAdhoc = (props) => {
-    const { visible, edit, onFinishUpdate, resetEditing, form } = props
+    const { visible, edit, onFinishUpdate, handleCancelEditing, form, loading } = props
     const { setFieldsValue } = form
 
     console.log(edit)
@@ -14,8 +14,9 @@ const ModalViewTextEmpAdhoc = (props) => {
             title="Edit Details Employee Adhoc"
             visible={visible}
             okText="Save"
-            onCancel={() => resetEditing()}
+            onCancel={() => handleCancelEditing()}
             onOk={form.submit}
+            okButtonProps={{ disabled: loading }}
         >
             <Form form={form} layout="vertical" onFinish={onFinishUpdate}>
                 <Form.Item name="name" label="Nama" initialValue={edit?.user?.name} rules={[{ required: true, message: 'Please input your name' },]}>

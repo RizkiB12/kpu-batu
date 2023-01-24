@@ -2,7 +2,7 @@ import { Row } from 'antd'
 import React from 'react'
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-const ActionEmpAdhoc = ({ handleOpenEditing, setDataCell, Delete, record }) => {
+const ActionEmpAdhoc = ({ handleOpenEditing, setDataCell, handleDelete, record }) => {
     return (
         <Row justify="space-evenly">
             <EditOutlined
@@ -11,7 +11,7 @@ const ActionEmpAdhoc = ({ handleOpenEditing, setDataCell, Delete, record }) => {
             />
             <DeleteOutlined
                 style={{ color: "red", fontSize: "14px" }}
-                onClick={() => Delete(record)}
+                onClick={() => handleDelete(record)}
             />
         </Row>
     )

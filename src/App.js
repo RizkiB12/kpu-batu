@@ -11,7 +11,7 @@ import BlogPost from "./BlogPost/pages/BlogPost";
 import EditBlogPost from "./BlogPost/pages/EditBlogPost";
 import AddBlogPost from "./pages/AddBlogPost";
 import AddEmployee from "./pages/AddEmployee";
-import EmpAdhoc from "./EmpAdhoc/pages/EmpAdhoc";
+import EmpAdhoc from "./V2/EmpAdhoc/pages/EmpAdhoc";
 // import Home from "./pages/guest/Home";
 import PrintEmployeeAdhoc from "./pages/PrintEmployeeAdhoc";
 import { AdminRoute, GuestRoute } from "./middleware/AuthRoute";

@@ -1,16 +1,18 @@
-import { Form, message, Modal, Table } from 'antd'
+import { Button, Divider, Form, message, Modal, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import moment from 'moment'
-import LayoutAdmin from '../../components/admin/LayoutAdmin'
+import LayoutAdmin from '../../../components/admin/LayoutAdmin'
 import { useSelector } from 'react-redux'
 import axios from 'axios'
 import { ColumnEmpAdhoc } from '../utils/ColumnEmpAdhoc'
 import ModalViewEmpAdhoc from '../components/ModalViewEmpAdhoc'
 import ModalViewTextEmpAdhoc from '../components/ModalViewTextEmpAdhoc'
+import { useNavigate } from 'react-router-dom'
 
 const EmpAdhoc = () => {
     moment().locale('id')
     const { authUser } = useSelector(state => state.authUser)
+    const navigate = useNavigate()
 
     const [data, setData] = useState([]);
     const [form] = Form.useForm();
@@ -29,7 +31,7 @@ const EmpAdhoc = () => {
     useEffect(() => {
         const fetchEmp = () => {
             setLoading(true)
-            axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc?page=1&limit=4`, {
+            axios.get(`${process.env.REACT_APP_API_URL}emp-adhoc?page=1&limit=10`, {
                 headers: { 'Authorization': 'Bearer ' + authUser.access_token }
             })
                 .then((res) => {
@@ -41,7 +43,7 @@ const EmpAdhoc = () => {
         fetchEmp();
     }, [authUser.access_token])
 
-    const Delete = (record) => {
+    const handleDelete = (record) => {
         console.log(record);
         console.log(authUser);
         const data = {
@@ -59,31 +61,32 @@ const EmpAdhoc = () => {
                 }
                 ).then(res => {
                     console.log(res.data);
+                    message.success('Sukses menghapus data employee adhoc')
                     setData((pre) => {
                         return pre.filter((emp) => emp.user_id !== record.user_id);
                     });
-                }).finally(() => {
-                    loading();
+                }).catch(err => {
+                    message.error('Gagal menghapus data employee adhoc')
                 })
+                    .finally(() => {
+                        loading();
+                    })
 
             },
         });
     };
 
-    const Edit = (record) => {
-        setTimeout(() => {
-            form.resetFields()
-        }, 100);
-    };
-
     const onFinishUpdate = (values) => {
         console.log('this value will be updated', values)
+        const loading = message.loading('Loading...')
+        setLoading(true)
         axios.post(`${process.env.REACT_APP_API_URL}emp-adhoc/update`, values, {
             headers: {
                 'Authorization': 'Bearer ' + authUser.access_token
             }
         }).then(res => {
             console.log(res.data);
+            message.success('Sukses mengubah data employee adhoc')
             setData(data.map(item => {
                 if (item.user_id === values.user_id) {
                     console.log('run update')
@@ -107,6 +110,11 @@ const EmpAdhoc = () => {
                     return item
                 }
             }))
+        }).catch(err => {
+            message.error('Gagal mengubah data employee adhoc')
+        }).finally(() => {
+            setLoading(false)
+            loading()
         })
     }
 
@@ -118,46 +126,42 @@ const EmpAdhoc = () => {
         setOpenEditText(true);
     }
 
-    const handleResetEditing = () => {
+    const handleCancelEditing = () => {
         setOpenEditText(false);
         setDataCell('')
     }
 
-    const propsColumn = {
-        Delete,
-        Edit,
-        authUser,
-        setModalCell,
-        setDataCell,
-        setOpenEditText,
-        handleOpenEditing,
-    }
-
     return (
         <LayoutAdmin breadcumb={breadcumb}>
+            <Button type='primary' onClick={() => navigate('/adddata')}>Tambah Employee Adhoc</Button>
+            <Divider />
             <Table
                 loading={loading}
                 dataSource={data}
-                columns={ColumnEmpAdhoc(propsColumn)}
+                columns={ColumnEmpAdhoc({
+                    authUser,
+                    handleDelete,
+                    setModalCell,
+                    setDataCell,
+                    handleOpenEditing,
+                })}
                 scroll={{ x: 1300 }}
                 pagination={{ pageSize: 8, showSizeChanger: true }}
                 bordered
             />
-
             <ModalViewEmpAdhoc
                 openCell={openCell}
                 setModalCell={setModalCell}
                 dataCell={dataCell}
             />
-
             <ModalViewTextEmpAdhoc
                 onFinishUpdate={onFinishUpdate}
                 form={form}
                 visible={openEditText}
                 edit={dataCell}
                 setData={setData}
-                resetEditing={handleResetEditing}
-                handleDelete={Delete}
+                handleCancelEditing={handleCancelEditing}
+                loading={loading}
             />
         </LayoutAdmin>
     )
