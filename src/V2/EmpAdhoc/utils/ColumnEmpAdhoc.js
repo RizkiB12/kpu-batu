@@ -1,4 +1,4 @@
-import { Row } from "antd";
+import { Image, Row } from "antd";
 import { RowCellFile } from "./RowCellFile";
 import moment from "moment";
 import ActionEmpAdhoc from "../components/ActionEmpAdhoc";
@@ -18,7 +18,7 @@ export const ColumnEmpAdhoc = ({ handleDelete, authUser, setModalCell, setDataCe
         title: "Foto",
         width: 150,
         onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.foto, typeFile: 'image' }); } }),
-        render: (item, record) => (<Row justify="center"><img src={item?.foto || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="Foto Employee Adhoc" /></Row>)
+        render: (item, record) => (<Row justify="center"><Image preview={false} src={item?.foto || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="Foto Employee Adhoc" /></Row>)
     },
     {
         key: "dob",
