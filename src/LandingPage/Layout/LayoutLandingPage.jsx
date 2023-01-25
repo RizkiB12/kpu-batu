@@ -34,7 +34,10 @@ const LayoutLandingPage = (props) => {
           zIndex: 1,
           width: '100%', }}>
                 <WrapNavbar justify='space-between'>
-                    <Col>
+                    <Col 
+                    style={{
+                      cursor: 'pointer'}}
+                    onClick={ () => navigate('/')}>
                         BADAN ADHOC
                     </Col>
                     <Col>
