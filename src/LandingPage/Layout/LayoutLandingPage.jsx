@@ -42,7 +42,9 @@ const LayoutLandingPage = (props) => {
                             <Col style={{
                                 cursor: 'pointer'}} >Home</Col>
                             <Col style={{
-                                cursor: 'pointer'}} >News</Col>
+                                cursor: 'pointer'}}
+                                onClick={ () => navigate('/newspage')}
+                                >News</Col>
                             <Col style={{
                                 cursor: 'pointer'}} 
                                 onClick={authUser === null ? () => handleLogin() : () => handleLogout()}>{authUser === null ? 'Login' : 'Logout'}</Col>
