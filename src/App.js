@@ -16,7 +16,10 @@ import EmpAdhoc from "./V2/EmpAdhoc/pages/EmpAdhoc";
 import PrintEmployeeAdhoc from "./pages/PrintEmployeeAdhoc";
 import { AdminRoute, GuestRoute } from "./middleware/AuthRoute";
 import CreateBlogPost from "./V2/BlogPost/pages/CreateBlogPost";
-import LandingPage from "../src/LandingPage"
+// import LandingPage from "../src/LandingPage"
+// import LayoutLandingPage from "./LandingPage/Layout/LayoutLandingPage";
+// import Home from "./LandingPage/Pages/LandingPage";
+import LandingPage from "./LandingPage/Pages/LandingPage";
 
 function App() {
   return (

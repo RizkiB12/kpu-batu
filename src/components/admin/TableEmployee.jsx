@@ -106,7 +106,7 @@ function TableEmployee() {
     return (
         <>
             <Table
-            loading={loading}
+             loading={loading}
              dataSource={employeeData}
              columns={ColumnEmployee({Delete, Edit, authUser})}
              >

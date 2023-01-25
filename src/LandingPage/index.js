@@ -10,7 +10,7 @@ const { Title } = Typography
 const { Search } = Input
 const { Panel } = Collapse
 
-const LandingPage = () => {
+const LandingPagee = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -30,12 +30,10 @@ const LandingPage = () => {
 
 
     const { xs, sm, md, lg } = Grid.useBreakpoint()
-    const text = `
-    https://drive.google.com/drive/folders/1ieaYMvgWTkx1uLJPZucwoBO_poueYztj?usp=share_link
-        `;
+    const text = `https://bit.ly/3kF4K0R`;
     return (
         <>
-            <Header style={{ color: 'white', position: 'sticky',
+         <Header style={{ color: 'white', position: 'sticky',
           top: 0,
           zIndex: 1,
           width: '100%', }}>
@@ -175,7 +173,7 @@ const LandingPage = () => {
                         <Col xs={20} lg={18}>
                             <Row justify='center'>
                                 <Col style={{ margin: '10px 0 10px 0' }} xs={24} lg={6}>
-                                    <Title style={{ color: 'white' }} level={4}>Adress</Title>
+                                    <Title style={{ color: 'white' }} level={4}>Address</Title>
                                     <p>Jl. Sultan Agung No.16, Sisir, Kec. Batu, Kota Batu, Jawa Timur 65314</p>
                                 </Col>
                                 <Col style={{ margin: '10px 0 10px 0' }} xs={24} lg={6}>
@@ -206,7 +204,7 @@ const LandingPage = () => {
     )
 }
 
-export default LandingPage
+export default LandingPagee
 
 const WrapNavbar = styled(Row)`
     @media (min-width: 768px) {
