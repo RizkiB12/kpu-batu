@@ -89,10 +89,83 @@ export const ColumnEmpAdhoc = ({ handleDelete, authUser, setModalCell, setDataCe
         render: (item, record) => (item.ktp !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
     },
     {
+        key: "spsp",
+        title: "SPSPS",
+        width: 150,
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.spsp, typeFile: 'pdf' }); } }),
+        render: (item, record) => (item.spsps !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
+    },
+    {
+        key: "spi",
+        title: "SPI",
+        width: 150,
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.spi, typeFile: 'pdf' }); } }),
+        render: (item, record) => (item.spi !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
+    },
+    {
+        key: "stpol",
+        title: "STPOL",
+        width: 150,
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.stpol, typeFile: 'pdf' }); } }),
+        render: (item, record) => (item.stpol !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
+    },
+    {
+        key: "skes",
+        title: "SKES",
+        width: 150,
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.skes, typeFile: 'pdf' }); } }),
+        render: (item, record) => (item.skes !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
+    },
+    {
+        key: "skck",
+        title: "SKCK",
+        width: 150,
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.skck, typeFile: 'pdf' }); } }),
+        render: (item, record) => (item.skck !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
+    },
+    {
+        key: "stskpu",
+        title: "STSKPU",
+        width: 150,
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.stskpu, typeFile: 'pdf' }); } }),
+        render: (item, record) => (item.stskpu !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
+    },
+    {
+        key: "sbth",
+        title: "SBTH",
+        width: 150,
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.sbth, typeFile: 'pdf' }); } }),
+        render: (item, record) => (item.sbth !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
+    },
+    {
+        key: "stpp",
+        title: "STPP",
+        width: 150,
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.stpp, typeFile: 'pdf' }); } }),
+        render: (item, record) => (item.stpp !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
+    },
+    {
+        key: "sdom",
+        title: "SDOM",
+        width: 150,
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.sdom, typeFile: 'pdf' }); } }),
+        render: (item, record) => (item.sdom !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
+    },
+    {
+        key: "kk",
+        title: "KK",
+        width: 150,
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.kk, typeFile: 'pdf' }); } }),
+        render: (item, record) => (item.kk !== null ? RowCellFile({ typeFile: 'pdf' }) : null),
+    },
+    {
         key: "action",
         title: authUser?.role === "admin" ? "Actions" : "",
         width: authUser?.role === "admin" ? 150 : 0,
         fixed: "right",
         render: (record) => (authUser?.role === "admin" && <ActionEmpAdhoc handleOpenEditing={handleOpenEditing} setDataCell={setDataCell} handleDelete={handleDelete} record={record} />)
+    },
+    {
+
     },
 ];
