@@ -118,6 +118,43 @@ const EmpAdhoc = () => {
         })
     }
 
+    const handleUpdateFile = async (e) => {
+        const formData = new FormData()
+        formData.append('user_id', e.user_id)
+        formData.append(`${e.nameFile}`, e.fileUpdate.file)
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0] + ', ' + pair[1]);
+        // }
+        setLoading(true)
+        const loading = message.loading('Loading...')
+        axios.post(`${process.env.REACT_APP_API_URL}emp-adhoc/update/file`, formData, {
+            headers: {
+                'Authorization': 'Bearer ' + authUser.access_token
+            }
+        }).then(res => {
+            const fileSrc = res.data.data.emp_adhoc.emp_adhoc[e.nameFile]
+            if (res.status === 200) {
+                console.log('run update state')
+                setDataCell(prev => ({
+                    ...prev,
+                    fileSrc
+                }))
+                setData(data.map(x => {
+                    if (x.user_id === e.user_id) {
+                        return { ...x, [e.nameFile]: fileSrc }
+                    } else {
+                        return x
+                    }
+                }))
+            }
+            setLoading(false)
+        }).catch(err => {
+            message.error(err.message)
+        }).finally(() => {
+            loading()
+        })
+    }
+
     const handleOpenEditing = (record) => {
         setTimeout(() => {
             form.resetFields()
@@ -153,6 +190,8 @@ const EmpAdhoc = () => {
                 openCell={openCell}
                 setModalCell={setModalCell}
                 dataCell={dataCell}
+                handleUpdateFile={handleUpdateFile}
+                loading={loading}
             />
             <ModalViewTextEmpAdhoc
                 onFinishUpdate={onFinishUpdate}

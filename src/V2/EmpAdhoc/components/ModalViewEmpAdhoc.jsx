@@ -1,13 +1,12 @@
-import { Modal, Row } from 'antd'
+import { Modal, Row, Upload } from 'antd'
 import React from 'react'
 import {
     EditOutlined,
     DeleteOutlined,
 } from "@ant-design/icons";
 
-
 const ModalViewEmpAdhoc = (props) => {
-    const { openCell, setModalCell, dataCell } = props
+    const { openCell, setModalCell, dataCell, handleUpdateFile } = props
     return (
         <Modal
             open={openCell}
@@ -36,10 +35,16 @@ const ModalViewEmpAdhoc = (props) => {
                 )
             }
             <Row justify="space-evenly">
-                <EditOutlined
-                    onClick={(e) => console.log('edit bro', e)}
-                    style={{ color: "black", fontSize: "15px", paddingTop: "10px" }}
-                />
+                <Upload
+                    showUploadList={false}
+                    maxCount={1}
+                    beforeUpload={false}
+                    customRequest={e => handleUpdateFile({ fileUpdate: e, nameFile: dataCell.nameFile, user_id: dataCell.user_id })}
+                >
+                    <EditOutlined
+                        style={{ color: "black", fontSize: "15px", paddingTop: "10px" }}
+                    />
+                </Upload>
                 <DeleteOutlined
                     onClick={(e) => console.log('delete bro', e)}
                     style={{ color: "red", fontSize: "15px", paddingTop: "10px" }}

@@ -17,7 +17,7 @@ export const ColumnEmpAdhoc = ({ handleDelete, authUser, setModalCell, setDataCe
         key: "foto",
         title: "Foto",
         width: 150,
-        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.foto, typeFile: 'image' }); } }),
+        onCell: (record, rowIndex) => ({ onClick: (e) => { setModalCell(true); setDataCell({ fileSrc: record.foto, typeFile: 'image', nameFile: 'foto', user_id: record.user_id }); } }),
         render: (item, record) => (<Row justify="center"><Image preview={false} src={item?.foto || "https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png"} alt="Foto Employee Adhoc" /></Row>)
     },
     {

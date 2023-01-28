@@ -7,8 +7,6 @@ const ModalViewTextEmpAdhoc = (props) => {
     const { visible, edit, onFinishUpdate, handleCancelEditing, form, loading } = props
     const { setFieldsValue } = form
 
-    console.log(edit)
-
     return (
         <Modal
             title="Edit Details Employee Adhoc"
