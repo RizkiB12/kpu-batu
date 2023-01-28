@@ -5,7 +5,7 @@ import News from '../components/News'
 import Faq from '../components/Faq'
 import Contact from '../components/Contact'
 
-function Home() {
+function LandingPage() {
   return (
     <>
       <LayoutLandingPage>
@@ -18,4 +18,4 @@ function Home() {
   )
 }
 
-export default Home
+export default LandingPage
