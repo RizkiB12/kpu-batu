@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 
 const ModalViewEmpAdhoc = (props) => {
-    const { openCell, setModalCell, dataCell, handleUpdateFile } = props
+    const { openCell, setModalCell, dataCell, handleUpdateFile, handleDeleteFile } = props
     return (
         <Modal
             open={openCell}
@@ -46,7 +46,7 @@ const ModalViewEmpAdhoc = (props) => {
                     />
                 </Upload>
                 <DeleteOutlined
-                    onClick={(e) => console.log('delete bro', e)}
+                    onClick={(e) => handleDeleteFile({ nameFile: dataCell.nameFile, user_id: dataCell.user_id, })}
                     style={{ color: "red", fontSize: "15px", paddingTop: "10px" }}
                 />
             </Row>

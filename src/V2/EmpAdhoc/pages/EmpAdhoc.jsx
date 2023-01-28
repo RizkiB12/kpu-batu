@@ -155,6 +155,45 @@ const EmpAdhoc = () => {
         })
     }
 
+    const handleDeleteFile = async (e) => {
+        console.log({ event: e })
+        Modal.confirm({
+            title: "Anda yakin ingin menghapus file ?",
+            onOk: () => {
+                const loading = message.loading('Loading...')
+                axios.post(`${process.env.REACT_APP_API_URL}emp-adhoc/update/file`, {
+                    user_id: e.user_id,
+                    [e.nameFile]: null,
+                }, {
+                    headers: {
+                        'Authorization': 'Bearer ' + authUser.access_token
+                    }
+                }).then(res => {
+                    if (res.status === 200) {
+                        console.log('run update state')
+                        setDataCell(prev => ({
+                            ...prev,
+                            fileSrc: null
+                        }))
+                        setData(data.map(x => {
+                            if (x.user_id === e.user_id) {
+                                return { ...x, [e.nameFile]: null }
+                            } else {
+                                return x
+                            }
+                        }))
+                    }
+                    setLoading(false)
+                    message.success('Sukses menghapus file')
+                }).catch(err => {
+                    message.error(err.message)
+                }).finally(() => {
+                    loading()
+                })
+            }
+        })
+    }
+
     const handleOpenEditing = (record) => {
         setTimeout(() => {
             form.resetFields()
@@ -191,6 +230,7 @@ const EmpAdhoc = () => {
                 setModalCell={setModalCell}
                 dataCell={dataCell}
                 handleUpdateFile={handleUpdateFile}
+                handleDeleteFile={handleDeleteFile}
                 loading={loading}
             />
             <ModalViewTextEmpAdhoc
