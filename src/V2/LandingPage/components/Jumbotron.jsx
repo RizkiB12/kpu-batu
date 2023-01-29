@@ -1,7 +1,7 @@
 import { Row } from 'antd'
 import React from 'react'
 import styled from 'styled-components'
-import ImageJumbotron from '../../assets/images/jumbotron.jpg'
+import ImageJumbotron from '../../../assets/images/jumbotron.jpg'
 
 
 function Jumbo() {

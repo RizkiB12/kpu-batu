@@ -17,8 +17,8 @@ import PrintEmployeeAdhoc from "./pages/PrintEmployeeAdhoc";
 import { AdminRoute, GuestRoute } from "./middleware/AuthRoute";
 import CreateBlogPost from "./V2/BlogPost/pages/CreateBlogPost";
 
-import LandingPage from "./LandingPage/Pages/LandingPage";
-import NewsPage from "./LandingPage/Pages/NewsPage";
+import LandingPage from "./V2/LandingPage/Pages/LandingPage";
+import NewsPage from "./V2/LandingPage/Pages/NewsPage";
 
 function App() {
   return (

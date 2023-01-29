@@ -3,7 +3,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import styled from 'styled-components'
-import { logout } from '../../redux/slice/AuthSlice'
+import { logout } from '../../../redux/slice/AuthSlice'
 import { YoutubeOutlined, FacebookOutlined, InstagramOutlined, TwitterOutlined } from '@ant-design/icons';
 const { Header } = Layout
 const { Title } = Typography

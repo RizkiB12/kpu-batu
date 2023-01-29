@@ -1,6 +1,6 @@
 import { Col, Grid, Image, Row, Typography } from 'antd'
 import React from 'react'
-import ImageJumbotron from '../../assets/images/jumbotron.jpg'
+import ImageJumbotron from '../../../assets/images/jumbotron.jpg'
 const { Title } = Typography
 
 const News = () => {

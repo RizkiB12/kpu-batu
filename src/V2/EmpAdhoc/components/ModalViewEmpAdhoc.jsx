@@ -1,4 +1,4 @@
-import { Modal, Row, Upload } from 'antd'
+import { Modal, Row, Upload, Alert } from 'antd'
 import React from 'react'
 import {
     EditOutlined,
@@ -16,7 +16,8 @@ const ModalViewEmpAdhoc = (props) => {
             bodyStyle={dataCell.typeFile === "pdf" ? { height: 800 } : null}
         >
             {
-                dataCell.fileSrc === null ? (<div>tidak ada data</div>) : dataCell.typeFile === ("image" || "foto") ? (
+                dataCell.fileSrc === null ? (
+                <Alert message="Data Not Found" type='error' showIcon />) : dataCell.typeFile === ("image" || "foto") ? (
                     <img
                         alt="example"
                         style={{
