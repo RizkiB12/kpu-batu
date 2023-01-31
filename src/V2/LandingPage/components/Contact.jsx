@@ -8,7 +8,9 @@ const { Search } = Input
 const Contact = () => {
     const { xs,  lg } = Grid.useBreakpoint()
   return (
-    <>          <Row justify='center' style={{ backgroundColor: '#001529', padding: '100px 0 100px 0', marginTop: '20px' }}>
+    <>          
+    
+            <Row justify='center' style={{ backgroundColor: '#001529', padding: '100px 0 100px 0', marginTop: '20px' }}>
                 <Col span={24}>
                     <Row justify='center'>
                         <Col xs={24} lg={18}>
@@ -37,7 +39,7 @@ const Contact = () => {
                     </Row>
                 </Col>
             </Row>
-            </>
+    </>
 
   )
 }
