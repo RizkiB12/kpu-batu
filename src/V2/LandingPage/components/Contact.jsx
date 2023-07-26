@@ -29,6 +29,7 @@ const Contact = () => {
                                             <Search
                                                 enterButton="Send"
                                                 size="large"
+                                                onClick={() => window.location.href = 'mailto:kpu.batu@kpu.ac.id'}
                                             />
                                             <Title level={5} style={{ color: 'white', marginTop: '20px' }}>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aliquam, ab?</Title>
                                         </Col>

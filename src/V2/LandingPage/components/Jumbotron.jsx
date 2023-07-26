@@ -1,4 +1,4 @@
-import { Row } from 'antd'
+import { Button, Row } from 'antd'
 import React from 'react'
 import styled from 'styled-components'
 import ImageJumbotron from '../../../assets/images/jumbotron.jpg'
@@ -10,7 +10,7 @@ function Jumbo() {
          <Jumbotron>
                 <WrapTitleJumbotron>
                     <TitleJumbotron>Badan Adhoc KPU Kota Batu</TitleJumbotron>
-                    <SubtitleJumbotron>This is subtitle jumbotron</SubtitleJumbotron>
+                    <SubtitleJumbotron><Button>Getting Started</Button></SubtitleJumbotron>
                 </WrapTitleJumbotron>
             </Jumbotron>
 
